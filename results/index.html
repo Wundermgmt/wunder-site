@@ -115,7 +115,138 @@
     </div>
   </section>
 
-  <section class="section section-alt cta-band">
+  <section class="section section-alt" id="youtube">
+    <div class="wrap">
+      <span class="kicker">More proof</span>
+      <h2>Straight from Lauris.</h2>
+      <p class="lede">Longer breakdowns from our co-founder's YouTube. Click to play.</p>
+      <div class="videos">
+        <figure class="video-card">
+          <button class="yt-facade" data-id="H5r0p4vDyVM" aria-label="Play video: scaling a creator from $30K to $110K per month in 60 days">
+            <img src="/assets/img/yt-30k-110k.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"></span>
+          </button>
+          <figcaption><b>$30K to $110K per month in 60 days</b><span>The full case study, with proof, from Lauris himself.</span></figcaption>
+        </figure>
+        <figure class="video-card">
+          <button class="yt-facade" data-id="V6q4O55fIyA" aria-label="Play video: 2,500+ paid subscribers in 4 months">
+            <img src="/assets/img/yt-2500-subs.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"></span>
+          </button>
+          <figcaption><b>2,500+ paid subs in 4 months</b><span>How one creator's OnlyFans went from quiet to paid.</span></figcaption>
+        </figure>
+        <figure class="video-card">
+          <button class="yt-facade" data-id="aZgbSOnkPDg" aria-label="Play video: 213K Instagram followers and 30M views in one month">
+            <img src="/assets/img/yt-213k-followers.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"></span>
+          </button>
+          <figcaption><b>213K followers and 30M views in one month</b><span>The method behind the reach, step by step.</span></figcaption>
+        </figure>
+        <figure class="video-card">
+          <button class="yt-facade" data-id="ION-xrM6GOM" aria-label="Play video: 20M views a month on autopilot">
+            <img src="/assets/img/yt-20m-views.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"></span>
+          </button>
+          <figcaption><b>20M views a month on autopilot</b><span>What life as a Wunder creator actually looks like.</span></figcaption>
+        </figure>
+      </div>
+      <script>
+        // ponytail: click-to-load facade — no YouTube request until the visitor plays.
+        document.querySelectorAll('.yt-facade').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var f = document.createElement('iframe');
+            f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1';
+            f.title = b.getAttribute('aria-label');
+            f.allow = 'autoplay; encrypted-media; picture-in-picture';
+            f.allowFullscreen = true;
+            f.className = 'yt-frame';
+            b.replaceWith(f);
+          });
+        });
+      </script>
+    </div>
+  </section>
+
+  <section class="section" id="receipts">
+    <div class="wrap">
+      <span class="kicker">The receipts</span>
+      <h2>More results from creators we work with.</h2>
+      <p class="lede">Reviews, payout dashboards, and growth charts, exactly as our creators sent them.</p>
+      <div class="stats" style="margin-top: 44px;">
+        <div class="stat"><b>1.500&euro; &rarr; 10.000&euro;</b><span>per month, within 12 weeks</span></div>
+        <div class="stat"><b>200K+</b><span>followers gained in just 6 months</span></div>
+        <div class="stat"><b>Tens of thousands</b><span>earned every single month</span></div>
+      </div>
+      <div class="wall">
+        <img src="/assets/img/wall/shot-01.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-02.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-03.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-04.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-05.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-06.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-07.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-08.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-09.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-10.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-11.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-12.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-13.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-14.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-15.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-16.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-17.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-18.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-19.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-20.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-21.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-22.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-23.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-24.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-25.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-26.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-27.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-28.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-29.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-30.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-31.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-32.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-33.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-34.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-35.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-36.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-37.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-38.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-39.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-40.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-41.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-42.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-43.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-44.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-45.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-46.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-47.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-48.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-49.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-50.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-51.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-52.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-53.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-54.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-55.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-56.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-57.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-58.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-59.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-60.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-61.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-62.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-63.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-64.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-65.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-66.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-67.jpg" alt="" loading="lazy">
+        <img src="/assets/img/wall/shot-68.jpg" alt="" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band">
     <div class="wrap">
       <h2>All of this could be you.</h2>
       <p class="lede" style="margin: 20px auto 0;">One call is all it takes to find out if we're a fit.</p>
