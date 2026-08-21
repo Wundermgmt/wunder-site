@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wundermgmt.com/sitemap.xml

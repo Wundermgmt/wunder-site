@@ -1,0 +1,104 @@
+# Render Blueprint for wundermgmt.com — main marketing site.
+# Static files at the repo root, no build step (same pattern as wunder-careers-site).
+services:
+  - type: web
+    name: wunder-site
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: Strict-Transport-Security
+        value: max-age=31536000; includeSubDomains
+      - path: /assets/video/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /assets/fonts/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /assets/img/*
+        name: Cache-Control
+        value: public, max-age=86400
+      - path: /assets/styles.css
+        name: Cache-Control
+        value: public, max-age=300, must-revalidate
+    routes:
+      # Old Squarespace URLs -> new locations, so existing links and Google
+      # index entries land somewhere useful instead of a 404.
+      - type: redirect
+        source: /home
+        destination: /
+      - type: redirect
+        source: /services
+        destination: /#what-we-do
+      - type: redirect
+        source: /story
+        destination: /#about
+      - type: redirect
+        source: /team
+        destination: /#about
+      - type: redirect
+        source: /call
+        destination: /apply/
+      - type: redirect
+        source: /contact
+        destination: /apply/
+      - type: redirect
+        source: /influencer
+        destination: /
+      - type: redirect
+        source: /workshop
+        destination: /
+      - type: redirect
+        source: /results-1
+        destination: /results/
+      - type: redirect
+        source: /thank-you
+        destination: /
+      # Old funnel/test pages that were live in the Squarespace sitemap.
+      - type: redirect
+        source: /workshop-old
+        destination: /
+      - type: redirect
+        source: /workshop-ty
+        destination: /
+      - type: redirect
+        source: /workshop-done
+        destination: /
+      - type: redirect
+        source: /vibe-check
+        destination: /
+      - type: redirect
+        source: /wunder-1
+        destination: /
+      - type: redirect
+        source: /new-page
+        destination: /
+      - type: redirect
+        source: /test
+        destination: /
+      - type: redirect
+        source: /freelance-photo-videographer
+        destination: /
+      # Ref-link redirects carried over from the old site.
+      - type: redirect
+        source: /onlyfans
+        destination: https://onlyfans.com?ref=155121555
+      - type: redirect
+        source: /group
+        destination: https://www.skool.com/wunder-7680/about
+      # Serve the branded 404 for anything unknown. This must stay LAST:
+      # rewrites only fire when no real file matches, and the page carries
+      # noindex so the 200 status doesn't pollute the index.
+      - type: rewrite
+        source: /*
+        destination: /404.html
