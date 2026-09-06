@@ -1,0 +1,177 @@
+---
+/*
+  Home. Structure and copy: 04-konzept.md section 4.3, page "/".
+  Six sections, one message above the fold, no number tiles, no badges.
+
+  PENDING DECISION 1 (Manuel): section "What it costs, before you ask" states
+  the split publicly. The concept recommends it, Manuel has not signed it off.
+  PENDING DECISION 2 (Manuel): the contract term sentence in the same section.
+*/
+import Base from '../layouts/Base.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import RecordCard from '../components/RecordCard.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { getCollection } from 'astro:content';
+import { legal } from '../site';
+
+const records = (await getCollection('records'))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+const firstRecord = records[0];
+---
+
+<Base
+  title="Wunder | Managed against your own numbers"
+  description="Wunder is a creator management company registered in Riga. We write down what your account did on its own over the last thirty days, and everything after that is measured against that number."
+>
+  <section class="section hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <h1>Managed against your own numbers.</h1>
+          <p class="lead">
+            Wunder is a creator management company registered in Riga. Before we start, we write
+            down what your account did on its own over the last thirty days. Everything we do after
+            that is measured against that number, in the same portal you log into.
+          </p>
+          <CtaBlock secondary />
+        </div>
+        <Placeholder label="Own production photography" ratio="portrait" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>You know what your account did at its best.</h2>
+      <p class="lead">
+        We write that number down before we start, and we let you measure us against it.
+      </p>
+      {
+        firstRecord && (
+          <div class="record-slot">
+            <RecordCard {...firstRecord.data} />
+          </div>
+        )
+      }
+      <p class="caption">
+        Every result on this site is one case, dated, with the part that did not work written next
+        to it. <a href="/proof">See how we report numbers</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Three things we can show you, not just tell you.</h2>
+      <div class="grid-3">
+        <div class="panel">
+          <h3>You see the same screen we do</h3>
+          <p>
+            Every post runs through our own posting system, and we read every number at the source
+            instead of estimating it. You log into your own portal and see views, reach and
+            followers over seven, thirty and ninety days.
+          </p>
+          <p><a href="/how-it-works#portal">See how it works</a></p>
+        </div>
+        <div class="panel">
+          <h3>You never hand us a password</h3>
+          <p>
+            Instagram publishing runs through Zernio, the OnlyFans chat and vault work runs through
+            Infloww, both authorised interfaces. A permission you granted can be withdrawn. A
+            password you handed over cannot.
+          </p>
+          <p><a href="/how-it-works#access">See how it works</a></p>
+        </div>
+        <div class="panel">
+          <h3>The people writing in your name get audited</h3>
+          <p>
+            Twice a week an automated run pulls the last finished shift and scores it against a
+            versioned rubric. The run is on a schedule and nobody on the chat team can switch it
+            off.
+          </p>
+          <p><a href="/how-it-works#chatting">See how it works</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>What it costs, before you ask.</h2>
+      <p>
+        The split is 50/50 on your net OnlyFans revenue. There is no upfront fee, no setup fee and
+        no monthly retainer.
+      </p>
+      <p>
+        The payout goes to your own bank account first. We invoice you weekly afterwards. Your money
+        never sits with us on its way to you.
+      </p>
+      <p>
+        The contract runs for six months and renews unless it is cancelled inside the notice window
+        at the end of a period. We write the term on this page rather than in a call, because it is
+        the first thing worth comparing.
+      </p>
+      <p class="caption">
+        Conditions on this page are pending sign off. See the note in the pull request.
+      </p>
+      <CtaBlock />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>A registered company, with two people who sign for it.</h2>
+      <p>
+        Wunder is a brand by {legal.company}, registration number {legal.regNumber}, registered in
+        Riga on {legal.registered}. Two managing directors, each with sole signing authority: Manuel
+        Gonzalez, CEO and co owner, and Lauris Kalnins, COO and co owner.
+      </p>
+      <p>
+        You can look that up before you talk to either of them. <a href="/company"
+          >The company page has the rest</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Apply, and we will tell you either way.</h2>
+      <p>
+        You send eight short answers, a person reads them, and you get an answer whether it is a fit
+        or not. If it is not, you get one sentence instead of silence.
+      </p>
+      <p>We answer within one working day.</p>
+      <CtaBlock secondary />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-top: 88px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .record-slot {
+    max-width: 640px;
+    margin: 32px 0 24px;
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      padding-top: 48px;
+    }
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>

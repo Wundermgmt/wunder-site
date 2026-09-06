@@ -1,0 +1,242 @@
+---
+/*
+  Application funnel. 04-konzept.md section 4.6.
+  Eight fields, the two qualification gates (tax residency, existing contract)
+  sit at the front, and the form takes no file uploads at all.
+
+  The target is FORM_ENDPOINT from the host environment and is empty by
+  default. No Google Apps Script, no endpoint in the repository (concept 6.3).
+  With no endpoint configured the form renders disabled instead of posting
+  somewhere unintended.
+*/
+import Base from '../layouts/Base.astro';
+import { formEndpoint } from '../site';
+
+const euCountries = [
+  'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia',
+  'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia',
+  'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania',
+  'Slovakia', 'Slovenia', 'Spain', 'Sweden',
+];
+
+const revenueBands = [
+  'Nothing right now',
+  'Up to EUR 1,000',
+  'EUR 1,000 to EUR 5,000',
+  'EUR 5,000 to EUR 15,000',
+  'EUR 15,000 to EUR 30,000',
+  'More than EUR 30,000',
+];
+
+const reelBands = ['None at the moment', 'One to three', 'Four to seven', 'Eight or more'];
+
+const configured = formEndpoint.trim() !== '';
+---
+
+<Base
+  title="Apply for a vibe check | Wunder"
+  description="Eight short answers. A person reads them and you get an answer within one working day, either way."
+>
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <h1>Apply for a vibe check.</h1>
+      <p class="lead">
+        Eight answers, about a minute. Two of them decide immediately whether we can work together
+        at all, so they are at the top rather than in minute twenty six of a call.
+      </p>
+      <p class="no-ask">
+        We do not ask for ID, photos, bank details or logins. Not here, not later by email.
+      </p>
+
+      {
+        !configured && (
+          <p class="notice">
+            This build has no form endpoint configured, so the form below cannot be submitted. Set
+            FORM_ENDPOINT in the host environment to switch it on.
+          </p>
+        )
+      }
+
+      <form
+        class="apply"
+        method="post"
+        action={configured ? formEndpoint : undefined}
+        novalidate={false}
+      >
+        <div class="field">
+          <label for="instagram">Instagram handle</label>
+          <input id="instagram" name="instagram" type="text" required autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="link">Link to your OnlyFans or link page</label>
+          <input id="link" name="link" type="url" required placeholder="https://" />
+        </div>
+
+        <div class="field">
+          <label for="tax">Where do you pay tax?</label>
+          <select id="tax" name="tax_country" required>
+            <option value="">Please choose</option>
+            {euCountries.map((country) => <option value={country}>{country}</option>)}
+            <option value="outside_eu">Outside the European Union</option>
+          </select>
+          <p class="hint caption">
+            We can only take on creators who pay tax in the European Union. It is a payment route,
+            not a judgement.
+          </p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Are you currently under contract with an agency or manager?</legend>
+          <label class="inline"
+            ><input type="radio" name="under_contract" value="yes" required /> Yes</label
+          >
+          <label class="inline"
+            ><input type="radio" name="under_contract" value="no" required /> No</label
+          >
+          <label class="sub" for="contract_until">If yes, until when?</label>
+          <input id="contract_until" name="contract_until" type="text" placeholder="Month and year" />
+          <p class="hint caption">
+            A yes is not a no from us. It changes the order of things. See <a href="/switching"
+              >switching</a
+            >.
+          </p>
+        </fieldset>
+
+        <div class="field">
+          <label for="revenue">Roughly what did your OnlyFans make in the last thirty days?</label>
+          <select id="revenue" name="revenue_band" required>
+            <option value="">Please choose</option>
+            {revenueBands.map((band) => <option value={band}>{band}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="reels">How many reels do you publish in a normal week?</label>
+          <select id="reels" name="reels_band" required>
+            <option value="">Please choose</option>
+            {reelBands.map((band) => <option value={band}>{band}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="note">Anything you want us to know before we talk?</label>
+          <textarea id="note" name="note" rows="4"></textarea>
+          <p class="hint caption">Optional. The history, if you want to tell it.</p>
+        </div>
+
+        <!-- Honeypot. Real people never fill this in. Bot protection without a third party service. -->
+        <div class="trap" aria-hidden="true">
+          <label for="company_website">Company website</label>
+          <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <input type="hidden" name="source" value="site" />
+
+        <p class="actions">
+          <button class="cta" type="submit" disabled={!configured} aria-disabled={!configured}>
+            Send application
+          </button>
+        </p>
+      </form>
+
+      <h2 class="after">What happens next.</h2>
+      <ol>
+        <li>A person reads this, not a filter.</li>
+        <li>The person is the one who runs first conversations here, not a sales queue.</li>
+        <li>You hear back within one working day, whether it is a fit or not.</li>
+      </ol>
+      <p>
+        If it is not a fit you get one sentence saying so. Not silence, and not a promise to come
+        back to it later.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .no-ask {
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    max-width: 68ch;
+  }
+
+  .notice {
+    padding: 16px 20px;
+    border: 1px solid var(--accent);
+    color: var(--text-muted);
+    max-width: 68ch;
+  }
+
+  .apply {
+    margin-top: 40px;
+  }
+
+  .field {
+    margin-bottom: 28px;
+    border: 0;
+    padding: 0;
+  }
+
+  label,
+  legend {
+    display: block;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 8px;
+    padding: 0;
+  }
+
+  label.inline {
+    display: inline-block;
+    margin-right: 24px;
+    color: var(--text-muted);
+  }
+
+  label.sub {
+    margin-top: 16px;
+    color: var(--text-muted);
+  }
+
+  input[type='text'],
+  input[type='url'],
+  input[type='email'],
+  select,
+  textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family: var(--font-text);
+    font-size: 17px;
+    padding: 12px 14px;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .hint {
+    margin: 8px 0 0;
+  }
+
+  .trap {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .after {
+    margin-top: 56px;
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+/*
+  Structure only, written from scratch rather than from a generator template.
+  The seven required parts come from 04-konzept.md section 4.3, "/imprint und
+  /privacy". Everything that needs a legal decision or a real processor name is
+  marked TO BE COMPLETED BY COUNSEL in the copy.
+
+  Two hard points from the concept that must survive review:
+  1. The recipient list names only services that actually see data.
+  2. A retention period written here has to be executed, not just printed.
+*/
+import Base from '../layouts/Base.astro';
+import { legal } from '../site';
+---
+
+<Base
+  title="Privacy | Wunder"
+  description="What data this site collects, who receives it, and how long it is kept."
+  noindex
+>
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <h1>Privacy</h1>
+
+      <p class="draft-note">
+        Draft structure. The wording on this page is not legally reviewed yet. Items marked TO BE
+        COMPLETED BY COUNSEL must be filled and the whole page confirmed before it goes live. The
+        old generator template is deliberately not carried over.
+      </p>
+
+      <h2>1. Controller</h2>
+      <p>
+        {legal.company}, {legal.street}, {legal.city}, {legal.country}. Registration number {
+          legal.regNumber
+        }.<br />
+        Data protection contact: <a href={`mailto:${legal.privacyEmail}`}>{legal.privacyEmail}</a>
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: whether a data protection officer is required for this entity,
+        and if so, the contact details.
+      </p>
+
+      <h2>2. Recipients</h2>
+      <p>
+        Only services that actually see data in the website and application path are listed here. No
+        precautionary list.
+      </p>
+      <ul>
+        <li>Hosting: <span class="todo">TO BE CONFIRMED, EU region, processing agreement in place</span></li>
+        <li>Form backend: <span class="todo">TO BE CONFIRMED</span></li>
+        <li>Database: <span class="todo">TO BE CONFIRMED</span></li>
+        <li>Customer relationship system: <span class="todo">TO BE CONFIRMED</span></li>
+        <li>Appointment booking: <span class="todo">TO BE CONFIRMED</span></li>
+        <li>Email: <span class="todo">TO BE CONFIRMED</span></li>
+        <li>Analytics: <span class="todo">TO BE CONFIRMED, cookieless and aggregate only</span></li>
+      </ul>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the legal wording per recipient, including the processing
+        agreement reference.
+      </p>
+
+      <h2>3. Transfers outside the European Union</h2>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: every recipient and every part of the team outside the European
+        Union, each with the transfer instrument it relies on. The content and chat team works
+        outside the European Union and belongs in this section.
+      </p>
+
+      <h2>4. Legal bases</h2>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the legal basis per processing activity under European and
+        Latvian law. The previous text argued from German employment law, which does not apply to
+        this controller and must not come back.
+      </p>
+
+      <h2>5. Applications</h2>
+      <p>
+        Creator applications and job applications are handled separately, with different fields,
+        different readers and different retention periods.
+      </p>
+      <h3>Creator applications</h3>
+      <p>
+        Fields collected: Instagram handle, link to your OnlyFans or link page, country of tax
+        residency, whether you are currently under contract and until when, a revenue band, a
+        publishing frequency band, your email address and an optional free text note.
+      </p>
+      <p>
+        We do not collect identity documents, photographs, bank details or login credentials, and we
+        do not accept file uploads through this site.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: purpose, readers, retention period and deletion routine. The
+        retention period stated here has to be executed as a real deletion job.
+      </p>
+      <h3>Job applications</h3>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the careers path is a separate system and has to be described
+        separately, including its own recipients and retention.
+      </p>
+
+      <h2>6. Your rights</h2>
+      <p>
+        You can request access, correction, deletion, restriction and portability of your data, and
+        you can object to processing. You can also complain to the Latvian supervisory authority,
+        the Data State Inspectorate.
+      </p>
+      <p class="todo">TO BE COMPLETED BY COUNSEL: the exact wording and the authority contact details.</p>
+
+      <h2>7. Cookies</h2>
+      <p>
+        This site sets no cookies. There is no tracking pixel, no session recording, no heatmap and
+        no cross site identifier, which is why there is no consent banner asking you to agree to
+        any of it.
+      </p>
+      <p>
+        If analytics are switched on, they are cookieless and aggregate. We cannot tell who visited
+        a page, and we do not want to be able to.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .draft-note {
+    padding: 16px 20px;
+    border: 1px solid var(--accent);
+    color: var(--text-muted);
+    max-width: 68ch;
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-top: 44px;
+  }
+
+  h3 {
+    font-size: 18px;
+    text-transform: none;
+    font-family: var(--font-text);
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-top: 28px;
+  }
+
+  .todo {
+    color: var(--accent);
+  }
+</style>

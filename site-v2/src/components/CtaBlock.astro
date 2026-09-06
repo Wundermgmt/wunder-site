@@ -1,0 +1,18 @@
+---
+/*
+  The one call to action, repeated word for word on every page.
+  04-konzept.md sections 4.2 and 5.1, principle 5.
+*/
+import { cta } from '../site';
+
+interface Props {
+  secondary?: boolean;
+}
+
+const { secondary = false } = Astro.props;
+---
+
+<p class="actions">
+  <a class="cta" href={cta.primaryHref}>{cta.primary}</a>
+  {secondary && <a class="cta-quiet" href={cta.secondaryHref}>{cta.secondary}</a>}
+</p>

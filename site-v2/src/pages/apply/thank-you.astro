@@ -1,0 +1,32 @@
+---
+/*
+  A real confirmation page, not a hint that disappears after three seconds.
+  04-konzept.md section 4.6, "Was nach dem Absenden passiert".
+*/
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Application received | Wunder"
+  description="Your application reached us. A person reads it and answers within one working day."
+  noindex
+>
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <h1>We have it.</h1>
+      <p class="lead">Three things, so you know what you are waiting for.</p>
+      <ol>
+        <li>A person reads this, not a filter.</li>
+        <li>The person is the one who runs first conversations here.</li>
+        <li>You hear back within one working day, whether it is a fit or not.</li>
+      </ol>
+      <p>
+        If you thought of something after sending, reply to the confirmation email rather than
+        applying twice.
+      </p>
+      <p>
+        While you wait, <a href="/how-it-works">the three mechanisms</a> are the part worth reading.
+      </p>
+    </div>
+  </section>
+</Base>

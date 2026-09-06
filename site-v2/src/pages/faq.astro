@@ -1,0 +1,119 @@
+---
+/*
+  The six fears in the order they came up in our own calls.
+  04-konzept.md section 4.3, page "/faq", derived from 03, section 4.
+  Every answer links into the mechanism it rests on. No absolute safety
+  promise anywhere on this page, appendix A of the closing playbook blocks it.
+
+  PENDING DECISION 2 (Manuel): the contract answer states term and notice.
+*/
+import Base from '../layouts/Base.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+
+const faqs = [
+  {
+    q: 'What happens if my account gets banned?',
+    a: [
+      'We work through authorised interfaces, we keep automated messages inside a hard content limit, and we do not run the growth patterns that get accounts flagged. That lowers the risk. It does not remove it, and anyone telling you otherwise is selling.',
+      'If it happens, we treat the recovery as the work: appeal where an appeal exists, rebuild the reach on the accounts you still have, and move the audience you already earned rather than starting again from nothing.',
+    ],
+    link: { href: '/how-it-works#access', label: 'How access works' },
+  },
+  {
+    q: 'Who has access to my accounts?',
+    a: [
+      'You do not hand us a password. Instagram publishing runs through Zernio and OnlyFans chat and vault work runs through Infloww, both authorised interfaces you can withdraw.',
+      'Our team signs in to our own systems with company accounts, not shared logins. Your portal identity is separate from the staff system and can never hold a staff role.',
+    ],
+    link: { href: '/how-it-works#access', label: 'How access works' },
+  },
+  {
+    q: 'Who writes to my fans, and what do they say?',
+    a: [
+      'A trained chat team, working from what you set in onboarding: your limits, your prices, your no go list.',
+      'Twice a week an automated run scores the last finished shift against a versioned rubric, with a fixed pass mark, hard fail reasons and a response time measurement. The review is not done by the person who wrote.',
+    ],
+    link: { href: '/how-it-works#chatting', label: 'How the audit works' },
+  },
+  {
+    q: 'How long is the contract and how do I get out?',
+    a: [
+      'The term is six months and it renews unless it is cancelled inside the notice window at the end of a period. That is the honest version, and it is the reason we write it here rather than waiting for you to ask.',
+      'What you sign is what applies. A friendly sentence in a call is not a clause, and we will not offer you one instead of a clause.',
+    ],
+    link: { href: '/switching', label: 'If you are switching from another agency' },
+  },
+  {
+    q: 'What about leaks?',
+    a: [
+      'It is the internet. Nobody gets content fully offline again, and an agency that promises that is lying to you.',
+      'What can actually be done: takedown requests where the platform accepts them, watermarking, and keeping the highest value material off the channels that get scraped first. We tell you which of those we do for you and which ones need you.',
+    ],
+    link: null,
+  },
+  {
+    q: 'How and when do I get paid?',
+    a: [
+      'The OnlyFans payout goes to your own bank account first. We invoice you weekly afterwards, on the agreed split. Your money does not pass through us on its way to you.',
+      'We do not give tax or banking advice. Where your situation needs it, that is a question for your accountant, and we would rather say so than guess.',
+    ],
+    link: null,
+  },
+];
+---
+
+<Base
+  title="FAQ | Wunder"
+  description="The six questions creators actually ask us, answered with the mechanism behind each answer."
+>
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <h1>The six questions we actually get.</h1>
+      <p class="lead">
+        In the order they come up. Every answer says what we do, not what we promise.
+      </p>
+      <div class="faq-list">
+        {
+          faqs.map((item) => (
+            <article class="faq-item">
+              <h2>{item.q}</h2>
+              {item.a.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {item.link && (
+                <p class="caption">
+                  <a href={item.link.href}>{item.link.label}</a>
+                </p>
+              )}
+            </article>
+          ))
+        }
+      </div>
+      <CtaBlock />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .faq-list {
+    margin-top: 40px;
+  }
+
+  .faq-item {
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .faq-item h2 {
+    font-size: 26px;
+    text-transform: none;
+    font-family: var(--font-text);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.3;
+  }
+
+  .faq-item p:last-child {
+    margin-bottom: 0;
+  }
+</style>

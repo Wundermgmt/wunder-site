@@ -1,0 +1,108 @@
+---
+/*
+  The only trust element on the whole site. 04-konzept.md section 4.4.
+  Six fields, always in the same order, "what did not work" is mandatory.
+  The guard below is the second lock next to the collection schema: if a card
+  ever reaches this component without a period, a source or the honest field,
+  the static build stops with a named error instead of publishing a claim
+  nobody can check.
+*/
+
+interface Props {
+  baseline: string;
+  period: string;
+  whatWeDid: string;
+  whatHappened: string;
+  whatDidNotWork: string;
+  source: string;
+  readAt: string;
+  /** Shown when the card is a structural placeholder, not a real case. */
+  placeholder?: boolean;
+}
+
+const {
+  baseline,
+  period,
+  whatWeDid,
+  whatHappened,
+  whatDidNotWork,
+  source,
+  readAt,
+  placeholder = false,
+} = Astro.props;
+
+const required = { baseline, period, whatWeDid, whatHappened, whatDidNotWork, source, readAt };
+for (const [field, value] of Object.entries(required)) {
+  if (typeof value !== 'string' || value.trim() === '') {
+    throw new Error(
+      `RecordCard: the field "${field}" is empty. Every record card needs baseline, period, ` +
+        `whatWeDid, whatHappened, whatDidNotWork, source and readAt. See 04-konzept.md section 4.4.`
+    );
+  }
+}
+---
+
+<article class="record" data-placeholder={placeholder ? 'true' : undefined}>
+  {placeholder && <p class="flag">Placeholder card. Real numbers pending.</p>}
+  <dl>
+    <dt>Starting point</dt>
+    <dd>{baseline}</dd>
+
+    <dt>Period</dt>
+    <dd>{period}</dd>
+
+    <dt>What we did</dt>
+    <dd>{whatWeDid}</dd>
+
+    <dt>What happened</dt>
+    <dd>{whatHappened}</dd>
+
+    <dt>What did not work</dt>
+    <dd>{whatDidNotWork}</dd>
+  </dl>
+  <p class="footnote caption">
+    Individual result. Not a typical result. Read from the portal at the source, {source}, on {
+      readAt
+    }.
+  </p>
+</article>
+
+<style>
+  .record {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 28px;
+  }
+
+  .flag {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 20px;
+  }
+
+  dl {
+    margin: 0;
+  }
+
+  dt {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  dd {
+    margin: 0 0 20px;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .footnote {
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+</style>

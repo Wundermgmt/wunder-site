@@ -1,0 +1,82 @@
+---
+/*
+  Replaces /story and /team. Governance instead of a founding story.
+  04-konzept.md section 4.3, page "/company".
+  No team size anywhere on this page until decision 5 is made: four different
+  numbers in four places are worse than no number.
+*/
+import Base from '../layouts/Base.astro';
+import Placeholder from '../components/Placeholder.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import { legal } from '../site';
+---
+
+<Base
+  title="Company | Wunder"
+  description="The legal entity behind Wunder: KG Models SIA, registered in Riga, with two managing directors on the register."
+>
+  <section class="section">
+    <div class="wrap">
+      <h1>The company behind the name.</h1>
+      <p class="lead">
+        Wunder is a brand by {legal.company}, registration number {legal.regNumber}, registered on {
+          legal.registered
+        } at {legal.street}, {legal.city}, {legal.country}.
+      </p>
+      <p>
+        You can look that up in the Latvian register without asking us for anything. There is a
+        company with a similar name in the United States that we have nothing to do with. The
+        registration number above is how you tell them apart.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Who decides.</h2>
+      <p>
+        Two managing directors, each with sole signing authority, both on the register: Manuel
+        Gonzalez, CEO and co owner, and Lauris Kalnins, COO and co owner.
+      </p>
+      <p>
+        Contracts are signed by {legal.company}. There is no second entity in the chain, no
+        intermediary and no third party that your agreement is quietly assigned to.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Where the work happens.</h2>
+      <p>
+        Riga is the registered seat and the office. The content and chat team works in the PHT time
+        zone, which is what makes the chat cover the hours your fans are awake in.
+      </p>
+      <p class="caption">
+        We do not publish a team size until we can define it the same way twice, split into
+        employees and contractors. A number we cannot repeat is worse than no number.
+      </p>
+      <div class="shots">
+        <Placeholder label="Office in Riga" ratio="square" />
+        <Placeholder label="Production" ratio="square" />
+      </div>
+      <CtaBlock secondary />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin: 32px 0;
+    max-width: 780px;
+  }
+
+  @media (max-width: 860px) {
+    .shots {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

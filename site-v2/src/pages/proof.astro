@@ -1,0 +1,76 @@
+---
+/*
+  Replaces /results. Structure and copy: 04-konzept.md section 4.3, page
+  "/proof", and the record card definition in section 4.4.
+  The metrics block from section 4.3, part 3, is deliberately not built yet:
+  the income distribution of our own creators does not exist (concept 8.5,
+  gap 1). An empty or estimated block is worse than none.
+*/
+import Base from '../layouts/Base.astro';
+import RecordCard from '../components/RecordCard.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import { getCollection } from 'astro:content';
+
+const records = (await getCollection('records'))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+  title="Proof | Wunder"
+  description="How we report numbers: every figure carries a period, a starting point and a source, and every case says what did not work."
+>
+  <section class="section">
+    <div class="wrap">
+      <h1>How we report numbers.</h1>
+      <p class="lead">
+        Every number on this page carries three things: the period it covers, the starting point it
+        is measured against, and whether it was read by us or checked by someone independent. No
+        value goes up without all three.
+      </p>
+      <p>
+        That rule costs us the big round numbers other agencies put in their headline. We think you
+        can tell the difference, and that is the point.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Cases</h2>
+      <p>
+        Anonymous, dated, one account each. Every case carries the part that did not work, because a
+        case without it is a brochure.
+      </p>
+      <div class="cards">
+        {records.map((entry) => <RecordCard {...entry.data} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>What is not on this page.</h2>
+      <ul>
+        <li>No earnings screenshots.</li>
+        <li>No press logos without a linked article.</li>
+        <li>No totals without the group they were counted over.</li>
+        <li>No testimonial with a name attached to it, ever.</li>
+      </ul>
+      <p>
+        A metrics sheet with median, range and the number of active creators is planned. It goes up
+        when the underlying evaluation exists, not before.
+      </p>
+      <CtaBlock secondary />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+</style>

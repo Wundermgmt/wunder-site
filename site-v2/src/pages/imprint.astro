@@ -1,0 +1,102 @@
+---
+/*
+  Structure only. The legal wording has to be confirmed by counsel before this
+  page goes live. Every open item is marked TO BE COMPLETED BY COUNSEL in the
+  copy itself, so nobody ships it by accident.
+  04-konzept.md section 4.3, "/imprint und /privacy".
+*/
+import Base from '../layouts/Base.astro';
+import { legal } from '../site';
+---
+
+<Base
+  title="Imprint | Wunder"
+  description="Legal information for Wunder, a brand by KG Models SIA, Riga, Latvia."
+  noindex
+>
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <h1>Imprint</h1>
+
+      <p class="draft-note">
+        Draft structure. The wording on this page is not legally reviewed yet. Items marked TO BE
+        COMPLETED BY COUNSEL must be filled and the whole page confirmed before it goes live.
+      </p>
+
+      <h2>Company</h2>
+      <p>
+        {legal.brandLine}.<br />
+        {legal.company}<br />
+        {legal.street}<br />
+        {legal.city}<br />
+        {legal.country}
+      </p>
+
+      <h2>Register</h2>
+      <p>
+        Registration number: {legal.regNumber}<br />
+        Registered: {legal.registered}<br />
+        Register: Register of Enterprises of the Republic of Latvia
+      </p>
+
+      <h2>VAT</h2>
+      <p>
+        VAT identification number: <span class="todo">{legal.vatId}</span><br />
+        <span class="todo">TO BE COMPLETED BY COUNSEL or by Manuel and Lauris from the tax filings.</span>
+      </p>
+
+      <h2>Represented by</h2>
+      <p>
+        Manuel Gonzalez, CEO and co owner, sole signing authority.<br />
+        Lauris Kalnins, COO and co owner, sole signing authority.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Email: <a href={`mailto:${legal.contactEmail}`}>{legal.contactEmail}</a><br />
+        <span class="todo">TO BE COMPLETED BY COUNSEL: a telephone number, if one is required for this entity form.</span>
+      </p>
+
+      <h2>Online dispute resolution</h2>
+      <p>
+        The European Commission provides a platform for online dispute resolution at <a
+          href="https://ec.europa.eu/consumers/odr"
+          rel="noopener"
+          target="_blank">ec.europa.eu/consumers/odr</a
+        >.
+      </p>
+      <p>
+        <span class="todo"
+          >TO BE COMPLETED BY COUNSEL: the statement on whether the company is willing or obliged to
+          take part in dispute resolution proceedings before a consumer arbitration board.</span
+        >
+      </p>
+
+      <h2>Responsible for the content of this site</h2>
+      <p><span class="todo">TO BE COMPLETED BY COUNSEL: name and address of the responsible person under Latvian and European law.</span></p>
+
+      <p class="caption">
+        Data protection is covered separately in our <a href="/privacy">privacy policy</a>.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .draft-note {
+    padding: 16px 20px;
+    border: 1px solid var(--accent);
+    color: var(--text-muted);
+    max-width: 68ch;
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-top: 40px;
+  }
+
+  .todo {
+    color: var(--accent);
+  }
+</style>
