@@ -4,29 +4,31 @@
   04-konzept.md section 4.3, page "/company".
   No team size anywhere on this page until decision 5 is made: four different
   numbers in four places are worse than no number.
+  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends.
 */
 import Base from '../layouts/Base.astro';
-import Placeholder from '../components/Placeholder.astro';
+import Photo from '../components/Photo.astro';
 import CtaBlock from '../components/CtaBlock.astro';
 import { legal } from '../site';
 ---
 
 <Base
   title="Company | Wunder"
-  description="The legal entity behind Wunder: KG Models SIA, registered in Riga, with two managing directors on the register."
+  description="The company behind Wunder: KG Models SIA in Riga, with two directors in the public register."
 >
   <section class="section">
     <div class="wrap">
       <h1>The company behind the name.</h1>
       <p class="lead">
-        Wunder is a brand by {legal.company}, registration number {legal.regNumber}, registered on {
-          legal.registered
-        } at {legal.street}, {legal.city}, {legal.country}.
+        Wunder is a brand by {legal.company}. The number in the register is {legal.regNumber}. The
+        company started on {legal.registered}. The address is {legal.street}, {legal.city}, {
+          legal.country
+        }.
       </p>
       <p>
-        You can look that up in the Latvian register without asking us for anything. There is a
-        company with a similar name in the United States that we have nothing to do with. The
-        registration number above is how you tell them apart.
+        You can look all of that up in the Latvian register. You do not need us for it. There is a
+        company with a like name in the United States. It has nothing to do with us. The number
+        above is how you tell them apart.
       </p>
     </div>
   </section>
@@ -35,12 +37,32 @@ import { legal } from '../site';
     <div class="wrap">
       <h2>Who decides.</h2>
       <p>
-        Two managing directors, each with sole signing authority, both on the register: Manuel
-        Gonzalez, CEO and co owner, and Lauris Kalnins, COO and co owner.
+        Two directors run the company. Each one may sign alone. Both are in the public register.
+        Manuel Gonzalez is CEO and co owner. Lauris Kalnins is COO and co owner.
       </p>
+      <div class="people">
+        <Photo
+          file="manuel-gonzalez.webp"
+          alt="Manuel Gonzalez smiles while working at a laptop by a window."
+          width={900}
+          height={675}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="portrait"
+          caption="Manuel Gonzalez, CEO and co owner."
+        />
+        <Photo
+          file="lauris-kalnins.webp"
+          alt="Lauris Kalnins sits at a desk with a laptop and an open notebook."
+          width={900}
+          height={1349}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="portrait"
+          caption="Lauris Kalnins, COO and co owner."
+        />
+      </div>
       <p>
-        Contracts are signed by {legal.company}. There is no second entity in the chain, no
-        intermediary and no third party that your agreement is quietly assigned to.
+        {legal.company} signs your deal. There is no second firm in the chain. There is no middle
+        man. Your deal is not passed on to anyone else.
       </p>
     </div>
   </section>
@@ -49,23 +71,58 @@ import { legal } from '../site';
     <div class="wrap">
       <h2>Where the work happens.</h2>
       <p>
-        Riga is the registered seat and the office. The content and chat team works in the PHT time
-        zone, which is what makes the chat cover the hours your fans are awake in.
+        Riga is the seat of the company and the office. Our content and chat team works in the
+        Philippine time zone. That is why the chat is awake when your fans are.
       </p>
       <p class="caption">
-        We do not publish a team size until we can define it the same way twice, split into
-        employees and contractors. A number we cannot repeat is worse than no number.
+        We do not publish a team size yet. First we want to count it the same way twice, staff and
+        freelancers apart. A number we cannot repeat is worse than no number.
       </p>
       <div class="shots">
-        <Placeholder label="Office in Riga" ratio="square" />
-        <Placeholder label="Production" ratio="square" />
+        <Photo
+          file="edvards-stalgevics.webp"
+          alt="Edvards Stalgevics works at a laptop in the Riga office."
+          width={1200}
+          height={1800}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="portrait"
+          caption="Edvards Stalgevics, Creative Director."
+        />
+        <Photo
+          file="nils-jasevics.webp"
+          alt="Nils Jasevics works at a laptop in the Riga office."
+          width={1200}
+          height={1799}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="portrait"
+          caption="Nils Jasevics, Creator Manager."
+        />
       </div>
+      <p class="caption">
+        These photos are our own. They come from our old website. We use no stock photos and no
+        pictures made by a machine.
+      </p>
       <CtaBlock secondary />
     </div>
   </section>
 </Base>
 
 <style>
+  .people {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 28px 0 0;
+    max-width: 700px;
+    align-items: start;
+  }
+
+  @media (max-width: 860px) {
+    .people {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .shots {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -75,7 +132,22 @@ import { legal } from '../site';
   }
 
   @media (max-width: 860px) {
-    .shots {
+    .people {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 28px 0 0;
+    max-width: 700px;
+    align-items: start;
+  }
+
+  @media (max-width: 860px) {
+    .people {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .shots {
       grid-template-columns: 1fr;
     }
   }

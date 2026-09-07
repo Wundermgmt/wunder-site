@@ -4,6 +4,10 @@
   Eight fields, the two qualification gates (tax residency, existing contract)
   sit at the front, and the form takes no file uploads at all.
 
+  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends. Labels, Hinweise
+  und die Auswahllisten im Frontmatter werden von der Lesbarkeitspruefung
+  mitgemessen, siehe scripts/check-copy.mjs, Regel 5.
+
   The target is FORM_ENDPOINT from the host environment and is empty by
   default. No Google Apps Script, no endpoint in the repository (concept 6.3).
   With no endpoint configured the form renders disabled instead of posting
@@ -41,22 +45,22 @@ const configured = formEndpoint.trim() !== '';
     <div class="wrap wrap-narrow">
       <h1>Apply for a vibe check.</h1>
       <p class="lead">
-        Eight answers, about a minute. Two of them decide immediately whether we can work together
-        at all, so they are at the top rather than in minute twenty six of a call.
+        Eight answers. It takes about a minute. Two of them decide right away if we can work
+        together at all. So they sit at the top. Not in minute twenty six of a call.
       </p>
       <p class="no-ask">
         We do not ask for ID, photos, bank details or logins. Not here, not later by email.
       </p>
       <p class="lead">
-        If you have been burned before, the fastest way to find out if we are different is to ask
-        us the specific thing that burned you, on the call. We would rather answer it there than
-        have you find out after you signed.
+        Maybe an agency burned you before. Then ask us about that exact thing on the call. It is
+        the fastest way to see if we are different. We would rather answer it there. You should
+        not have to find out after you sign.
       </p>
 
       {
         !configured && (
           <p class="notice">
-            This build has no form endpoint configured, so the form below cannot be submitted. Set
+            This build has no form target set up, so the form below cannot be sent. Set
             FORM_ENDPOINT in the host environment to switch it on.
           </p>
         )
@@ -86,8 +90,8 @@ const configured = formEndpoint.trim() !== '';
             <option value="outside_eu">Outside the European Union</option>
           </select>
           <p class="hint caption">
-            We can only take on creators who pay tax in the European Union. It is a payment route,
-            not a judgement.
+            We can only take you on if you pay tax in the European Union. That is about the way
+            we pay you, nothing else.
           </p>
         </div>
 
@@ -102,14 +106,14 @@ const configured = formEndpoint.trim() !== '';
           <label class="sub" for="contract_until">If yes, until when?</label>
           <input id="contract_until" name="contract_until" type="text" placeholder="Month and year" />
           <p class="hint caption">
-            A yes is not a no from us. It changes the order of things. See <a href="/switching"
-              >switching</a
+            A yes here is not a no from us. It only changes the order of things. See <a
+              href="/switching">switching</a
             >.
           </p>
         </fieldset>
 
         <div class="field">
-          <label for="revenue">Roughly what did your OnlyFans make in the last thirty days?</label>
+          <label for="revenue">About how much did your OnlyFans make in the last thirty days?</label>
           <select id="revenue" name="revenue_band" required>
             <option value="">Please choose</option>
             {revenueBands.map((band) => <option value={band}>{band}</option>)}
@@ -117,7 +121,7 @@ const configured = formEndpoint.trim() !== '';
         </div>
 
         <div class="field">
-          <label for="reels">How many reels do you publish in a normal week?</label>
+          <label for="reels">How many reels do you post in a normal week?</label>
           <select id="reels" name="reels_band" required>
             <option value="">Please choose</option>
             {reelBands.map((band) => <option value={band}>{band}</option>)}
@@ -130,9 +134,9 @@ const configured = formEndpoint.trim() !== '';
         </div>
 
         <div class="field">
-          <label for="note">Anything you want us to know before we talk?</label>
+          <label for="note">Anything we should know before we talk?</label>
           <textarea id="note" name="note" rows="4"></textarea>
-          <p class="hint caption">Optional. The history, if you want to tell it.</p>
+          <p class="hint caption">You can leave this empty. Tell us the story if you want to.</p>
         </div>
 
         <!-- Honeypot. Real people never fill this in. Bot protection without a third party service. -->
@@ -152,12 +156,11 @@ const configured = formEndpoint.trim() !== '';
       <h2 class="after">What happens next.</h2>
       <ol>
         <li>A person reads this, not a filter.</li>
-        <li>The person is the one who runs first conversations here, not a sales queue.</li>
-        <li>You hear back within one working day, whether it is a fit or not.</li>
+        <li>That person runs the first calls here. There is no sales queue.</li>
+        <li>You hear back within one working day, fit or not.</li>
       </ol>
       <p>
-        If it is not a fit you get one sentence saying so. Not silence, and not a promise to come
-        back to it later.
+        If it is not a fit, you get one line that says so. Not silence. Not a maybe later.
       </p>
     </div>
   </section>
@@ -167,14 +170,17 @@ const configured = formEndpoint.trim() !== '';
   .no-ask {
     padding: 16px 20px;
     border: 1px solid var(--line);
-    background: var(--surface);
+    border-radius: var(--radius);
+    background: var(--muted-surface);
     max-width: 68ch;
   }
 
   .notice {
     padding: 16px 20px;
     border: 1px solid var(--accent);
-    color: var(--text-muted);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    color: var(--text);
     max-width: 68ch;
   }
 
@@ -215,12 +221,13 @@ const configured = formEndpoint.trim() !== '';
   select,
   textarea {
     width: 100%;
-    background: var(--surface);
+    background: var(--ground);
     border: 1px solid var(--line);
+    border-radius: var(--radius);
     color: var(--text);
-    font-family: var(--font-text);
-    font-size: 17px;
-    padding: 12px 14px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    padding: 11px 14px;
   }
 
   input:focus,

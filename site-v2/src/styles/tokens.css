@@ -1,53 +1,66 @@
 /*
-  Design tokens. Source: 04-konzept.md, sections 5.2 and 5.3.
-  Six colour values, exactly one accent, and the accent is used only on
-  interactive elements, never as a surface.
-  Fonts are self hosted (no Google Fonts request, no third party host).
+  Design tokens. Einzige CI-Quelle ist das Produkt: wunderportal.com.
+  Uebernommen aus ~/manuel-os/tools/wunder-pdf/template.html und README.md
+  (Werte aus assets/index-*.css des Portals, Tailwind v4 oklch nach hex).
+  Ansage Manuel 07.09.2026 abends: das echte Wunder-CI ist das Portal, nicht
+  die vorherige Anton-Display-Optik.
+
+    Grund und Karte    #ffffff
+    Text               #09090b
+    Sekundaertext      #71717b
+    Rand               #e4e4e7
+    Flaeche ruhig      #f4f4f5
+    Seitenleiste       #fafafa
+    Akzent gruen       #009966
+    Akzent gruen hell  #ecfdf5
+    Rundung            10px
+    Schrift            Inter 400 bis 900, selbst gehostet
+
+  Kein Anton, kein Epilogue, kein Gold, kein Orange, keine Verlaeufe, keine
+  dunklen Vollflaechen. Schwarz ist eine Flaeche (Pille des aktiven
+  Menuepunkts und Primaerbutton), Gruen ist die Markierung.
+
+  Die Variablennamen bleiben wie vorher, damit bestehende Seiten und
+  Komponenten weiterlaufen. Nur die Werte sind neu.
 */
 
 @font-face {
-  font-family: "Anton";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/anton-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D, U+2026;
-}
-@font-face {
-  font-family: "Anton";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/anton-latin-ext.woff2") format("woff2");
-  unicode-range: U+0100-02BA;
-}
-@font-face {
-  font-family: "Epilogue";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("/fonts/epilogue-latin.woff2") format("woff2");
+  src: url("/fonts/inter-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D, U+2026;
 }
 @font-face {
-  font-family: "Epilogue";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("/fonts/epilogue-latin-ext.woff2") format("woff2");
-  unicode-range: U+0100-02BA;
+  src: url("/fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+0300-036F, U+1E00-1EFF;
 }
 
 :root {
-  --ground: #0b0b0c;
-  --surface: #141416;
-  --text: #f4f2ef;
-  --text-muted: #9a9691;
-  --accent: #c9a227;
-  --line: #2a2a2d;
+  --ground: #ffffff;
+  --card: #ffffff;
+  --surface: #fafafa;
+  --muted-surface: #f4f4f5;
+  --text: #09090b;
+  --ink: #09090b;
+  --text-muted: #71717b;
+  --accent: #009966;
+  --accent-strong: #007a55;
+  --accent-soft: #ecfdf5;
+  --line: #e4e4e7;
+  --line-strong: #d4d4d8;
+  --radius: 10px;
 
-  --font-display: "Anton", "Helvetica Neue", Arial, sans-serif;
-  --font-text: "Epilogue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
+    sans-serif;
+  /* Beide Altnamen zeigen jetzt auf Inter. Keine zweite Schrift mehr. */
+  --font-display: var(--font-sans);
+  --font-text: var(--font-sans);
 
   --wrap: 1100px;
   --wrap-narrow: 720px;
@@ -69,46 +82,59 @@ body {
   margin: 0;
   background: var(--ground);
   color: var(--text);
-  font-family: var(--font-text);
-  font-size: 18px;
+  font-family: var(--font-sans);
+  font-size: 17px;
   line-height: 1.6;
   font-weight: 400;
+  font-feature-settings: "cv05" 1, "ss01" 1;
+  -webkit-font-smoothing: antialiased;
 }
 
+/*
+  Portal-Typografie: fett, eng gesetzt, gemischte Gross- und Kleinschreibung.
+  Keine Versalien in Ueberschriften, das war die alte Anton-Optik.
+*/
 h1,
 h2,
 h3 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  color: var(--text);
+  text-transform: none;
   margin: 0 0 16px;
 }
 
 h1 {
-  font-size: 64px;
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
 }
 h2 {
-  font-size: 40px;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.019em;
 }
 h3 {
-  font-size: 24px;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
 }
 
 p {
-  margin: 0 0 20px;
+  margin: 0 0 18px;
   max-width: 68ch;
 }
 
 a {
-  color: var(--text);
-  text-underline-offset: 4px;
+  color: var(--accent);
+  text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
 
 a:hover {
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 
 ul,
@@ -118,13 +144,13 @@ ol {
 }
 
 li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 hr {
   border: 0;
   border-top: 1px solid var(--line);
-  margin: 48px 0;
+  margin: 40px 0;
 }
 
 small,
@@ -146,7 +172,7 @@ small,
 }
 
 .section {
-  padding: 72px 0;
+  padding: 64px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -154,64 +180,72 @@ small,
   border-bottom: 0;
 }
 
+/* Abschnittslabel: kleine graue Versalien mit Laufweite, wie im Portal. */
 .eyebrow {
-  font-size: 14px;
-  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.17em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin: 0 0 16px;
+  margin: 0 0 14px;
 }
 
 .lead {
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.5;
+  color: var(--text);
 }
 
-/* One CTA style for the whole site. Concept 4.2 and 5.1, principle 5. */
+/*
+  Primaerbutton: schwarze abgerundete Pille mit weisser Schrift, exakt die
+  Form des aktiven Menuepunkts im Portal. Nur hier und in der Navigation.
+*/
 .cta {
   display: inline-block;
-  font-family: var(--font-text);
-  font-size: 17px;
+  font-family: var(--font-sans);
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--ground);
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 14px 24px;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 11px 22px;
   text-decoration: none;
   cursor: pointer;
 }
 
 .cta:hover,
 .cta:focus-visible {
-  color: var(--ground);
-  background: #d8b23c;
-  border-color: #d8b23c;
+  color: #ffffff;
+  background: #27272a;
+  border-color: #27272a;
 }
 
 .cta[disabled],
 .cta[aria-disabled="true"] {
-  background: transparent;
+  background: var(--muted-surface);
   color: var(--text-muted);
   border-color: var(--line);
   cursor: not-allowed;
 }
 
-/* The single secondary action, always a quiet text link. */
+/* Die einzige Zweitaktion, immer ein ruhiger Textlink. */
 .cta-quiet {
   display: inline-block;
-  font-size: 17px;
+  font-size: 15px;
+  font-weight: 500;
   color: var(--text-muted);
   text-decoration: underline;
   margin-left: 20px;
 }
 
 .cta-quiet:hover {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .actions {
-  margin-top: 32px;
+  margin-top: 28px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -221,29 +255,35 @@ small,
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-top: 40px;
+  gap: 20px;
+  margin-top: 32px;
 }
 
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  margin-top: 40px;
+  gap: 20px;
+  margin-top: 32px;
 }
 
+/* Karte wie im Portal: weiss, feiner Rand, leichte Rundung, viel Weissraum. */
 .panel {
-  background: var(--surface);
+  background: var(--card);
   border: 1px solid var(--line);
-  padding: 28px;
+  border-radius: var(--radius);
+  padding: 24px;
 }
 
 .panel h3 {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .panel p:last-child {
   margin-bottom: 0;
+}
+
+.panel-quiet {
+  background: var(--muted-surface);
 }
 
 :focus-visible {
@@ -260,31 +300,35 @@ small,
   left: 24px;
   top: 12px;
   z-index: 10;
-  background: var(--surface);
+  background: var(--ground);
+  border-radius: var(--radius);
   padding: 10px 16px;
   border: 1px solid var(--line);
 }
 
 @media (max-width: 860px) {
   body {
-    font-size: 17px;
+    font-size: 16px;
   }
   h1 {
-    font-size: 38px;
+    font-size: 34px;
   }
   h2 {
-    font-size: 30px;
+    font-size: 25px;
   }
   h3 {
-    font-size: 21px;
+    font-size: 18px;
+  }
+  .lead {
+    font-size: 18px;
   }
   .section {
-    padding: 48px 0;
+    padding: 44px 0;
   }
   .grid-3,
   .grid-2 {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 16px;
   }
   .cta,
   .cta-quiet {

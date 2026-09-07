@@ -1,0 +1,96 @@
+---
+/*
+  Ein Video der Results-Seite.
+
+  Bewusst kein Fremdskript, kein iframe, keine externe Quelle: die Videos
+  liegen als MP4 mit Poster in public/videos/. Der Player ist das native
+  video-Element des Browsers.
+
+  Regeln, die hier fest verdrahtet sind:
+  kein autoplay, kein Ton beim Laden, preload="none" (nichts wird geladen,
+  bis jemand auf Play drueckt), festes Seitenverhaeltnis 16 zu 9, damit die
+  Seite beim Laden nicht springt.
+*/
+
+interface Props {
+  /** Pfad zur MP4-Datei. */
+  src: string;
+  /** Pfad zum Poster-Bild. */
+  poster: string;
+  /** Bildunterschrift, ein bis zwei einfache Saetze. */
+  caption: string;
+  /** Ruhige Zeile darunter: Quelle und Laufzeit. */
+  sourceNote?: string;
+}
+
+const { src, poster, caption, sourceNote } = Astro.props;
+---
+
+<figure class="video-card">
+  <video
+    class="video"
+    controls
+    preload="none"
+    playsinline
+    poster={poster}
+    width="1280"
+    height="720"
+  >
+    <source src={src} type="video/mp4" />
+    <p class="fallback">
+      Your browser cannot play this video.
+      <a href={src} download>Download the video file</a> and play it on your device.
+    </p>
+  </video>
+
+  <figcaption class="video-figcaption">
+    <p class="video-caption">{caption}</p>
+    {sourceNote && <p class="caption">{sourceNote}</p>}
+  </figcaption>
+</figure>
+
+<style>
+  .video-card {
+    margin: 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  /*
+    aspect-ratio haelt den Platz frei, bevor das Poster da ist. width und
+    height am Element sind der Fallback fuer aeltere Browser.
+  */
+  .video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: var(--muted-surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .video-figcaption {
+    padding: 16px 18px 18px;
+  }
+
+  .video-caption {
+    margin: 0;
+    color: var(--text);
+  }
+
+  .video-caption + .caption {
+    margin: 8px 0 0;
+  }
+
+  .fallback {
+    margin: 0;
+    padding: 18px;
+    color: var(--text-muted);
+  }
+
+  .fallback a {
+    color: var(--accent);
+  }
+</style>

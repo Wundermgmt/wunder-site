@@ -1,9 +1,24 @@
 ---
 /*
-  Structure only. The legal wording has to be confirmed by counsel before this
-  page goes live. Every open item is marked TO BE COMPLETED BY COUNSEL in the
-  copy itself, so nobody ships it by accident.
+  Impressum, ausformuliert am 07.09.2026.
+  Alle Angaben stammen aus src/site.ts und aus der Belegkette unten. Nichts ist
+  ergaenzt worden, was nicht belegt ist. Jede verbleibende Luecke steht als
+  TO BE COMPLETED BY COUNSEL sichtbar in der Seite, damit sie niemand uebersieht.
   04-konzept.md section 4.3, "/imprint und /privacy".
+
+  Belegkette, lokale Quellen (bewusst NICHT im ausgelieferten HTML):
+  1. Live-Impressum wundermgmt.com/imprint, Sicherung vom 07.09.2026 unter
+     "/Users/manuelgonzalez/Dropbox/AI DATABASE MG/13_wunder/squarespace-sicherung-2026-09-07/texte/imprint.txt".
+     Dort steht woertlich "Wunder is a brand by KG Models SIA", die Anschrift
+     "Valnu Iela 5-6, Riga, LV-1050, Latvia" und als Kontakt
+     lauris.kalnins@wundermgmt.com.
+  2. "/Users/manuelgonzalez/manuel-os/companies/wunder-management/public-web-recherche-2026-09-06.md":
+     Lursoft weist die KG Models SIA mit der Registernummer 50203451401 als
+     aktive lettische Gesellschaft mit Sitz in Riga aus.
+  3. Geschaeftsfuehrung und Vertretungsbefugnis: identisch zur Seite /company
+     in diesem Repo, dort aus 04-konzept.md section 4.3 uebernommen.
+  4. Die USt-ID ist in src/site.ts bewusst ein Platzhalter. Sie wird hier als
+     offener Punkt ausgewiesen und nicht geraten.
 */
 import Base from '../layouts/Base.astro';
 import { legal } from '../site';
@@ -14,18 +29,35 @@ import { legal } from '../site';
   description="Legal information for Wunder, a brand by KG Models SIA, Riga, Latvia."
   noindex
 >
+  <!--
+    Sources for the entity data on this page, checked on 7 September 2026:
+    1. The imprint published at wundermgmt.com/imprint, which names
+       "Wunder is a brand by KG Models SIA" and the address in Riga.
+    2. The Latvian company register, resolved through Lursoft, which lists
+       KG Models SIA under registration number 50203451401 as an active
+       company with its seat in Riga.
+    3. The management and signing authority stated here matches the /company
+       page of this site. Both come from the same internal fact base.
+    The VAT identification number is a placeholder in the code on purpose and
+    is marked as an open item in the copy. It is not to be filled in by guess.
+  -->
+
   <section class="section">
     <div class="wrap wrap-narrow">
       <h1>Imprint</h1>
 
       <p class="draft-note">
-        Draft structure. The wording on this page is not legally reviewed yet. Items marked TO BE
-        COMPLETED BY COUNSEL must be filled and the whole page confirmed before it goes live.
+        Draft wording, complete but not legally reviewed. Every item marked TO BE COMPLETED BY
+        COUNSEL has to be filled in, and the page as a whole has to be confirmed, before it goes
+        live.
       </p>
 
-      <h2>Company</h2>
+      <h2>Site operator</h2>
       <p>
-        {legal.brandLine}.<br />
+        {legal.brandLine}. Wunder is a brand name, not a separate legal person. The company that
+        operates this website, signs the agreements and is answerable for the content is:
+      </p>
+      <p>
         {legal.company}<br />
         {legal.street}<br />
         {legal.city}<br />
@@ -35,14 +67,23 @@ import { legal } from '../site';
       <h2>Register</h2>
       <p>
         Registration number: {legal.regNumber}<br />
-        Registered: {legal.registered}<br />
+        Registered on: {legal.registered}<br />
         Register: Register of Enterprises of the Republic of Latvia
+      </p>
+      <p>
+        The registration number is the reliable way to identify us. There is a company with a
+        similar name in the United States that we have nothing to do with, and the number above is
+        how you tell the two apart.
       </p>
 
       <h2>VAT</h2>
       <p>
-        VAT identification number: <span class="todo">{legal.vatId}</span><br />
-        <span class="todo">TO BE COMPLETED BY COUNSEL or by Manuel and Lauris from the tax filings.</span>
+        VAT identification number: <span class="todo">{legal.vatId}</span>
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL, or by Manuel and Lauris from the tax filings: the actual VAT
+        identification number, and confirmation of whether the company is registered for VAT at all.
+        The value above is a placeholder in the code and must not be replaced by an estimate.
       </p>
 
       <h2>Represented by</h2>
@@ -50,30 +91,61 @@ import { legal } from '../site';
         Manuel Gonzalez, CEO and co owner, sole signing authority.<br />
         Lauris Kalnins, COO and co owner, sole signing authority.
       </p>
+      <p>
+        Both are on the register. Either of them can sign for the company on their own. Agreements
+        are concluded with {legal.company} directly, with no second entity in the chain.
+      </p>
 
       <h2>Contact</h2>
       <p>
         Email: <a href={`mailto:${legal.contactEmail}`}>{legal.contactEmail}</a><br />
-        <span class="todo">TO BE COMPLETED BY COUNSEL: a telephone number, if one is required for this entity form.</span>
+        Postal address: as stated under site operator above.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: a telephone number, if one has to be published for this form of
+        company, and the working hours we want to state next to it.
       </p>
 
-      <h2>Online dispute resolution</h2>
-      <p>
-        The European Commission provides a platform for online dispute resolution at <a
-          href="https://ec.europa.eu/consumers/odr"
-          rel="noopener"
-          target="_blank">ec.europa.eu/consumers/odr</a
-        >.
+      <h2>Supervision and regulated activities</h2>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: whether any part of the business is subject to a supervisory
+        body or requires a licence under Latvian law, and if so the name and address of that body.
+        No supervisory body is named here until that question is answered.
       </p>
-      <p>
-        <span class="todo"
-          >TO BE COMPLETED BY COUNSEL: the statement on whether the company is willing or obliged to
-          take part in dispute resolution proceedings before a consumer arbitration board.</span
-        >
+
+      <h2>Dispute resolution</h2>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the statement on consumer dispute resolution, including whether
+        the company is obliged or willing to take part in proceedings before a consumer arbitration
+        body, and which reference to the European online dispute resolution scheme is still correct
+        at the time of publication. The status of that scheme has to be checked before a link to it
+        is put back on this page.
       </p>
 
       <h2>Responsible for the content of this site</h2>
-      <p><span class="todo">TO BE COMPLETED BY COUNSEL: name and address of the responsible person under Latvian and European law.</span></p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the name and address of the person responsible for the editorial
+        content under Latvian and European media law, and whether such a statement is required for
+        this site at all.
+      </p>
+
+      <h2>Content and links</h2>
+      <p>
+        We write the content of this site ourselves and keep it current to the best of our
+        knowledge. Where we link to a site we do not operate, we have no influence over what is
+        published there, and the operator of that site is responsible for its content.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: whether a formal liability statement for content and links is
+        required under Latvian law, and in what wording. The paragraph above is a plain description,
+        not a legal disclaimer.
+      </p>
+
+      <h2>Copyright</h2>
+      <p>
+        Texts, images and layout on this site belong to {legal.company} unless a source says
+        otherwise. Reuse beyond what copyright law allows needs our written consent.
+      </p>
 
       <p class="caption">
         Data protection is covered separately in our <a href="/privacy">privacy policy</a>.
@@ -86,7 +158,9 @@ import { legal } from '../site';
   .draft-note {
     padding: 16px 20px;
     border: 1px solid var(--accent);
-    color: var(--text-muted);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    color: var(--text);
     max-width: 68ch;
     margin-bottom: 40px;
   }

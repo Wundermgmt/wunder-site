@@ -5,6 +5,7 @@
   Hard limit that has to stay in the copy: reading and sorting a contract is
   not legal advice. Same logic as the ban on tax and banking statements in
   appendix A of the closing playbook.
+  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends.
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
@@ -12,16 +13,16 @@ import CtaBlock from '../components/CtaBlock.astro';
 
 <Base
   title="Switching agencies | Wunder"
-  description="What happens when you are still signed with another agency, in what order, and where our help ends."
+  description="What happens when you are still signed with another agency, in what order, and where our help stops."
 >
   <section class="section">
     <div class="wrap">
-      <h1>Leaving an agency you are already signed with.</h1>
-      <p class="lead">This is the part most people are actually stuck on. It is not the money.</p>
+      <h1>Leaving an agency you signed with.</h1>
+      <p class="lead">This is the part most people are stuck on. It is not the money.</p>
       <blockquote>
         <p>I am so nervous about telling my other agency. You have no idea.</p>
         <p class="caption">
-          A typical sentence from these conversations, not a testimonial, quoted without a name.
+          A line we hear a lot in these talks. Not a quote from a client, and no name on it.
         </p>
       </blockquote>
     </div>
@@ -31,17 +32,17 @@ import CtaBlock from '../components/CtaBlock.astro';
     <div class="wrap">
       <h2>What we do.</h2>
       <p>
-        Send us your current contract and we read it with you. We tell you what the notice period
-        says, when your next exit window opens, and what the clause about your content means in
-        practice.
+        Send us your deal and we read it with you. We tell you how much notice you owe. We tell you
+        when your next way out opens. We tell you what the part about your content means in real
+        life.
       </p>
       <p>
-        That is reading and sorting, not legal advice. We are not lawyers and we do not act as
-        yours. Where a document needs a legal opinion, we say so and you take it to a lawyer.
+        That is reading and sorting. It is not legal advice. We are not lawyers, and we are not
+        yours. When a paper needs a lawyer, we say so. Then you take it to one.
       </p>
       <p>
-        We do not contact your current agency, we do not write to them in your name, and we do not
-        ask you to break an agreement you signed.
+        We do not call your agency. We do not write to them in your name. We do not ask you to
+        break a deal you signed.
       </p>
     </div>
   </section>
@@ -50,21 +51,21 @@ import CtaBlock from '../components/CtaBlock.astro';
     <div class="wrap">
       <h2>The order things happen in.</h2>
       <ol>
-        <li>You apply and say in the form that you are currently under contract, and until when.</li>
-        <li>We talk anyway. Nothing about that call obliges you to anything.</li>
-        <li>We read your contract and work out the earliest clean exit date.</li>
+        <li>You apply. In the form you say that you are still tied, and until when.</li>
+        <li>We talk anyway. That call ties you to nothing.</li>
+        <li>We read your deal. We work out the first clean date you can leave.</li>
         <li>
-          You give notice yourself, in writing, in the window your contract allows. We do not start
+          You give notice yourself, in writing, in the window your deal allows. We do not start
           before that date.
         </li>
         <li>
-          We start after your old agreement has ended, with the thirty day starting point measured
-          on the day we begin.
+          We start after your old deal ends. On day one we read your last thirty days. That is
+          your starting point.
         </li>
       </ol>
       <p>
-        If your contract has no clean exit for another few months, we will tell you that and put a
-        date in the calendar instead of talking you into something.
+        Maybe your deal has no clean way out for months. Then we say so. We put a date in the
+        calendar instead of talking you into something.
       </p>
       <CtaBlock secondary />
     </div>
@@ -75,8 +76,9 @@ import CtaBlock from '../components/CtaBlock.astro';
   blockquote {
     margin: 32px 0 0;
     padding: 24px 28px;
-    background: var(--surface);
-    border-left: 2px solid var(--accent);
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
     max-width: 720px;
   }
 

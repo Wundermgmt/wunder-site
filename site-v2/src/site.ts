@@ -17,6 +17,13 @@ export const legal = {
   vatId: 'PLACEHOLDER_VAT_ID',
   contactEmail: 'info@wundermgmt.com',
   privacyEmail: 'privacy@wundermgmt.com',
+  /*
+    Ziel des Bewerbungsformulars, Ansage Manuel 07.09.2026 abends: Ralfs.
+    Adresse am 07.09.2026 gegen aspmx.l.google.com geprueft, RCPT TO wurde mit
+    250 angenommen, eine erfundene Adresse auf derselben Domain mit 550
+    abgelehnt. Das Postfach existiert also und es gibt kein Catch all.
+  */
+  applyRecipient: 'rg@wundermgmt.com',
 } as const;
 
 export const cta = {
@@ -31,6 +38,10 @@ export const cta = {
   Empty by default on purpose: no Google Apps Script, no open endpoint in the
   repository (04-konzept.md section 6.3). With no endpoint the form renders in a
   disabled state instead of posting somewhere unintended.
+
+  Die Empfaengeradresse steht oben in legal.applyRecipient. Offen bleibt, welcher
+  Formulardienst die Zustellung uebernimmt, ein Static Site auf Render kann
+  selbst keine Mail versenden. TODO vor dem Livegang.
 */
 export const formEndpoint: string = import.meta.env.FORM_ENDPOINT ?? '';
 

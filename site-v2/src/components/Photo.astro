@@ -1,0 +1,76 @@
+---
+/*
+  Echtes Foto statt Platzhalter.
+
+  Regel bleibt wie im Konzept, Abschnitt 5.4: nur eigenes Material, keine
+  Stockfotos, keine KI-Bilder. Alles, was ueber diese Komponente laeuft, stand
+  bereits auf der eigenen Live-Seite wundermgmt.com und ist damit belegt
+  veroeffentlicht. Herkunft je Datei steht in public/img/QUELLEN.txt.
+
+  Der Alt-Text ist Pflicht und wird hier erzwungen, damit keine Bildbeschreibung
+  vergessen wird. Er soll in einfachem Englisch geschrieben sein, wie der Rest
+  der Seite (Ansage Manuel 07.09.2026).
+*/
+
+interface Props {
+  /** Pfad unterhalb von /img, zum Beispiel "lauris-kalnins.webp". */
+  file: string;
+  /** Bildbeschreibung, einfaches Englisch, Pflicht. */
+  alt: string;
+  width: number;
+  height: number;
+  /** Bildunterschrift, optional. */
+  caption?: string;
+  /** Das Hero-Bild wird sofort geladen, alles andere erst beim Scrollen. */
+  eager?: boolean;
+  /** sizes-Attribut, damit der Browser die richtige Breite waehlt. */
+  sizes?: string;
+  /*
+    Einheitliches Bildformat. Ohne Angabe behaelt das Bild sein eigenes
+    Seitenverhaeltnis. Mit Angabe wird auf das Format zugeschnitten
+    (object-fit: cover), damit mehrere Fotos nebeneinander gleich hoch sind.
+  */
+  ratio?: 'portrait' | 'square' | 'wide';
+}
+
+const { file, alt, width, height, caption, eager = false, sizes, ratio } = Astro.props;
+
+const ratioValue = { portrait: '4 / 5', square: '1 / 1', wide: '16 / 9' }[ratio ?? ''] ?? undefined;
+
+if (typeof alt !== 'string' || alt.trim() === '') {
+  throw new Error(`Photo: "${file}" hat keinen Alt-Text. Jedes Bild braucht eine Beschreibung.`);
+}
+---
+
+<figure class="photo">
+  <img
+    src={`/img/${file}`}
+    alt={alt}
+    width={width}
+    height={height}
+    sizes={sizes}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding={eager ? 'sync' : 'async'}
+    style={ratioValue ? `aspect-ratio: ${ratioValue}; object-fit: cover;` : undefined}
+  />
+  {caption && <figcaption class="caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .photo {
+    margin: 0;
+  }
+
+  .photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--muted-surface);
+  }
+
+  figcaption {
+    margin-top: 10px;
+  }
+</style>

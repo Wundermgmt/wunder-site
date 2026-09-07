@@ -14,13 +14,24 @@ const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site ?? 'https://wundermgmt.com').href;
 const ogImage = new URL('/og-image.png', Astro.site ?? 'https://wundermgmt.com').href;
 
+/*
+  Hoechstens sechs Punkte im Kopf, sonst bricht die Leiste auf drei Zeilen um.
+  "Who we work with" und "Switching" stehen dafuer im Fuss und werden aus den
+  Seitentexten heraus verlinkt.
+*/
 const nav = [
   { href: '/how-it-works', label: 'How it works' },
+  { href: '/results', label: 'Results' },
   { href: '/proof', label: 'Proof' },
-  { href: '/who-we-work-with', label: 'Who we work with' },
-  { href: '/switching', label: 'Switching' },
+  { href: '/meet-us', label: 'Meet us' },
   { href: '/company', label: 'Company' },
   { href: '/faq', label: 'FAQ' },
+];
+
+const footerNav = [
+  { href: '/who-we-work-with', label: 'Who we work with' },
+  { href: '/switching', label: 'Switching' },
+  { href: '/apply', label: 'Apply' },
 ];
 ---
 
@@ -34,8 +45,8 @@ const nav = [
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, follow" />}
 
-    <!-- Favicon: own wordmark, generated from the site's own CI tokens and the -->
-    <!-- Anton display font already shipped here. No third party icon service. -->
+    <!-- Favicon: own wordmark, generated from the site's own CI tokens. -->
+    <!-- No third party icon service. -->
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -55,13 +66,7 @@ const nav = [
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link
-      rel="preload"
-      href="/fonts/epilogue-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
     {
       plausibleDomain && (
         <script defer data-domain={plausibleDomain} src="https://plausible.io/js/script.js" />
@@ -121,6 +126,16 @@ const nav = [
 
     <footer class="site-footer">
       <div class="wrap footer-inner">
+        <p class="caption footer-nav">
+          {
+            footerNav.map((item, i) => (
+              <>
+                {i > 0 && <span aria-hidden="true"> / </span>}
+                <a href={item.href}>{item.label}</a>
+              </>
+            ))
+          }
+        </p>
         <p class="caption entity">
           {legal.brandLine}, reg. {legal.regNumber}, {legal.street}, {legal.city}, {legal.country}.
         </p>
@@ -139,9 +154,18 @@ const nav = [
 </html>
 
 <style>
+  /*
+    Kopf und Fuss im Portal-CI: weisser Grund, feine Trennlinie, Wortmarke
+    WUNDER in fetten Versalien mit Laufweite schwarz auf weiss. Der aktive
+    Menuepunkt ist die schwarze Pille aus dem Portal, sonst ruhige graue
+    Textlinks. Quelle: ~/manuel-os/tools/wunder-pdf/README.md.
+  */
   .site-header {
     border-bottom: 1px solid var(--line);
     background: var(--ground);
+    position: sticky;
+    top: 0;
+    z-index: 20;
   }
 
   .header-inner {
@@ -149,50 +173,80 @@ const nav = [
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    min-height: 76px;
+    min-height: 68px;
     flex-wrap: wrap;
   }
 
   .brand {
-    font-family: var(--font-display);
-    font-size: 26px;
-    letter-spacing: 0.06em;
+    font-family: var(--font-sans);
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
     text-decoration: none;
+    color: var(--ink);
+  }
+
+  .brand:hover {
+    color: var(--ink);
   }
 
   .nav {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 6px;
     flex-wrap: wrap;
   }
 
   .nav-link {
-    font-size: 15px;
+    font-size: 14px;
+    font-weight: 500;
     color: var(--text-muted);
     text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    line-height: 1.2;
   }
 
-  .nav-link:hover,
-  .nav-link[aria-current='page'] {
+  .nav-link:hover {
     color: var(--text);
+    background: var(--muted-surface);
   }
 
-  /* Creator login stays a quiet text link, never a button. Concept 4.7. */
+  /* Aktiver Menuepunkt: schwarze Pille, weisse Schrift, wie im Portal. */
+  .nav-link[aria-current='page'] {
+    color: #ffffff;
+    background: var(--ink);
+  }
+
+  .nav-link[aria-current='page']:hover {
+    color: #ffffff;
+    background: var(--ink);
+  }
+
+  /* Creator login bleibt ein ruhiger Textlink, nie ein Button. Konzept 4.7. */
   .login {
     color: var(--text-muted);
     text-decoration: underline;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .login:hover {
+    background: transparent;
+    color: var(--text);
   }
 
   .header-cta {
-    font-size: 15px;
-    padding: 10px 18px;
+    font-size: 14px;
+    padding: 9px 18px;
+    margin-left: 6px;
   }
 
   .site-footer {
     border-top: 1px solid var(--line);
-    padding: 40px 0;
+    background: var(--surface);
+    padding: 32px 0;
     margin-top: 0;
   }
 
@@ -204,21 +258,53 @@ const nav = [
   }
 
   .entity,
-  .footer-links {
+  .footer-links,
+  .footer-nav {
     margin: 0;
   }
 
+  .footer-nav {
+    flex-basis: 100%;
+    padding-bottom: 16px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .footer-nav a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .footer-nav a:hover {
+    color: var(--accent);
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
+  }
+
+  .footer-links a:hover {
+    color: var(--text);
+  }
+
   @media (max-width: 860px) {
+    .site-header {
+      position: static;
+    }
     .header-inner {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding-top: 14px;
+      padding-bottom: 14px;
     }
     .nav {
-      gap: 14px;
+      gap: 4px;
+    }
+    .nav-link {
+      padding: 6px 10px;
     }
     .header-cta {
       display: inline-block;
       width: auto;
+      margin-left: 0;
     }
   }
 </style>

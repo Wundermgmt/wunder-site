@@ -1,0 +1,69 @@
+---
+/*
+  Die Seite "Meet the team in real life".
+
+  Zweck: Vertrauen ueber Gesichter statt ueber Text. Wer wissen will, mit wem
+  er es zu tun hat, sieht hier die beiden Gruender und eine Creatorin, die
+  ueber ihre Zeit bei uns spricht.
+
+  Die Videos liegen als Daten in src/data/youtube.ts, samt Quelle und
+  Laufzeit. Diese Seite gibt nur aus. Geladen wird von YouTube erst nach
+  einem Klick, siehe components/YouTubeEmbed.astro.
+*/
+import Base from '../layouts/Base.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import { teamVideos, loadNote } from '../data/youtube';
+---
+
+<Base
+  title="Meet us | Wunder"
+  description="See the people behind Wunder. Our own videos with our founders and a creator."
+>
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Meet us</p>
+      <h1>Meet the team in real life</h1>
+      <p class="lead">We fly out and meet our creators face to face.</p>
+      <p>
+        Lauris films most of these talks. He is one of our two founders. The other one is Manuel.
+        You can see them both here.
+      </p>
+      <p>
+        Nothing on this page is a stock photo. These are our own videos, from our own days at work.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Watch the videos</h2>
+      <p class="lead">Press play on one. Each one is a real talk, not an ad.</p>
+      <div class="grid-2">
+        {
+          teamVideos.map((video) => (
+            <YouTubeEmbed
+              id={video.id}
+              title={video.title}
+              url={video.url}
+              blurb={video.blurb}
+              durationLabel={video.durationLabel}
+              poster={video.poster}
+              loadNote={loadNote}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="panel panel-quiet">
+        <h2>Come and see for yourself</h2>
+        <p>We would rather show you than tell you. Watch a talk, then write to us.</p>
+      </div>
+      <CtaBlock />
+    </div>
+  </section>
+</Base>

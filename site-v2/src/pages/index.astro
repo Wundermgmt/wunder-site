@@ -3,16 +3,20 @@
   Home. Structure and copy: 04-konzept.md section 4.3, page "/".
   Six sections, one message above the fold, no number tiles, no badges.
 
-  PENDING DECISION 1 (Manuel): section "What it costs, before you ask" states
-  the split publicly. The concept recommends it, Manuel has not signed it off.
+  DECIDED (Manuel, 07.09.2026, abends): the revenue split is NOT stated on the
+  public site. It is covered in the closing call. This replaces the earlier
+  decision from midday. Do not put a split figure back on any page.
   DECIDED (Manuel, 07.09.2026): no contract term, notice period or renewal
   language on the site. Early exit if it stops working stays, without a
   concrete deadline.
+  DECIDED (Manuel, 07.09.2026, abends): most creators are not native English
+  speakers. Every sentence on this page is short and plain on purpose. The
+  build measures it, see scripts/check-copy.mjs, rule 5.
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
 import RecordCard from '../components/RecordCard.astro';
-import Placeholder from '../components/Placeholder.astro';
+import Photo from '../components/Photo.astro';
 import { getCollection } from 'astro:content';
 import { legal } from '../site';
 
@@ -24,7 +28,7 @@ const firstRecord = records[0];
 
 <Base
   title="Wunder | Managed against your own numbers"
-  description="Wunder is a creator management company registered in Riga. We write down what your account did on its own over the last thirty days, and everything after that is measured against that number."
+  description="Wunder is a creator management company in Riga. We write down what your account did in the last thirty days. After that, you measure us against that number."
 >
   <section class="section hero">
     <div class="wrap">
@@ -32,13 +36,22 @@ const firstRecord = records[0];
         <div>
           <h1>Managed against your own numbers.</h1>
           <p class="lead">
-            Wunder is a creator management company registered in Riga. Before we start, we write
-            down what your account did on its own over the last thirty days. Everything we do after
-            that is measured against that number, in the same portal you log into.
+            Wunder is a creator management company. We are based in Riga. Before we start, we look
+            at your last thirty days. We write that number down. Then you measure us against it.
+            You see the same portal we do.
           </p>
           <CtaBlock secondary />
         </div>
-        <Placeholder label="Own production photography" ratio="portrait" />
+        <Photo
+          file="lauris-kalnins.webp"
+          alt="Lauris Kalnins sits at a desk with a laptop and an open notebook."
+          width={900}
+          height={1349}
+          sizes="(max-width: 860px) 100vw, 420px"
+          ratio="portrait"
+          eager
+          caption="Lauris Kalnins, COO. He runs the day to day work with our creators."
+        />
       </div>
     </div>
   </section>
@@ -47,30 +60,39 @@ const firstRecord = records[0];
     <div class="wrap">
       <h2>You know what your account did at its best.</h2>
       <p class="lead">
-        We write that number down before we start, and we let you measure us against it.
+        We write that number down before we start. Then you can hold us to it.
       </p>
       {
-        firstRecord && (
+        firstRecord ? (
           <div class="record-slot">
             <RecordCard {...firstRecord.data} />
+          </div>
+        ) : (
+          <div class="record-slot panel">
+            <p>
+              Six creators tell you on video what changed for them. Watch them on the
+              <a href="/results">results page</a>.
+            </p>
+            <p class="caption">
+              Our own case cards are not ready yet. We check each one against the portal first.
+            </p>
           </div>
         )
       }
       <p class="caption">
-        Every result on this site is one case, dated, with the part that did not work written next
-        to it. <a href="/proof">See how we report numbers</a>.
+        Every result here is one case. Each one has a date. Each one says what did not work.
+        <a href="/proof">See how we report numbers</a>.
       </p>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <h2>The reason you are reading this page.</h2>
+      <h2>Why you are on this page.</h2>
       <p class="lead">
-        Almost everyone who ends up on a call with us is looking for one of four things: growth
-        that has stalled on its own, someone to take on the parts of the work that are not the
-        content itself, marketing knowledge they have not had to build themselves, or time back.
-        We are not going to guess which one is yours. Tell us on the call.
+        Most people come to us for one of four things. Growth that has stopped. Help with the work
+        that is not the content. Marketing skills they never had time to learn. Or free time. We
+        will not guess which one is yours. Tell us on the call.
       </p>
     </div>
   </section>
@@ -82,31 +104,31 @@ const firstRecord = records[0];
         <div class="panel">
           <h3>You see the same screen we do</h3>
           <p>
-            Every post runs through our own posting system, and we read every number at the source
-            instead of estimating it. You log into your own portal and see views, reach and
-            followers over seven, thirty and ninety days.
+            Every post goes through our own system. We read each number at the source. We do not
+            guess it. You log into your own portal. There you see views, reach and followers. You
+            can look at seven, thirty and ninety days.
           </p>
           <p><a href="/how-it-works#portal">See how it works</a></p>
         </div>
         <div class="panel">
           <h3>You never hand us a password</h3>
           <p>
-            Instagram publishing runs through Zernio, the OnlyFans chat and vault work runs through
-            Infloww, both authorised interfaces. A permission you granted can be withdrawn. A
-            password you handed over cannot.
+            We post to Instagram through Zernio. We run the OnlyFans chat and vault through
+            Infloww. Both are official tools. You give them access, and you can take it back. A
+            password you hand over is gone.
           </p>
           <p><a href="/how-it-works#access">See how it works</a></p>
         </div>
         <div class="panel">
-          <h3>The people writing in your name get audited</h3>
+          <h3>We check the people who write in your name</h3>
           <p>
-            Twice a week an automated run pulls the last finished shift and scores it against a
-            versioned rubric. The run is on a schedule and nobody on the chat team can switch it
+            Twice a week our system reads the last finished shift. It scores the chat against a
+            written rule set. The check runs to a fixed plan. Nobody on the chat team can turn it
             off.
           </p>
           <p>
-            Who writes to your fans is written down, not just told to you. You are free to say so
-            in your own bio. If you want a line about it there, we will not ask you to remove it.
+            We write down who writes to your fans. You may say that in your own bio. We will not
+            ask you to take it down.
           </p>
           <p><a href="/how-it-works#chatting">See how it works</a></p>
         </div>
@@ -116,20 +138,18 @@ const firstRecord = records[0];
 
   <section class="section">
     <div class="wrap">
-      <h2>What it costs, before you ask.</h2>
+      <h2>How you get paid.</h2>
       <p>
-        The split is 50/50. No setup fee, no minimum revenue. OnlyFans pays out to your own account
-        first. We invoice our share afterwards, once a week.
+        There is no setup fee. There is no minimum you have to earn. OnlyFans pays your own bank
+        first. We send our bill after that, once a week. We go through the numbers on the call.
+        You sign nothing before that.
       </p>
       <p>
-        You can leave early if this stops working for you. We walk through exactly how in the call.
+        You can leave early if this stops working for you. We show you how on the call.
       </p>
       <p>
-        Your content stays yours. We never held your passwords, so there is nothing to hand back
-        except portal access, which we switch off the same day.
-      </p>
-      <p class="caption">
-        Conditions on this page are pending sign off. See the note in the pull request.
+        Your content stays yours. We never held your passwords. So there is nothing to hand back.
+        We switch your portal access off the same day.
       </p>
       <CtaBlock />
     </div>
@@ -137,26 +157,24 @@ const firstRecord = records[0];
 
   <section class="section">
     <div class="wrap">
-      <h2>A registered company, with two people who sign for it.</h2>
+      <h2>A real company, with two people who sign for it.</h2>
       <p>
-        Wunder is a brand by {legal.company}, registration number {legal.regNumber}, registered in
-        Riga on {legal.registered}. Two managing directors, each with sole signing authority: Manuel
-        Gonzalez, CEO and co owner, and Lauris Kalnins, COO and co owner.
+        Wunder is a brand by {legal.company}. The number in the register is {legal.regNumber}. The
+        company started in Riga on {legal.registered}. Two directors run it, and each one may sign
+        alone. Manuel Gonzalez is CEO and co owner. Lauris Kalnins is COO and co owner.
       </p>
       <p>
-        You can look that up before you talk to either of them. <a href="/company"
-          >The company page has the rest</a
-        >.
+        You can look all of that up first. <a href="/company">The company page has the rest</a>.
       </p>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <h2>Apply, and we will tell you either way.</h2>
+      <h2>Apply, and we tell you either way.</h2>
       <p>
-        You send eight short answers, a person reads them, and you get an answer whether it is a fit
-        or not. If it is not, you get one sentence instead of silence.
+        You send eight short answers. A person reads them. Then you hear if it is a fit. If it is
+        not, you get one line. You do not get silence.
       </p>
       <p>We answer within one working day.</p>
       <CtaBlock secondary />

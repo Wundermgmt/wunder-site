@@ -3,6 +3,11 @@
   The page Ralfs sends in the middle of a conversation. It has to stand on its
   own. Structure and copy: 04-konzept.md section 4.3, page "/how-it-works",
   built on the three pillars in section 2.2.
+
+  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends. Alle Befunde
+  bleiben drin, nur in kurzen Saetzen. Der Satz zur Einkommenszusage unten steht
+  wortgleich in scripts/allowed-phrases.txt. Wer ihn umformuliert, muss die
+  Freigabezeile dort mitziehen, sonst bricht der Copy-Check.
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
@@ -11,56 +16,57 @@ import Placeholder from '../components/Placeholder.astro';
 
 <Base
   title="How it works | Wunder"
-  description="Three mechanisms you can check: your own portal, authorised interfaces instead of passwords, and an audit on everyone who writes in your name."
+  description="Three things you can check: your own portal, official tools instead of passwords, and a check on everyone who writes in your name."
 >
   <section class="section">
     <div class="wrap">
-      <h1>How the work is actually done.</h1>
+      <h1>How the work is done.</h1>
       <p class="lead">
-        Three mechanisms. Each one is something you can check, not something you have to believe.
+        Three parts. You can check each one. You do not have to take our word for it.
       </p>
     </div>
   </section>
 
   <section class="section" id="portal">
     <div class="wrap">
-      <p class="eyebrow">Mechanism one</p>
+      <p class="eyebrow">Part one</p>
       <h2>You see the same screen we do.</h2>
       <p class="lead">
-        You see what is happening on your account at any time, without asking us, and you see the
-        same number we see.
+        You can look at your account at any time. You do not have to ask us. You see the same
+        number we see.
       </p>
       <p>
-        Every post runs through our own portal and we read every number at the source instead of
-        estimating it. We built the whole chain ourselves, so there is nothing we would have to tell
-        you that we could not show you.
+        Every post goes through our own portal. We read each number at the source. We do not guess
+        it. We built the whole chain ourselves. So there is nothing we could tell you that we
+        cannot also show you.
       </p>
       <ol>
         <li>
-          Before we start we read what your account did on its own over the last thirty days. That
-          number is your starting point.
+          First we read your last thirty days. We look at what your account did on its own.
+          That number is your starting point.
         </li>
         <li>
-          Our posting engine recalculates the thirty day median of your account every night and
-          scores every single post against your own median, not against an agency average. A post
-          counts as scoreable after seventy two hours of maturity.
+          Each night our system works out your middle day of the last thirty days. Then it scores
+          every post against your own middle day, not against some agency average.
         </li>
         <li>
-          You log into your own portal and see views, reach and followers over seven, thirty and
-          ninety days, the daily curve, the comparison with the period before, the content calendar
-          and the strategy your manager wrote.
+          A post is scored three days after it goes up. Before that it is too young to judge.
         </li>
         <li>
-          What you do not see there, you do not see on purpose: the identity of individual fans and
-          internal team metrics. That line exists so your access is not a side door into other
-          people's data.
+          You log into your own portal. You see views, reach and followers there. You can look
+          at seven, thirty and ninety days. You see the daily line and the period before it. You
+          see the content plan. You see the plan your manager wrote.
+        </li>
+        <li>
+          Two things are missing there on purpose. You cannot see who a single fan is. You cannot
+          see how our team is doing inside. That line keeps your access from becoming a back door
+          into other people's data.
         </li>
       </ol>
       <div class="portal-hint">
         <Placeholder label="Reduced hint of the portal view, no readable numbers" ratio="wide" />
         <p class="caption">
-          A reduced hint, on purpose. The portal itself is not a public demo and stays out of the
-          index.
+          A small hint, on purpose. The portal is not a public demo. It stays out of search.
         </p>
       </div>
       <CtaBlock />
@@ -69,31 +75,28 @@ import Placeholder from '../components/Placeholder.astro';
 
   <section class="section" id="access">
     <div class="wrap">
-      <p class="eyebrow">Mechanism two</p>
+      <p class="eyebrow">Part two</p>
       <h2>You never hand us a password.</h2>
       <p class="lead">
-        You do not give us a password. Not for Instagram, not for OnlyFans.
+        You do not give us a password. Not for Instagram. Not for OnlyFans.
       </p>
       <p>
-        We work through the official interfaces of the platforms, not through your login details. A
-        permission you granted can be withdrawn. A password you handed over cannot.
+        We work through the official tools of the platforms. We do not use your login. You give
+        those tools access, and you can take it back. A password you hand over is gone.
       </p>
       <ol>
-        <li>Instagram publishing runs through Zernio, an authorised interface with server side scheduling.</li>
-        <li>OnlyFans chat and vault management runs through Infloww, also an authorised interface.</li>
+        <li>We post to Instagram through Zernio. It is an official tool and it plans posts for us.</li>
+        <li>We run the OnlyFans chat and vault through Infloww. It is an official tool too.</li>
+        <li>Our team signs in to our own systems with company Google accounts. No shared logins.</li>
         <li>
-          Our team signs into our own systems with company Google accounts, not with shared logins.
+          Your portal login is its own thing. It is kept apart from the staff system. A creator
+          login can never hold a staff role. We read who you are from a signed cookie only. So
+          nobody can change a number in the link and land in someone else's data.
         </li>
         <li>
-          Your portal access is its own identity, separate from the staff system. A creator account
-          can never technically hold a staff role. Your session is resolved from a signed cookie
-          only, never from the request itself, so nobody can look into someone else's data by
-          changing an identifier.
-        </li>
-        <li>
-          An administrator can revoke your portal access immediately, effective on the next click
-          rather than the next login. Removing you from the portal deletes nothing permanently, it
-          sets a date field, so a wrong click is one reset and not a loss.
+          We can switch your portal access off at once. It stops on the next click, not on the
+          next login. Taking you out of the portal deletes nothing. It only sets a date. So a
+          wrong click is one reset, not a loss.
         </li>
       </ol>
     </div>
@@ -101,36 +104,36 @@ import Placeholder from '../components/Placeholder.astro';
 
   <section class="section" id="chatting">
     <div class="wrap">
-      <p class="eyebrow">Mechanism three</p>
-      <h2>The people writing in your name get audited.</h2>
+      <p class="eyebrow">Part three</p>
+      <h2>We check the people who write in your name.</h2>
       <p class="lead">
-        You already make the work. What is missing is the selling, and that is the part we do, with
-        people who get audited for it.
+        You already make the work. What is missing is the selling. That is the part we do, with
+        people we check.
       </p>
       <p>
-        Whoever writes to your fans in your name is reviewed, and not by the person who wrote. Chat
-        is the only service that happens in your name, so we built a review track for it that runs
-        on a schedule and that nobody on the chat team can switch off.
+        Someone writes to your fans in your name. That work gets read back, and not by the person
+        who wrote it. Chat is the only thing we do in your name. So we built a check for it. It
+        runs to a plan, and nobody on the chat team can turn it off.
       </p>
       <ol>
         <li>
-          Twice a week an automated run reads the shift plan, pulls the chat log of the last
-          finished shift and scores it against a versioned rubric.
+          Twice a week our system reads the shift plan. It pulls the chat log of the last finished
+          shift. It scores that log against a written score sheet. Every version of the sheet is
+          kept.
         </li>
         <li>
-          Only human messages are scored. Every message is classified by source first, automated
-          messages serve as context only.
+          Only human messages get a score. Each message is sorted by source first. Messages sent by
+          the system count as background, not as work.
         </li>
         <li>
-          There is a fixed pass mark, a median across several scorers, hard fail reasons and a
-          measurement of response time.
+          There is a fixed pass mark. Several people score, and we take the middle score. Some
+          mistakes fail on their own. We also measure how fast the reply came.
         </li>
-        <li>The chat logs themselves are never stored in the database for this report.</li>
+        <li>The chat logs themselves are never saved in the database for this report.</li>
         <li>
-          Automatically generated messages additionally pass a hard coded content limit, including
-          an age detector that blocks any message hinting at an age under eighteen, and a ban on
-          asking for payments outside the platform. The point is to stop an automated message from
-          putting your account at risk.
+          Messages sent by the system pass one more test. It is built into the code. It blocks any
+          message that hints at an age under eighteen. It blocks any request for money outside the
+          platform. The point is simple. An automatic message must not put your account at risk.
         </li>
       </ol>
     </div>
@@ -140,13 +143,11 @@ import Placeholder from '../components/Placeholder.astro';
     <div class="wrap">
       <h2>What we do not do.</h2>
       <ul>
-        <li>No upfront fee, and no fee before you have earned anything.</li>
-        <li>No access to your money. Your payout reaches your account first.</li>
-        <li>
-          No content published without your release, and no old material kept in rotation once you
-          have asked for it to stop.
-        </li>
-        <li>We do not guarantee your income, and nobody honest can.</li>
+        <li>No fee up front. No fee before you have earned.</li>
+        <li>No access to your money. Your payout reaches your bank first.</li>
+        <li>No post goes out without your yes.</li>
+        <li>No old post stays in the plan once you ask us to stop it.</li>
+        <li>We do not guarantee your income. Nobody honest can.</li>
       </ul>
       <CtaBlock />
     </div>

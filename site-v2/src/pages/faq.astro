@@ -7,57 +7,62 @@
 
   DECIDED (Manuel, 07.09.2026): the contract answer names no term or notice
   period, only that terms are discussed on the call and early exit stays open.
+  Der Split steht nicht auf der Seite, "on the agreed split" bleibt ohne Zahl.
+
+  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends. Diese Strings
+  werden als Text gerendert und deshalb von der Lesbarkeitspruefung
+  mitgemessen, siehe scripts/check-copy.mjs, Regel 5.
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
 
 const faqs = [
   {
-    q: 'What happens if my account gets banned?',
+    q: 'What if my account gets banned?',
     a: [
-      'We work through authorised interfaces, we keep automated messages inside a hard content limit, and we do not run the growth patterns that get accounts flagged. That lowers the risk. It does not remove it, and anyone telling you otherwise is selling.',
-      'If it happens, we treat the recovery as the work: appeal where an appeal exists, rebuild the reach on the accounts you still have, and move the audience you already earned rather than starting again from nothing.',
+      'We work through official tools. We keep the messages our system sends inside a hard limit. We do not use the growth tricks that get accounts flagged. That lowers the risk. It does not take the risk away. Anyone who tells you it does is selling something.',
+      'If it happens, the fix is the work. We appeal where an appeal exists. We build the reach back on the accounts you still have. We move the fans you already earned. You do not start from nothing.',
     ],
     link: { href: '/how-it-works#access', label: 'How access works' },
   },
   {
-    q: 'Who has access to my accounts?',
+    q: 'Who can get into my accounts?',
     a: [
-      'You do not hand us a password. Instagram publishing runs through Zernio and OnlyFans chat and vault work runs through Infloww, both authorised interfaces you can withdraw.',
-      'Our team signs in to our own systems with company accounts, not shared logins. Your portal identity is separate from the staff system and can never hold a staff role.',
-      'Two factor custody for your actual accounts, and what changes if someone on our team leaves: [wird ergaenzt, sobald schriftlich].',
+      'You do not hand us a password. We post to Instagram through Zernio. We run the OnlyFans chat and vault through Infloww. Both are official tools, and you can take their access back.',
+      'Our team signs in to our own systems with company accounts. We use no shared logins. Your portal login is kept apart from the staff system. It can never hold a staff role.',
+      'Two step login for your own accounts is the next question. So is what changes when someone leaves our team. Both: [to be added here once it is in writing].',
     ],
     link: { href: '/how-it-works#access', label: 'How access works' },
   },
   {
     q: 'Who writes to my fans, and what do they say?',
     a: [
-      'A trained chat team, working from what you set in onboarding: your limits, your prices, your no go list.',
-      'Twice a week an automated run scores the last finished shift against a versioned rubric, with a fixed pass mark, hard fail reasons and a response time measurement. The review is not done by the person who wrote.',
-      'Someone on our team, on a documented schedule, against a written rubric. It is written down who is writing in your name, and you can tell your fans that if you want to. We will not ask you to take a bio note like that down.',
+      'A trained chat team. They work from what you set at the start. Your limits. Your prices. Your no go list.',
+      'Twice a week our system scores the last finished shift. It uses a written score sheet and a fixed pass mark. Some mistakes fail on the spot. We also measure how fast the reply came. The person who wrote is never the person who scores.',
+      'So a colleague reads the work, on a fixed plan, against a written sheet. We write down who writes in your name. You may tell your fans that. We will not ask you to take the line out of your bio.',
     ],
-    link: { href: '/how-it-works#chatting', label: 'How the audit works' },
+    link: { href: '/how-it-works#chatting', label: 'How the check works' },
   },
   {
-    q: 'How long is the contract and how do I get out?',
+    q: 'How long is the deal, and how do I get out?',
     a: [
-      'We talk through the exact terms in the call. You can leave early if this stops working for you.',
+      'We go through the terms on the call. You can leave early if this stops working for you.',
     ],
     link: { href: '/switching', label: 'If you are switching from another agency' },
   },
   {
     q: 'What about leaks?',
     a: [
-      'It is the internet. Nobody gets content fully offline again, and an agency that promises that is lying to you.',
-      'What can actually be done: takedown requests where the platform accepts them, watermarking, and keeping the highest value material off the channels that get scraped first. We tell you which of those we do for you and which ones need you.',
+      'It is the internet. Nobody gets content fully off it again. An agency that promises that is lying to you.',
+      'Here is what can be done. We send takedown notices where the site takes them. We watermark. We keep your best paid material off the channels that get copied first. We tell you which of those we do for you, and which ones need you.',
     ],
     link: null,
   },
   {
     q: 'How and when do I get paid?',
     a: [
-      'The OnlyFans payout goes to your own bank account first. We invoice you weekly afterwards, on the agreed split. Your money does not pass through us on its way to you.',
-      'We do not give tax or banking advice. Where your situation needs it, that is a question for your accountant, and we would rather say so than guess.',
+      'OnlyFans pays your own bank first. We send our bill after that, once a week, on the agreed split. Your money does not run through us on the way to you.',
+      'We do not give tax or bank advice. When your case needs it, ask your accountant. We would rather say that than guess.',
     ],
     link: null,
   },
@@ -66,11 +71,11 @@ const faqs = [
 
 <Base
   title="FAQ | Wunder"
-  description="The six questions creators actually ask us, answered with the mechanism behind each answer."
+  description="The six questions creators really ask us, with the answer and the reason behind it."
 >
   <section class="section">
     <div class="wrap wrap-narrow">
-      <h1>The six questions we actually get.</h1>
+      <h1>The six questions we really get.</h1>
       <p class="lead">
         In the order they come up. Every answer says what we do, not what we promise.
       </p>
@@ -107,11 +112,11 @@ const faqs = [
   }
 
   .faq-item h2 {
-    font-size: 26px;
+    font-size: 22px;
     text-transform: none;
-    font-family: var(--font-text);
-    font-weight: 600;
-    letter-spacing: 0;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.012em;
     line-height: 1.3;
   }
 

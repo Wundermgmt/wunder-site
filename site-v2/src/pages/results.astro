@@ -1,0 +1,144 @@
+---
+/*
+  /results, uebernommen aus dem Tab "Resultate" von wundermgmt.com,
+  Sicherung vom 7. September 2026. Ansage Manuel 07.09.2026 abends:
+  die Seite inklusive der Videos uebernehmen.
+
+  Reihenfolge wie auf der Live-Seite: Einleitung, die sechs Video-Cases,
+  die drei benannten Ergebnisaussagen, das Abschlussvideo, der Abschluss-CTA.
+
+  Alle Zahlen liegen in src/data/results.ts, weil der Copy-Check nackte
+  Zahlen in Seiten-Copy verbietet. Hier wird nur ausgegeben.
+
+  Sprache: einfaches Englisch, kurze Saetze. Die meisten Creatorinnen sind
+  keine englischen Muttersprachlerinnen.
+*/
+import Base from '../layouts/Base.astro';
+import VideoCard from '../components/VideoCard.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import {
+  intro,
+  videosBlock,
+  videoCases,
+  statementsBlock,
+  statements,
+  closingVideo,
+  closingBlock,
+  sourceNote,
+  videoSourceNote,
+} from '../data/results';
+---
+
+<Base
+  title="Results | Wunder"
+  description="Creators tell you what changed for them. Six short videos, plus the numbers behind them, taken from our own website."
+>
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow">{intro.eyebrow}</p>
+      <h1>{intro.heading}</h1>
+      <p class="lead">{intro.lead}</p>
+      <p>{intro.body}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">{videosBlock.eyebrow}</p>
+      <h2>{videosBlock.heading}</h2>
+      <p class="lead">{videosBlock.lead}</p>
+
+      <div class="video-list">
+        {
+          videoCases.map((item) => (
+            <article class="video-item">
+              <h3>{item.headline}</h3>
+              <VideoCard
+                src={item.src}
+                poster={item.poster}
+                caption={item.caption}
+                sourceNote={`${videoSourceNote} ${item.duration}.`}
+              />
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">{statementsBlock.eyebrow}</p>
+      <h2>{statementsBlock.heading}</h2>
+      <p class="lead">{statementsBlock.lead}</p>
+
+      <div class="grid-3">
+        {
+          statements.map((item) => (
+            <div class="panel">
+              <p class="statement">{item.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!--
+    Hier stand auf der Live-Seite die grosse Wand aus rund 60 Verdienst-
+    und WhatsApp-Screenshots, Block "More Results From Creators We Work
+    With". Die Bilder baut ein anderer Agent ein. Diese Datei fasst sie
+    bewusst nicht an.
+  -->
+
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <VideoCard
+        src={closingVideo.src}
+        poster={closingVideo.poster}
+        caption={closingVideo.caption}
+        sourceNote={`${videoSourceNote} ${closingVideo.duration}.`}
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow">{closingBlock.eyebrow}</p>
+      <h2>{closingBlock.heading}</h2>
+      <p class="lead">{closingBlock.lead}</p>
+      <CtaBlock secondary />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <h2 class="note-heading">{sourceNote.heading}</h2>
+      {sourceNote.lines.map((line) => <p class="caption">{line}</p>)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Eine Spalte auf breiten Schirmen bis 720px Video, zwei ab Tablet. */
+  .video-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .video-item h3 {
+    margin: 0 0 12px;
+  }
+
+  .statement {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .note-heading {
+    font-size: 18px;
+    color: var(--text-muted);
+  }
+</style>

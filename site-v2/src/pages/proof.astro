@@ -5,6 +5,7 @@
   The metrics block from section 4.3, part 3, is deliberately not built yet:
   the income distribution of our own creators does not exist (concept 8.5,
   gap 1). An empty or estimated block is worse than none.
+  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends.
 */
 import Base from '../layouts/Base.astro';
 import RecordCard from '../components/RecordCard.astro';
@@ -18,19 +19,19 @@ const records = (await getCollection('records'))
 
 <Base
   title="Proof | Wunder"
-  description="How we report numbers: every figure carries a period, a starting point and a source, and every case says what did not work."
+  description="How we report numbers: every number carries a time span, a starting point and a source, and every case says what did not work."
 >
   <section class="section">
     <div class="wrap">
       <h1>How we report numbers.</h1>
       <p class="lead">
-        Every number on this page carries three things: the period it covers, the starting point it
-        is measured against, and whether it was read by us or checked by someone independent. No
-        value goes up without all three.
+        Every number here carries three things. The time span it covers. The starting point we
+        measured it against. And who read it, us or someone from outside. No number goes up
+        without all three.
       </p>
       <p>
-        That rule costs us the big round numbers other agencies put in their headline. We think you
-        can tell the difference, and that is the point.
+        That rule costs us the big round numbers other agencies put in their headline. We think
+        you can tell the difference. That is the point.
       </p>
     </div>
   </section>
@@ -39,12 +40,26 @@ const records = (await getCollection('records'))
     <div class="wrap">
       <h2>Cases</h2>
       <p>
-        Anonymous, dated, one account each. Every case carries the part that did not work, because a
-        case without it is a brochure.
+        One account each, with a date. Every case says what did not work. A case without that part
+        is just an advert.
       </p>
-      <div class="cards">
-        {records.map((entry) => <RecordCard {...entry.data} />)}
-      </div>
+      {
+        records.length > 0 ? (
+          <div class="cards">
+            {records.map((entry) => (
+              <RecordCard {...entry.data} />
+            ))}
+          </div>
+        ) : (
+          <div class="pending panel">
+            <p>
+              No case is ready yet. We are checking each one against the portal first. The stories
+              from our old website are still up on the <a href="/results">results page</a>. Those
+              are older, and they do not follow the rule above yet.
+            </p>
+          </div>
+        )
+      }
     </div>
   </section>
 
@@ -52,14 +67,19 @@ const records = (await getCollection('records'))
     <div class="wrap">
       <h2>What is not on this page.</h2>
       <ul>
-        <li>No earnings screenshots.</li>
-        <li>No press logos without a linked article.</li>
-        <li>No totals without the group they were counted over.</li>
-        <li>No testimonial with a name attached to it, ever.</li>
+        <li>No screenshots of what someone earned.</li>
+        <li>No press logos without the article behind them.</li>
+        <li>No total without the group it was counted over.</li>
+        <li>No quote with a name on it.</li>
       </ul>
       <p>
-        A metrics sheet with median, range and the number of active creators is planned. It goes up
-        when the underlying evaluation exists, not before.
+        The <a href="/results">results page</a> is the one exception. Those videos and stories come
+        from our old website. Some creators show their face and their name there, because they
+        agreed to it back then. They do not follow the rule on this page yet.
+      </p>
+      <p>
+        We plan a page of numbers for all our creators. It goes up when the work behind it is
+        done, and not one day before.
       </p>
       <CtaBlock secondary />
     </div>
@@ -67,6 +87,15 @@ const records = (await getCollection('records'))
 </Base>
 
 <style>
+  .pending {
+    margin-top: 32px;
+    max-width: 640px;
+  }
+
+  .pending p {
+    margin: 0;
+  }
+
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
