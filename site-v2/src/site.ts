@@ -26,8 +26,16 @@ export const legal = {
   applyRecipient: 'rg@wundermgmt.com',
 } as const;
 
+/*
+  Der Knopftext hiess bis 07.09.2026 "Apply for a vibe check". Geaendert nach
+  der Tiefenrecherche einfache Sprache, Beispiel E18: "vibe check" ist eine
+  Redewendung, die eine Leserin mit Englisch als Fremdsprache nicht sicher
+  aufloesen kann, und der Knopf oeffnet ein Bewerbungsformular, keinen Termin.
+  Das Verb muss benennen, was der naechste Bildschirm wirklich tut.
+  Gleiche Vorgabe im Female-Gaze-Dossier, Abschnitt 6.
+*/
 export const cta = {
-  primary: 'Apply for a vibe check',
+  primary: 'Apply to work with us',
   primaryHref: '/apply',
   secondary: 'See how it works',
   secondaryHref: '/how-it-works',

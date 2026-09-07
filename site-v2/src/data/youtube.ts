@@ -74,8 +74,16 @@ export const teamVideos: TeamVideo[] = [
     source: YOUTUBE_SOURCE,
   },
   {
+    /*
+      poster am 07.09.2026 auf false gesetzt. Das Standbild traegt einen
+      eingebrannten Zitattext, der im 16-zu-9-Zuschnitt mitten im Wort
+      abgeschnitten ist ("Keep pe... eyes glue... the scree..."). Text auf dem
+      Bild ist unlesbar und zugleich eine Aussage, die der Copy-Check nicht
+      sehen kann. Female-Gaze-Dossier Abschnitt 4, Punkt 5: kein Text ueber
+      Gesicht oder Motiv.
+    */
     id: 'ZQwUQf3c7lE',
-    poster: true,
+    poster: false,
     title: 'How Lauris got started',
     url: 'https://www.youtube.com/watch?v=ZQwUQf3c7lE',
     publishedAt: '2026-01-09',
@@ -84,8 +92,16 @@ export const teamVideos: TeamVideo[] = [
     source: YOUTUBE_SOURCE,
   },
   {
+    /*
+      poster am 07.09.2026 auf false gesetzt. Im Video erzaehlt Katrina, warum
+      sie gewechselt ist. Das Standbild zeigt aber fast nur Lauris, sie steht
+      als schmaler Streifen am rechten Rand und verschwindet im mobilen
+      Zuschnitt ganz. Genau der Befund T1 des Female-Gaze-Dossiers: der Mann
+      erklaert, die Frau ist Beiwerk. Bis ein Standbild vorliegt, in dem beide
+      am Tisch sichtbar sind, bleibt hier die ruhige CI-Flaeche.
+    */
     id: 'z_tpNrxZRoU',
-    poster: true,
+    poster: false,
     title: 'Why Katrina joined us',
     url: 'https://www.youtube.com/watch?v=z_tpNrxZRoU',
     publishedAt: '2026-01-02',

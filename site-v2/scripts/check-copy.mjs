@@ -10,6 +10,11 @@
     3. no long dash anywhere in the copy
     4. no record card with an empty mandatory field
     5. no page whose reading level is above sixth grade
+    6. no sentence longer than 25 words, and at most one sentence in ten
+       above 20 words
+    7. no formal word where a plain one exists ("utilise", "prior to" ...)
+    8. no opaque idiom or metaphorical phrasal verb ("vibe check", "walk you
+       through", "reach out" ...)
 
   Cleared exceptions live in scripts/allowed-phrases.txt, one phrase per line,
   with the reason on the same line after a double slash. Everything else fails
@@ -20,6 +25,19 @@
   Flesch-Kincaid Grade Level gemessen, Schwelle 6.0. Eigene Rechnung in
   JavaScript, bewusst ohne neue Abhaengigkeit: der Render-Build faehrt npm ci
   und das Projekt haelt nur astro und @astrojs/sitemap.
+
+  Regeln 6 bis 8, ergaenzt am 07.09.2026 abends aus der Tiefenrecherche
+  "einfache Sprache", Abschnitte 10, 16 und 19. Grund fuer die Ergaenzung: ein
+  Flesch-Kincaid-Wert sieht nur Wort- und Satzlaenge. Er sieht nicht, dass
+  "vibe check" kurz ist und trotzdem niemand ausserhalb des Sprachraums weiss,
+  was passiert, wenn man draufdrueckt. Genau das schreibt das Dossier in
+  Abschnitt 03: "A formula sees length, not meaning." Die drei Regeln pruefen
+  deshalb Bedeutung statt Laenge, soweit eine Maschine das kann.
+
+  Anders als Regel 1 bis 4 laufen 5 bis 8 NUR auf der sichtbaren Copy, also auf
+  dem, was eine Besucherin liest. Deutsche Code-Kommentare sind ausdruecklich
+  erlaubt und werden vorher entfernt, sonst wuerde dieser Kommentarkopf die
+  eigene Pruefung brechen.
 
   Nur berichten statt brechen:  node scripts/check-copy.mjs --readability-report
 */
@@ -90,6 +108,82 @@ const readabilityMaxGrade = 6.0;
 // Datenschutzerklaerung in Grundschulsprache waeren juristisch schlechter, also
 // sind genau diese zwei Seiten benannt ausgenommen. Ansage Manuel 07.09.2026.
 const readabilityExempt = ['src/pages/imprint.astro', 'src/pages/privacy.astro'];
+
+/*
+  Regel 6. Satzlaenge, Dossier "einfache Sprache" Abschnitt 19:
+  Schnitt 8 bis 12 Woerter, mindestens 90 Prozent bei 20 oder weniger, kein
+  unerklaerter Satz ueber 25. Der Schnitt wird nur berichtet, weil ein guter
+  Schnitt einen einzelnen Bandwurmsatz verstecken kann. Gebrochen wird an den
+  zwei harten Werten.
+*/
+const maxSentenceWords = 25;
+const longSentenceWords = 20;
+const longSentenceShare = 0.1;
+
+/*
+  Regel 7. Formelle Woerter mit einer einfachen Entsprechung. Liste aus
+  Abschnitt 16 des Dossiers, Spalte "Look for". Gesucht wird auf Wortgrenze,
+  damit "user" nicht wegen "use" anschlaegt.
+*/
+const formalWords = [
+  { find: 'utilise', use: 'use' },
+  { find: 'utilize', use: 'use' },
+  { find: 'commence', use: 'start' },
+  { find: 'assistance', use: 'help' },
+  { find: 'additional', use: 'extra' },
+  { find: 'prior to', use: 'before' },
+  { find: 'subsequent to', use: 'after' },
+  { find: 'in order to', use: 'to' },
+  { find: 'approximately', use: 'about' },
+  { find: 'regarding', use: 'about' },
+  { find: 'obtain', use: 'get, or name the action' },
+  { find: 'retain', use: 'keep' },
+  { find: 'terminate', use: 'end' },
+  { find: 'remuneration', use: 'pay' },
+  { find: 'monetisation', use: 'earning money, or name the task' },
+  { find: 'monetization', use: 'earning money, or name the task' },
+  { find: 'monetise', use: 'earn money from' },
+  { find: 'monetize', use: 'earn money from' },
+  { find: 'optimise', use: 'improve, or name the change' },
+  { find: 'optimize', use: 'improve, or name the change' },
+  { find: 'facilitate', use: 'help, and say what the help is' },
+  { find: 'rubric', use: 'written rules, or the actual checks' },
+  { find: 'custody', use: 'who holds it, or who can use it' },
+];
+
+/*
+  Regel 8. Redewendungen und bildhafte Verbverbindungen. Ein Wort kann A2 sein
+  und in der Wendung trotzdem unverstaendlich, siehe Abschnitt 17 des Dossiers:
+  aus "take" und "off" folgt nicht, dass "take off" leicht ist. Die Liste ist
+  bewusst kurz und enthaelt nur, was auf einer Agenturseite realistisch
+  auftaucht. Eine Wendung, die im Einzelfall bleiben soll, kommt mit Begruendung
+  in scripts/allowed-phrases.txt.
+*/
+const opaqueIdioms = [
+  { find: 'vibe check', use: 'say what the next screen really does' },
+  { find: 'burned', use: 'had a bad experience' },
+  { find: 'walk you through', use: 'we explain' },
+  { find: 'walk through', use: 'explain' },
+  { find: 'reach out', use: 'write to us' },
+  { find: 'back door', use: 'name the access you mean' },
+  { find: 'get in on', use: 'name the action' },
+  { find: 'no brainer', use: 'say why it is easy to decide' },
+  { find: 'game changer', use: 'say what changes' },
+  { find: 'level up', use: 'say what gets better' },
+  { find: 'dive in', use: 'start' },
+  { find: 'touch base', use: 'talk' },
+  { find: 'in the loop', use: 'we tell you' },
+  { find: 'down the line', use: 'later' },
+  { find: 'bottom line', use: 'name the point' },
+  { find: 'hands down', use: 'drop it, or show the evidence' },
+  { find: 'heads up', use: 'we tell you first' },
+  { find: 'ramp up', use: 'increase' },
+  { find: 'roll out', use: 'start' },
+  { find: 'carry on', use: 'continue' },
+  { find: 'clean break', use: 'name the date' },
+  { find: 'fresh start', use: 'say what starts again' },
+  { find: 'take off', use: 'name what grows' },
+];
 
 function loadAllowList() {
   try {
@@ -374,7 +468,7 @@ function readabilityOf(source, rel = '') {
   }
 
   if (measured.length === 0 || words === 0) {
-    return { grade: 0, words: 0, sentences: 0, longest: [] };
+    return { grade: 0, words: 0, sentences: 0, longest: [], measured: [], copy: [] };
   }
 
   const grade =
@@ -386,7 +480,81 @@ function readabilityOf(source, rel = '') {
     words,
     sentences: measured.length,
     longest,
+    // Regeln 6 bis 8 arbeiten auf denselben Saetzen, damit nichts zweimal
+    // zerlegt wird und beide Pruefungen dasselbe sehen.
+    measured,
+    copy,
   };
+}
+
+/*
+  Streicht die freigegebenen Formulierungen aus einem Textstueck, bevor die
+  Wort- und Wendungslisten darueber laufen. Gleiche Logik wie bei Regel 1: die
+  Freigabe gilt fuer genau diesen Wortlaut, nicht fuer das Wort ueberall.
+*/
+function withoutAllowed(text, allowed) {
+  let out = text;
+  for (const phrase of allowed) out = out.split(phrase).join(' '.repeat(phrase.length));
+  return out;
+}
+
+/*
+  Sucht eine Wendung als ganze Woerter. "use" darf nicht in "user" anschlagen,
+  "burned" nicht in "sunburned". Der Punkt in einer Wendung wird escaped, die
+  Leerzeichen duerfen auch ein Zeilenumbruch sein.
+*/
+function phraseHits(haystack, phrase) {
+  const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+');
+  const re = new RegExp(`(?<![a-z])${escaped}(?![a-z])`, 'gi');
+  return [...haystack.matchAll(re)].length;
+}
+
+/*
+  Regeln 6 bis 8 fuer eine Datei. Gibt eine Liste fertiger Meldungen zurueck.
+*/
+function copyRuleFailures(rel, result, allowed) {
+  const out = [];
+
+  // Regel 6, harte Grenze: kein Satz ueber 25 Woerter.
+  for (const item of result.measured) {
+    if (item.words > maxSentenceWords) {
+      out.push(
+        `${rel} sentence of ${item.words} words is over ${maxSentenceWords}. ` +
+          `Split it into two.\n      ${item.text}`
+      );
+    }
+  }
+
+  // Regel 6, Anteil: hoechstens jeder zehnte Satz ueber 20 Woerter.
+  const long = result.measured.filter((item) => item.words > longSentenceWords);
+  const allowedLong = Math.floor(result.measured.length * longSentenceShare);
+  if (result.measured.length > 0 && long.length > allowedLong) {
+    out.push(
+      `${rel} has ${long.length} sentences over ${longSentenceWords} words, ` +
+        `at most ${allowedLong} of ${result.measured.length} are allowed. ` +
+        'Longest:\n' +
+        [...long]
+          .sort((a, b) => b.words - a.words)
+          .slice(0, 3)
+          .map((item) => `      (${item.words} words) ${item.text}`)
+          .join('\n')
+    );
+  }
+
+  // Regeln 7 und 8 auf demselben sichtbaren Text.
+  const visible = result.copy.map((segment) => withoutAllowed(segment, allowed)).join('\n');
+  for (const { find, use } of formalWords) {
+    if (phraseHits(visible, find) > 0) {
+      out.push(`${rel} formal word "${find}" in visible copy. Prefer: ${use}.`);
+    }
+  }
+  for (const { find, use } of opaqueIdioms) {
+    if (phraseHits(visible, find) > 0) {
+      out.push(`${rel} opaque phrase "${find}" in visible copy. Prefer: ${use}.`);
+    }
+  }
+
+  return out;
 }
 
 function readabilityFiles() {
@@ -411,13 +579,21 @@ function readabilityFiles() {
   node scripts/check-copy.mjs --readability-report
 */
 if (process.argv.slice(2).includes('--readability-report')) {
-  console.log('\nFlesch-Kincaid Grade Level per page. Threshold for the build: 6.0.\n');
+  console.log('\nFlesch-Kincaid Grade Level per page. Threshold for the build: 6.0.');
+  console.log(
+    `Sentence rule: average words per sentence, longest sentence, and how many ` +
+      `run over ${longSentenceWords} words.\n`
+  );
   for (const rel of readabilityFiles()) {
     const result = readabilityOf(readFileSync(join(root, rel), 'utf8'), rel);
     const flag = result.grade > readabilityMaxGrade ? 'over' : 'ok';
+    const average = result.sentences > 0 ? result.words / result.sentences : 0;
+    const longest = result.measured.reduce((max, item) => Math.max(max, item.words), 0);
+    const long = result.measured.filter((item) => item.words > longSentenceWords).length;
     console.log(
-      `  ${result.grade.toFixed(2).padStart(6)}  ${flag.padEnd(5)} ${rel}` +
-        `  (${result.words} words, ${result.sentences} sentences)`
+      `  ${result.grade.toFixed(2).padStart(6)}  ${flag.padEnd(5)} ${rel.padEnd(34)}` +
+        `  ${result.words} words, ${result.sentences} sentences` +
+        `, avg ${average.toFixed(1)}, longest ${longest}, over ${longSentenceWords}: ${long}`
     );
   }
   console.log(`\n  skipped on purpose: ${readabilityExempt.join(', ')}\n`);
@@ -493,7 +669,7 @@ for (const file of walk(recordsDir)) {
   }
 }
 
-// Rule 5. Reading level per page.
+// Rules 5 to 8. Reading level, sentence length, formal words, opaque phrases.
 for (const rel of readabilityFiles()) {
   const result = readabilityOf(readFileSync(join(root, rel), 'utf8'), rel);
   if (result.grade > readabilityMaxGrade) {
@@ -505,6 +681,7 @@ for (const rel of readabilityFiles()) {
           .join('\n')
     );
   }
+  failures.push(...copyRuleFailures(rel, result, allowList));
 }
 
 if (failures.length > 0) {
@@ -517,4 +694,7 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log('Copy check passed: no blocked claims, no bare numbers, no long dashes.');
+console.log(
+  'Copy check passed: no blocked claims, no bare numbers, no long dashes, ' +
+    'no over long sentences, no formal words, no opaque phrases.'
+);

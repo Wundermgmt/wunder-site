@@ -8,13 +8,27 @@
   und die Auswahllisten im Frontmatter werden von der Lesbarkeitspruefung
   mitgemessen, siehe scripts/check-copy.mjs, Regel 5.
 
+  Aenderungen 07.09.2026 abends aus den drei Tiefenrecherchen:
+  - Titel und H1 heissen jetzt "Apply to work with us". Grund: Beispiel E18 im
+    Dossier einfache Sprache, der Knopf muss benennen, was er wirklich tut.
+  - Die Redewendung "burned" ist raus, ebenso die unbelegte Behauptung, das sei
+    "the fastest way". Beispiele E16 und E17 im selben Dossier.
+  - Die Antwortzeit-Zusage "within one working day" ist raus. Ansage Manuel
+    07.09.2026, keine Claims und keine Antwortzeitwerte; gleiche Vorgabe im
+    Vertrauens-Dossier, These T7.
+  - Optionale Felder sind als optional beschriftet, und der Freitext sagt, was
+    NICHT hineingehoert. Formularregeln im Vertrauens-Dossier, Abschnitt 7.
+  - Ohne FORM_ENDPOINT stand hier eine Entwicklerkonfiguration. Jetzt steht dort
+    ein ehrlicher zweiter Kontaktweg. Female-Gaze-Dossier, Abschnitt 10,
+    Prioritaet 1.
+
   The target is FORM_ENDPOINT from the host environment and is empty by
   default. No Google Apps Script, no endpoint in the repository (concept 6.3).
   With no endpoint configured the form renders disabled instead of posting
   somewhere unintended.
 */
 import Base from '../layouts/Base.astro';
-import { formEndpoint } from '../site';
+import { formEndpoint, legal } from '../site';
 
 const euCountries = [
   'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia',
@@ -38,30 +52,30 @@ const configured = formEndpoint.trim() !== '';
 ---
 
 <Base
-  title="Apply for a vibe check | Wunder"
-  description="Eight short answers. A person reads them and you get an answer within one working day, either way."
+  title="Apply to work with us | Wunder"
+  description="Eight short answers. A person reads them, and you hear back either way."
 >
   <section class="section">
     <div class="wrap wrap-narrow">
-      <h1>Apply for a vibe check.</h1>
+      <h1>Apply to work with us.</h1>
       <p class="lead">
-        Eight answers. It takes about a minute. Two of them decide right away if we can work
-        together at all. So they sit at the top. Not in minute twenty six of a call.
+        Eight answers. It takes about a minute. A person reads them, not a filter. Two answers
+        decide right away if we can work together at all. So they sit at the top. Not in minute
+        twenty six of a call.
       </p>
       <p class="no-ask">
         We do not ask for ID, photos, bank details or logins. Not here, not later by email.
       </p>
       <p class="lead">
-        Maybe an agency burned you before. Then ask us about that exact thing on the call. It is
-        the fastest way to see if we are different. We would rather answer it there. You should
-        not have to find out after you sign.
+        Had a bad experience with an agency? Tell us what went wrong. Ask us how we work. Ask your
+        questions before you sign anything.
       </p>
 
       {
         !configured && (
           <p class="notice">
-            This build has no form target set up, so the form below cannot be sent. Set
-            FORM_ENDPOINT in the host environment to switch it on.
+            The form below is switched off right now. Write to <a href={`mailto:${legal.contactEmail}`}>{legal.contactEmail}</a> instead and tell us the
+            same things in your own words.
           </p>
         )
       }
@@ -103,7 +117,7 @@ const configured = formEndpoint.trim() !== '';
           <label class="inline"
             ><input type="radio" name="under_contract" value="no" required /> No</label
           >
-          <label class="sub" for="contract_until">If yes, until when?</label>
+          <label class="sub" for="contract_until">If yes, until when? (optional)</label>
           <input id="contract_until" name="contract_until" type="text" placeholder="Month and year" />
           <p class="hint caption">
             A yes here is not a no from us. It only changes the order of things. See <a
@@ -134,9 +148,12 @@ const configured = formEndpoint.trim() !== '';
         </div>
 
         <div class="field">
-          <label for="note">Anything we should know before we talk?</label>
+          <label for="note">What would you like help with? (optional)</label>
           <textarea id="note" name="note" rows="4"></textarea>
-          <p class="hint caption">You can leave this empty. Tell us the story if you want to.</p>
+          <p class="hint caption">
+            You can leave this empty. Please leave out passwords, bank details and private
+            pictures.
+          </p>
         </div>
 
         <!-- Honeypot. Real people never fill this in. Bot protection without a third party service. -->
@@ -157,10 +174,10 @@ const configured = formEndpoint.trim() !== '';
       <ol>
         <li>A person reads this, not a filter.</li>
         <li>That person runs the first calls here. There is no sales queue.</li>
-        <li>You hear back within one working day, fit or not.</li>
+        <li>You hear back either way, fit or not.</li>
       </ol>
       <p>
-        If it is not a fit, you get one line that says so. Not silence. Not a maybe later.
+        If it is not a fit, you get one line that says so. You get an answer, not silence.
       </p>
     </div>
   </section>

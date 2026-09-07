@@ -6,6 +6,13 @@
   not legal advice. Same logic as the ban on tax and banking statements in
   appendix A of the closing playbook.
   Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends.
+
+  Geaendert 07.09.2026 abends: hier stand ein Zitat in Ich-Form in einem
+  blockquote, mit der Fussnote, dass es von niemandem stammt. Beide neuen
+  Dossiers verbieten genau das. Vertrauens-Dossier Abschnitt 10, Anti-Muster
+  "Sterne ohne Quelle" und "Testimonials aus Textentwuerfen erfinden";
+  Female-Gaze-Dossier Abschnitt 4, "Keine erfundenen Ich-Zitate". Die Aussage
+  steht jetzt als berichtete Beobachtung da, ohne Zitatoptik.
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
@@ -19,12 +26,10 @@ import CtaBlock from '../components/CtaBlock.astro';
     <div class="wrap">
       <h1>Leaving an agency you signed with.</h1>
       <p class="lead">This is the part most people are stuck on. It is not the money.</p>
-      <blockquote>
-        <p>I am so nervous about telling my other agency. You have no idea.</p>
-        <p class="caption">
-          A line we hear a lot in these talks. Not a quote from a client, and no name on it.
-        </p>
-      </blockquote>
+      <p>
+        Most people tell us the same thing on the first call. They are nervous about telling their
+        current agency. That part is normal, and it has an order you can follow.
+      </p>
     </div>
   </section>
 
@@ -53,7 +58,7 @@ import CtaBlock from '../components/CtaBlock.astro';
       <ol>
         <li>You apply. In the form you say that you are still tied, and until when.</li>
         <li>We talk anyway. That call ties you to nothing.</li>
-        <li>We read your deal. We work out the first clean date you can leave.</li>
+        <li>We read your deal. We work out the first date you can leave.</li>
         <li>
           You give notice yourself, in writing, in the window your deal allows. We do not start
           before that date.
@@ -64,31 +69,11 @@ import CtaBlock from '../components/CtaBlock.astro';
         </li>
       </ol>
       <p>
-        Maybe your deal has no clean way out for months. Then we say so. We put a date in the
-        calendar instead of talking you into something.
+        Maybe your deal has no way out for months. Then we say so. We put a date in the calendar
+        instead of talking you into something.
       </p>
       <CtaBlock secondary />
     </div>
   </section>
 </Base>
 
-<style>
-  blockquote {
-    margin: 32px 0 0;
-    padding: 24px 28px;
-    background: var(--accent-soft);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    max-width: 720px;
-  }
-
-  blockquote p:first-child {
-    font-size: 21px;
-    line-height: 1.5;
-    margin-bottom: 12px;
-  }
-
-  blockquote p:last-child {
-    margin: 0;
-  }
-</style>

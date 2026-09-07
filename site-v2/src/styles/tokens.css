@@ -127,14 +127,21 @@ p {
   max-width: 68ch;
 }
 
+/*
+  Linktext nutzt das dunklere Gruen, nicht den Markenakzent.
+  Eigene Kontrastrechnung nach WCAG-sRGB, 07.09.2026 (Dossier Female Gaze,
+  Abschnitt 5): #009966 auf Weiss erreicht nur 3,653:1 und verfehlt damit die
+  4,5:1 fuer normalen Text. #007a55 erreicht 5,364:1. Der Markenakzent
+  #009966 bleibt fuer Marker, Flaechen, Icons und Linien.
+*/
 a {
-  color: var(--accent);
+  color: var(--accent-strong);
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
 
 a:hover {
-  color: var(--accent-strong);
+  color: var(--text);
 }
 
 ul,

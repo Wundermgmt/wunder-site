@@ -16,3 +16,78 @@ Nicht uebernommen und bewusst nicht verwendet:
 - alle unsplash-image-*.jpg, Stockfotos
 - Verdienst-Screenshots und WhatsApp-Screenshots von Creatorinnen
 - Instagram-Profil-Screenshots einzelner Creatorinnen (Freigabe offen)
+
+
+Nachtrag 07.09.2026 abends, nach der Tiefenrecherche Female Gaze.
+
+Bildbefund T1 zum heutigen Stand: alle fuenf Dateien oben zeigen Maenner, vier
+davon am Laptop. Auf / und /company ist damit keine Creatorin als handelnde
+Person zu sehen. Das Dossier nennt genau das als Hauptproblem. Es fehlen drei
+Aufnahmen mit dokumentierter Freigabe:
+  Slot 1, Home Hero    Creatorin trifft eine Auswahl, Kamera auf Augenhoehe
+  Slot 2, /company     zwei Menschen sehen dasselbe Material an
+  Slot 3, /company     Creatorin richtet selbst etwas ein oder waehlt eine Aufnahme
+Bis diese Bilder mit Freigabe vorliegen, bleibt der Slot leer. Kein Stockfoto,
+kein KI-Bild, kein Creatorinnen-Foto ohne dokumentierte Freigabe.
+
+public/img/youtube/  Standbilder aus dem YouTube-Kanal von Lauris Kalnins,
+gezogen am 07.09.2026 mit yt-dlp, Ablage in
+13_wunder/medien-2026-09-07/lauris-youtube/thumbnails/. Lokal gespeichert, damit
+beim Seitenaufruf nichts von Google geladen wird.
+  V6q4O55fIyA.webp   in Gebrauch. Zwei Menschen am Podcasttisch, Augenhoehe,
+                     beide gestikulieren. Erfuellt die Bildregeln.
+  ZQwUQf3c7lE.webp   liegt da, wird NICHT verwendet. Eingebrannter Zitattext,
+                     im Zuschnitt mitten im Wort abgeschnitten.
+  z_tpNrxZRoU.webp   liegt da, wird NICHT verwendet. Zeigt fast nur Lauris,
+                     obwohl im Video Katrina erzaehlt. Befund T1.
+Beide abgeschalteten Dateien koennen zurueck, sobald ein Zuschnitt vorliegt, in
+dem die sprechende Person im Bild ist und kein Text ueber dem Motiv liegt.
+
+public/videos/results-01.jpg bis results-07.jpg  Poster der uebernommenen
+Videos, aus der Sicherung der eigenen Live-Seite vom 07.09.2026. ACHTUNG:
+results-02, results-05 und results-06 zeigen Namen zahlender Fans. Siehe den
+Blocker-Vermerk oben in src/data/results.ts.
+
+## Nachtrag 07.09.2026, Bilder aus der Medienbibliothek
+
+Quelle: 13_wunder/medien-2026-09-07/, manifest.json und manifest.md.
+
+hero-creator-talk.webp        lauris-youtube/creatorin-treffen-podcast-holzstudio-02.webp
+                              Standbild aus youtube.com/watch?v=z_tpNrxZRoU, 02.01.2026
+                              Creatorin und Lauris auf Augenhoehe am Podcasttisch. Startseite, Hero.
+creator-tells-her-story.webp  lauris-youtube/creatorin-treffen-podcast-schwarzstudio-03.webp
+                              Standbild aus youtube.com/watch?v=V6q4O55fIyA, 17.02.2026. /meet-us
+creator-checkin.webp          lauris-youtube/creatorin-checkin-podcast-02.webp
+                              Standbild aus youtube.com/watch?v=aZgbSOnkPDg, 25.04.2026. /meet-us
+creator-meeting-blue.webp     lauris-youtube/creatorin-treffen-podcast-studio-03.webp
+                              Standbild aus youtube.com/watch?v=ION-xrM6GOM, 28.07.2026. /meet-us
+founders-call.webp            lauris-youtube/team-manuel-lauris-podcast-call-01.webp
+                              Standbild aus youtube.com/watch?v=UhjMp8M-bco, 03.11.2025. /meet-us
+team-group.webp               manuel/23_sq_Teamfoto-Kopie.webp, Gruppenfoto. /company
+portal-login-desktop.webp     portal/wunderportal-login-desktop.webp, eigener Screenshot
+portal-login-mobile.webp      portal/wunderportal-login-mobile.webp, eigener Screenshot
+                              Beide zeigen nur die Anmeldemaske, keine Creator-Zahlen. /how-it-works
+
+OFFEN VOR LIVEGANG, Freigaben:
+- Die vier Standbilder mit einer Creatorin stammen aus oeffentlichen YouTube-Videos, die
+  auf /meet-us ohnehin verlinkt sind. Eine schriftliche Freigabe fuer die Nutzung als
+  Website-Bild und fuer den Zuschnitt liegt NICHT vor. Vor dem Livegang einholen.
+  Ihr Name steht bewusst nicht auf der Seite.
+- team-group.webp zeigt acht Personen, teils frueheres Umfeld, nicht das heutige
+  Wunder-Team. Vor dem Livegang pruefen, ob das Bild noch stimmt.
+
+ERSETZT UND NICHT MEHR EINGEBUNDEN:
+- lauris-kalnins.webp und manuel-gonzalez.webp bleiben auf /company unter "Who decides",
+  dort sind die zwei Geschaeftsfuehrer der Gegenstand.
+- edvards-stalgevics.webp und nils-jasevics.webp sind aus /company raus. Grund:
+  Female-Gaze-Dossier T1, vier Maenner am Laptop als Bild fuer Arbeit und Autoritaet auf
+  einer Seite, die sich an Creatorinnen richtet. Dateien bleiben liegen.
+- jio.webp wird nirgends verwendet.
+
+VIDEO-POSTER, WICHTIG:
+Die Poster von results-01 bis results-06 wurden am 07.09.2026 neu gezogen. Die vorherigen
+Poster zeigten OnlyFans-Statistikseiten mit Kontostaenden und den Namen einzelner zahlender
+Fans, sichtbar ohne jeden Klick. Die neuen Poster stammen aus Sekunde 3 und zeigen nur die
+sprechende Person. results-07 stammt aus Sekunde 14 und zeigt eine Creatorin.
+Die Videos selbst zeigen diese Daten beim Abspielen weiterhin. Das ist ungeloest und
+braucht Manuels Entscheidung.

@@ -15,6 +15,34 @@
   Premium-Partner) sind bewusst nicht uebernommen.
 */
 
+/*
+  ============================================================================
+  BLOCKER VOR DEM LIVEGANG, gefunden am 07.09.2026 abends. NICHT deployen,
+  bevor Manuel entschieden hat.
+
+  In results-02, results-05 und results-06 ist die OnlyFans-Statistik eines
+  Accounts als Bildschirmaufnahme zu sehen, samt Klarnamen und Nutzernamen
+  zahlender Fans. Belegt an den Postern und an Einzelbildern:
+    results-06.jpg      QuickNick, Jasonoss, Roger, Dukee, B-Dubs808, Bo
+    results-02.jpg      Diegog
+    results-05.jpg      Bruno "lab" BABU
+    results-02.mp4 t=150  Stan @u148826603, Mike @u30457136, Bryce @b66515466
+  Das sind personenbezogene Daten Dritter. Die Poster zeigen sie sofort beim
+  Seitenaufruf, ohne dass jemand auf Play drueckt.
+
+  Zusaetzlich verbietet das Female-Gaze-Dossier, Abschnitt 8, ausdruecklich
+  "Screenshots mit privaten Namen, Logins, Nachrichten oder nicht freigegebenen
+  Zahlen", und public/img/QUELLEN.txt haelt fest, dass Verdienst-Screenshots
+  bewusst NICHT uebernommen wurden. Die Videos widersprechen dieser eigenen
+  Regel.
+
+  Moegliche Wege, Entscheidung liegt bei Manuel: die drei Videos entfernen,
+  oder die Statistikhaelfte im Schnitt unkenntlich machen und neue Poster
+  ziehen. Ein blosser Poster-Zuschnitt reicht nicht, das Video selbst zeigt es
+  weiter.
+  ============================================================================
+*/
+
 /** Einheitliche Quellenangabe. Steht an jedem Eintrag mit einer Zahl. */
 export const RESULTS_SOURCE = 'live site 2026-09-07' as const;
 
@@ -38,11 +66,24 @@ export interface VideoCase {
   source: ResultsSource;
 }
 
+/*
+  KORREKTUR 07.09.2026 abends. Die Ueberschrift hiess "Real creators. Real
+  numbers." und der Videoblock "Six creators tell you what happened." Beides
+  ist falsch: in keinem der sieben Videos spricht eine Creatorin. Zu sehen ist
+  jeweils eine Person, die am Bildschirm die Zahlen eines Accounts durchgeht.
+  Geprueft am 07.09.2026 an den Postern und an Einzelbildern bei Sekunde 40, 90
+  und 150 von results-01, -02 und -06.
+
+  Grundlage der Korrektur: Regel 9 des Bauauftrags (nichts erfinden, jede
+  Aussage belegt), Vertrauens-Dossier These T3 (Integritaet heisst, dieselbe
+  Auskunft steht ueberall) und Female-Gaze-Dossier Abschnitt 9 ("Stimmen Rolle,
+  Handlung, Caption und angrenzender Text ueberein?").
+*/
 export const intro = {
   eyebrow: 'Results',
-  heading: 'Real creators. Real numbers.',
-  lead: 'Trust is the base of our work. So we share the stories of creators like you.',
-  body: 'Watch them below. Each one says what changed, and how long it took.',
+  heading: 'The numbers, one account at a time.',
+  lead: 'These videos stood on our old website. We took them over as they were.',
+  body: 'In each one you see the numbers of one account on screen while someone talks through them.',
 };
 
 /*
@@ -66,7 +107,7 @@ export const videoCases: VideoCase[] = [
     src: '/videos/results-02.mp4',
     poster: '/videos/results-02.jpg',
     headline: 'More than USD 50K per month on OnlyFans',
-    caption: 'She earns in one month what many people earn in a full year.',
+    caption: 'The video goes through her OnlyFans statistics on screen.',
     duration: '3 min 28 s',
     durationSeconds: 208,
     source: RESULTS_SOURCE,
@@ -86,7 +127,7 @@ export const videoCases: VideoCase[] = [
     src: '/videos/results-04.mp4',
     poster: '/videos/results-04.jpg',
     headline: '1 million views every week',
-    caption: 'She reaches more people in one day than many creators reach in a year.',
+    caption: 'The video goes through her Instagram reach on screen.',
     duration: '2 min 2 s',
     durationSeconds: 122,
     source: RESULTS_SOURCE,
@@ -122,7 +163,7 @@ export const closingVideo: VideoCase = {
   src: '/videos/results-07.mp4',
   poster: '/videos/results-07.jpg',
   headline: '',
-  caption: 'One more look at how we work with creators.',
+  caption: 'One of our team talks about the work.',
   duration: '2 min 1 s',
   durationSeconds: 121,
   source: RESULTS_SOURCE,
@@ -159,15 +200,15 @@ export const statementsBlock = {
 };
 
 export const videosBlock = {
-  eyebrow: 'Their stories',
-  heading: 'Six creators tell you what happened.',
+  eyebrow: 'Six accounts',
+  heading: 'Six accounts, one video each.',
   lead: 'Press play on a video. There is no sound until you start it.',
 };
 
 export const closingBlock = {
   eyebrow: 'Your turn',
-  heading: 'This could be you.',
-  lead: 'Want the same path? Read how we work, then apply.',
+  heading: 'Read how we work, then apply.',
+  lead: 'Each account above is one case. Yours would start with your own last thirty days.',
 };
 
 /*

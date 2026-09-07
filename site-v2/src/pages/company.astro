@@ -78,24 +78,14 @@ import { legal } from '../site';
         We do not publish a team size yet. First we want to count it the same way twice, staff and
         freelancers apart. A number we cannot repeat is worse than no number.
       </p>
-      <div class="shots">
+      <div class="shots-single">
         <Photo
-          file="edvards-stalgevics.webp"
-          alt="Edvards Stalgevics works at a laptop in the Riga office."
-          width={1200}
-          height={1800}
-          sizes="(max-width: 860px) 100vw, 340px"
-          ratio="portrait"
-          caption="Edvards Stalgevics, Creative Director."
-        />
-        <Photo
-          file="nils-jasevics.webp"
-          alt="Nils Jasevics works at a laptop in the Riga office."
-          width={1200}
-          height={1799}
-          sizes="(max-width: 860px) 100vw, 340px"
-          ratio="portrait"
-          caption="Nils Jasevics, Creator Manager."
+          file="team-group.webp"
+          alt="Eight people from the team stand together and smile."
+          width={1400}
+          height={787}
+          sizes="(max-width: 860px) 100vw, 780px"
+          caption="Part of the team. Not everyone is in this picture."
         />
       </div>
       <p class="caption">
@@ -117,37 +107,13 @@ import { legal } from '../site';
     align-items: start;
   }
 
-  @media (max-width: 860px) {
-    .people {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .shots {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+  .shots-single {
     margin: 32px 0;
     max-width: 780px;
   }
 
   @media (max-width: 860px) {
     .people {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin: 28px 0 0;
-    max-width: 700px;
-    align-items: start;
-  }
-
-  @media (max-width: 860px) {
-    .people {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .shots {
       grid-template-columns: 1fr;
     }
   }

@@ -11,7 +11,7 @@
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
-import Placeholder from '../components/Placeholder.astro';
+import Photo from '../components/Photo.astro';
 ---
 
 <Base
@@ -59,14 +59,30 @@ import Placeholder from '../components/Placeholder.astro';
         </li>
         <li>
           Two things are missing there on purpose. You cannot see who a single fan is. You cannot
-          see how our team is doing inside. That line keeps your access from becoming a back door
-          into other people's data.
+          see how our team is doing inside. That limit stops your own login from opening other
+          people's data.
         </li>
       </ol>
       <div class="portal-hint">
-        <Placeholder label="Reduced hint of the portal view, no readable numbers" ratio="wide" />
+        <div class="portal-shots">
+          <Photo
+            file="portal-login-desktop.webp"
+            alt="The portal login screen on a laptop, with fields for work email and password."
+            width={1200}
+            height={750}
+            sizes="(max-width: 860px) 100vw, 520px"
+          />
+          <Photo
+            file="portal-login-mobile.webp"
+            alt="The same portal login screen on a phone."
+            width={430}
+            height={932}
+            sizes="(max-width: 860px) 60vw, 200px"
+          />
+        </div>
         <p class="caption">
-          A small hint, on purpose. The portal is not a public demo. It stays out of search.
+          This is the door, not the rooms behind it. We show no creator numbers here. The portal is
+          not a public demo and it stays out of search.
         </p>
       </div>
       <CtaBlock />
@@ -158,5 +174,19 @@ import Placeholder from '../components/Placeholder.astro';
   .portal-hint {
     max-width: 760px;
     margin: 32px 0;
+  }
+
+  .portal-shots {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  @media (max-width: 860px) {
+    .portal-shots {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+    }
   }
 </style>

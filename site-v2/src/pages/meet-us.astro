@@ -13,6 +13,7 @@
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import Photo from '../components/Photo.astro';
 import { teamVideos, loadNote } from '../data/youtube';
 ---
 
@@ -53,6 +54,48 @@ import { teamVideos, loadNote } from '../data/youtube';
             />
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Days at work</h2>
+      <p class="lead">Stills from the same talks. Nobody is posing here.</p>
+      <div class="gallery">
+        <Photo
+          file="creator-tells-her-story.webp"
+          alt="A creator talks and uses her hands to explain how her account grew."
+          width={640}
+          height={360}
+          sizes="(max-width: 860px) 100vw, 340px"
+          caption="A creator tells us what changed for her."
+        />
+        <Photo
+          file="creator-checkin.webp"
+          alt="A creator and Lauris sit at a podcast table with a Wunder sign behind them."
+          width={640}
+          height={360}
+          sizes="(max-width: 860px) 100vw, 340px"
+          caption="A check in talk with a creator we work with."
+        />
+        <Photo
+          file="creator-meeting-blue.webp"
+          alt="A creator and Lauris sit across from each other and talk in a blue lit studio."
+          width={640}
+          height={360}
+          sizes="(max-width: 860px) 100vw, 340px"
+          caption="Another talk, another studio."
+        />
+        <Photo
+          file="founders-call.webp"
+          alt="Manuel and Lauris talk to each other on a video call, each in his own room."
+          width={324}
+          height={360}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="wide"
+          caption="Manuel and Lauris. They run the company together."
+        />
       </div>
     </div>
   </section>
