@@ -52,12 +52,37 @@ Zwei Schloesser, beide muessen passieren:
 Fliesstext (`value`, `period`, `basis`, `source`, `readAt`). Noch nicht im
 Einsatz, weil heute keine Zahl alle fuenf Angaben traegt.
 
+## SEO und Social-Share
+
+- `astro.config.mjs` bindet `@astrojs/sitemap`. Der Build erzeugt
+  `dist/sitemap-index.xml` und `dist/sitemap-0.xml`. Impressum, Datenschutz und
+  die Bestaetigungsseite `/apply/thank-you` bleiben ausgeschlossen (`noindex`
+  in `Base.astro`, gleicher Filter im Sitemap-Integration-Aufruf).
+- `robots.txt` verweist auf `/sitemap-index.xml`.
+- `Base.astro` setzt og:title, og:description, og:image, og:url, twitter:card
+  und den canonical Link auf jeder Seite. Das og:image ist
+  `public/og-image.png`, 1200x630, selbst erzeugt aus den Design-Tokens und
+  der Anton-Schrift, die hier schon liegt. Kein KI-Bild, kein Stockfoto.
+- Favicon: `public/favicon.ico`, `favicon-32.png` und `apple-touch-icon.png`,
+  gleiche Herkunft wie das og:image, ein "W" in der Akzentfarbe.
+
 ## Was hier Platzhalter ist
 
 - Alle drei Record-Cards. Inhalt kommt aus einem Portal-Auszug, nicht aus dem Kopf.
-- Alle Bilder. `Placeholder.astro` liefert Inline-SVG, bis schriftliche
-  Bildfreigaben vorliegen.
+- Alle Bilder im Seiteninhalt. `Placeholder.astro` liefert Inline-SVG, bis
+  schriftliche Bildfreigaben vorliegen. Favicon und og:image sind keine
+  Platzhalter, siehe oben.
 - Impressum und Datenschutz. Struktur steht, jede offene Stelle ist im Text mit
-  `TO BE COMPLETED BY COUNSEL` markiert.
+  `TO BE COMPLETED BY COUNSEL` markiert. Der Live-Auftritt unter
+  kgmodelmanagement.com/imprint liefert kein zusaetzliches Fakteninventar,
+  dort steht nur ein generischer Datenschutz-Generator-Text ohne USt-ID,
+  Telefonnummer oder Registerangaben.
 - Umsatzsteuer-Identifikationsnummer in `src/site.ts`.
 - Konditionen auf `/` und `/faq`: haengen an Entscheidung 1 und 2 aus Konzept 8.4.
+- AGB/Terms-Seite: nicht gebaut. Es gibt keinen freigegebenen oeffentlichen
+  Vertragstext, der eigentliche Vertrag ist ein privates, individuell
+  unterschriebenes Dokument. Mit Entscheidung 1 und 2 oben kommt der Inhalt
+  fuer eine Terms-Seite erst zustande.
+- Cookie-Consent: nicht gebaut. Die Seite setzt keine Cookies, Plausible laeuft
+  cookielos und ist per Default aus. Kein Consent-Banner noetig, solange das
+  so bleibt.
