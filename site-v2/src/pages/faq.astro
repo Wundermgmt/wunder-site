@@ -78,6 +78,12 @@ const faqs = [
       'The money goes straight to your bank. We send our bill after that, once a week. Your money does not run through us on the way to you.',
       'We do not give tax or bank advice. When your case needs it, ask your accountant. We would rather say that than guess.',
     ],
+    /*
+      Entscheidung Manuel 08.09.2026: Rat Nummer 7 aus dem Zielgruppen-Rat
+      steht hier zusaetzlich einmal als Kasten, weil diese Antwort die
+      Zahlung erklaert. Kein zweiter Streifen, nur eine ruhige Box.
+    */
+    note: 'No fee to start. No minimum to reach. You pay us after your money arrives.',
     link: null,
   },
 ];
@@ -151,6 +157,7 @@ const secondHalf = faqs.slice(3);
               {item.a.map((paragraph) => (
                 <p>{paragraph}</p>
               ))}
+              {item.note && <p class="panel panel-quiet faq-note">{item.note}</p>}
               {item.link && (
                 <p class="caption">
                   <a href={item.link.href}>{item.link.label}</a>
@@ -186,5 +193,11 @@ const secondHalf = faqs.slice(3);
 
   .faq-item p:last-child {
     margin-bottom: 0;
+  }
+
+  .faq-note {
+    margin-top: 16px;
+    font-weight: 600;
+    color: #27272a;
   }
 </style>

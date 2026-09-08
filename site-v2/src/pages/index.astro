@@ -39,6 +39,15 @@
   7. "How you get paid" bleibt und ist kuerzer: keine Setup-Gebuehr, kein
      Mindestumsatz, das Geld geht direkt auf ihr Konto, wir stellen danach
      unsere Rechnung, einmal die Woche.
+     Ergaenzt 08.09.2026, Entscheidung Manuel: Ratschlag Nummer 7 aus dem
+     Zielgruppen-Rat ("No fee to start. No minimum to reach. You pay us
+     after your money arrives.") wird KEINE Headline, sondern ein eigener,
+     ruhiger Streifen direkt unter dem Kopf, volle Breite, hell, gruenes
+     Icon. Die drei Zusicherungen im Kopf ("promise") sagen das nicht
+     doppelt, bleiben also unveraendert. Der Streifen deckt sich mit zwei
+     Punkten weiter unten in "How you get paid" ("no setup fee", "no
+     minimum"). Diese zwei Punkte sind dort raus, damit die Aussage nur
+     einmal prominent steht statt zweimal auf derselben Seite.
   8. Jeder Abschnitt hat jetzt ein Bild, abwechselnd links und rechts. Vorher
      stand ausser im Kopf nirgends eines. Regel Manuel: nie Text auf Text.
 
@@ -80,6 +89,18 @@ import { legal } from '../site';
     </p>
     <CtaBlock secondary />
   </Split>
+
+  <section class="section terms-stripe">
+    <div class="wrap">
+      <div class="terms-stripe-inner">
+        <span class="terms-stripe-icon" aria-hidden="true"></span>
+        <p class="terms-stripe-text">
+          No fee to start. No minimum to reach.<br />
+          You pay us after your money arrives.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <Split
     image="creator-and-manager-table.webp"
@@ -191,8 +212,6 @@ import { legal } from '../site';
   >
     <h2>How you get paid.</h2>
     <ul>
-      <li>There is no setup fee.</li>
-      <li>There is no minimum you have to earn.</li>
       <li>The money goes straight to your bank.</li>
       <li>We send our bill after that, once a week.</li>
     </ul>
@@ -244,3 +263,48 @@ import { legal } from '../site';
     <CtaBlock secondary />
   </Split>
 </Base>
+
+<style>
+  /*
+    Streifen fuer Rat Nummer 7, Entscheidung Manuel 08.09.2026: nicht als
+    Headline, sondern als eigener ruhiger Abschnitt direkt unter dem Kopf.
+    Volle Breite, helle Flaeche, gruenes Icon, zwei Zeilen.
+  */
+  .terms-stripe {
+    padding: 28px 0;
+    background: var(--muted-surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .terms-stripe-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .terms-stripe-icon {
+    flex-shrink: 0;
+    width: 15px;
+    height: 8px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 3px solid var(--accent);
+    transform: rotate(-45deg);
+  }
+
+  .terms-stripe-text {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #27272a;
+  }
+
+  @media (max-width: 640px) {
+    .terms-stripe-inner {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
