@@ -24,6 +24,14 @@
        ueber 200k Follower         -> case06_200k-followers-6months.png
        zehntausende jeden Monat    -> case07_tens-of-thousands-monthly.jpg
      Die drei Screenshots zeigen keine Namen, keine Fans und keinen Toolnamen.
+  4b. KORREKTUR 08.09.2026, Ansage Manuel: die Ueberschrift zu case-monthly-pay.webp
+     nannte "1,500 euro" bis "10,000 euro", das Bild selbst zeigt Dollar und
+     eine Kurve von rund 3.000 auf rund 9.000. Manuel: Text an den Screenshot
+     anpassen. Bild mit Read-Tool erneut geprueft (08.09.2026): oben links
+     "Earnings", Kurve startet bei rund 3.000 Dollar im Juni 2024, bleibt bis
+     Ende 2024 dort, steigt dann auf rund 9.000 Dollar im April 2025. Neue
+     Ueberschrift: "She went from about 3,000 dollars a month to about 9,000
+     dollars a month."
   5. Neu: die vier Kundenbewertungen, die auf der Live-Seite im Block zu
      "USD 50K+ per month" hingen. Fuenf Sterne, Datum, Vorname, Bewertungstext.
      Das ist Beweis neben Behauptung, Manuel-Korrektur 07 vom 08.09.2026.
@@ -92,7 +100,7 @@ export interface ProofCase {
 
 export const proofCases: ProofCase[] = [
   {
-    headline: 'She went from 1,500 euro a month to 10,000 euro a month.',
+    headline: 'She went from about 3,000 dollars a month to about 9,000 dollars a month.',
     image: 'case-monthly-pay.webp',
     alt: 'A statistics page for one creator. A blue line rises from about three thousand dollars a month to about nine thousand.',
     caption: 'Her own statistics page. The blue line is what she earned each month.',
