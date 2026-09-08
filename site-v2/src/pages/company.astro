@@ -17,6 +17,22 @@
      Zaehlproblem. Die Teamgroesse steht weiterhin nirgends, aber jetzt ohne
      Selbstkommentar.
   5. Jeder Abschnitt hat ein Bild.
+
+  NACHTRAG 08.09.2026, Ansage Manuel (Foto-Zuordnung Kontaktblatt):
+  6. Edvards Stalgevics kommt als drittes Teammitglied dazu, Foto 3 aus dem
+     nummerierten Kontaktblatt (`edvards-stalgevics.webp`). Er ist kein
+     Direktor, deshalb bleibt der "Who decides"-Absatz zu den zwei
+     Geschaeftsfuehrern unveraendert und Edvards steht in einem eigenen
+     Block direkt danach. Rolle "Creative Director" ist belegt aus der
+     Bio-Seite der alten Live-Seite (squarespace-sicherung-2026-09-07/
+     texte/wunder-1.txt: "Edvards Stalgevics, Creative Director ... social
+     media wizard"), gestuetzt durch 00-faktenbasis-intern.md (Edvards fuehrt
+     wunder-social-suite/Content-Discovery, ist "Eds" und Owner des
+     Referral-Systems). Foto 6 (moeglicherweise Ryan, unbestaetigt) ist bewusst noch
+     nicht eingebaut. Fotos 2 und 5 zeigen beide Lauris; kein Platzhalter auf
+     /meet-us oder der Startseite gefunden, der einen Tausch rechtfertigt,
+     also bleibt Foto 2 (lauris-kalnins.webp) unveraendert hier, Foto 5 bleibt
+     ungenutzt in der Medienbibliothek liegen.
 */
 import Base from '../layouts/Base.astro';
 import Photo from '../components/Photo.astro';
@@ -82,6 +98,19 @@ import { legal } from '../site';
         {legal.company} signs your deal. There is no second firm in the chain. There is no middle
         man. Your deal is not passed on to anyone else.
       </p>
+      <h3>The team behind the brand.</h3>
+      <p>Edvards Stalgevics leads the creative side. He shapes the look of every campaign and post.</p>
+      <div class="people people-solo">
+        <Photo
+          file="edvards-stalgevics.webp"
+          alt="Edvards Stalgevics smiles while working at a laptop in the office."
+          width={1200}
+          height={1800}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="portrait"
+          caption="Edvards Stalgevics, Creative Director."
+        />
+      </div>
     </div>
   </section>
 
@@ -132,6 +161,11 @@ import { legal } from '../site';
     margin: 28px 0;
     max-width: 700px;
     align-items: start;
+  }
+
+  .people-solo {
+    grid-template-columns: 1fr;
+    max-width: 340px;
   }
 
   @media (max-width: 860px) {
