@@ -1,36 +1,48 @@
 ---
 /*
-  The six fears in the order they came up in our own calls.
-  04-konzept.md section 4.3, page "/faq", derived from 03, section 4.
-  Every answer links into the mechanism it rests on. No absolute safety
-  promise anywhere on this page, appendix A of the closing playbook blocks it.
+  Die sechs Aengste in der Reihenfolge, in der sie in unseren Calls kommen.
 
-  DECIDED (Manuel, 07.09.2026): the contract answer names no term or notice
-  period, only that terms are discussed on the call and early exit stays open.
-  Der Split steht nicht auf der Seite, "on the agreed split" bleibt ohne Zahl.
+  UMBAU 08.09.2026, Ansage Manuel:
 
-  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends. Diese Strings
-  werden als Text gerendert und deshalb von der Lesbarkeitspruefung
-  mitgemessen, siehe scripts/check-copy.mjs, Regel 5.
+  1. Die Bann-Frage war falsch beantwortet. Sie sagte, das Risiko bleibe und
+     keine Agentur koenne es nehmen. Korrektur Manuel 08.09.2026: in den
+     letzten Jahren wurde kein Instagram-Konto gebannt, und falls es passiert,
+     haben wir Kontakte, die das Konto wieder freischalten. Manuels Aussage
+     gilt hier als Tatsache, sie steht ueber der aelteren Formulierung.
+     Das Wort fuer besondere Beziehungen zur Plattform faellt trotzdem nicht.
+     Es steht auf der Sperrliste in scripts/check-copy.mjs und im
+     Trust-Standard. Der Satz sagt nur, dass wir Leute kennen.
+  2. Keine Toolnamen mehr in der Zugriffsfrage.
+  3. Der Name der Fan-Plattform steht nirgends mehr.
+  4. Die Zugriffsfrage sagt jetzt die Wahrheit ueber das Passwort.
+  5. Zwei Bilder, damit die Seite keine reine Textwand ist.
+
+  BINDEND: Die Vertragsfrage nennt weiter keine Laufzeit und keine Frist. Der
+  Split steht nicht auf der Seite, auch nicht als Wort.
+
+  Diese Strings werden als Text gerendert und deshalb von der
+  Lesbarkeitspruefung mitgemessen, siehe scripts/check-copy.mjs, Regel 5.
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
+import Split from '../components/Split.astro';
 
 const faqs = [
   {
     q: 'What if my account gets banned?',
     a: [
-      'We work through official tools. We keep the messages our system sends inside a hard limit. We do not use the growth tricks that get accounts flagged. That lowers the risk. It does not take the risk away. No agency can take it away.',
-      'If it happens, the fix is the work. We appeal where an appeal exists. We build the reach back on the accounts you still have. We move the fans you already earned. You do not start from nothing.',
+      'In the last years not one Instagram account of our creators was banned. We work through official ways. We keep the messages our system sends inside a hard limit. We do not use the growth tricks that get accounts flagged.',
+      'If it ever does happen, we know people at the platforms who can switch an account back on. That is the first thing we try.',
+      'While that runs, we build your reach back on the accounts you still have. We move the fans you already earned. You do not start from nothing.',
     ],
     link: { href: '/how-it-works#access', label: 'How access works' },
   },
   {
     q: 'Who can get into my accounts?',
     a: [
-      'You do not hand us a password. We post to Instagram through Zernio. We run the OnlyFans chat and vault through Infloww. Both are official tools, and you can take their access back.',
+      'You give us the password for your page. Our programs need it so they can connect. That is the only reason we ask for it.',
+      'Nobody here opens your account by hand. Every post, every message and every number runs through the programs we built for this. So there is a record of what was done, and when.',
       'Our team signs in to our own systems with company accounts. We use no shared logins. Your portal login is kept apart from the staff system. It can never hold a staff role.',
-      'Two step login for your own accounts is the next question. So is what changes when someone leaves our team. We have no written answer for either one yet. Ask us on the call and we will tell you where it stands today.',
     ],
     link: { href: '/how-it-works#access', label: 'How access works' },
   },
@@ -39,14 +51,15 @@ const faqs = [
     a: [
       'A trained chat team. They work from what you set at the start. Your limits. Your prices. Your no go list.',
       'Twice a week our system scores the last finished shift. It uses a written score sheet and a fixed pass mark. Some mistakes fail on the spot. We also measure how fast the reply came. The person who wrote is never the person who scores.',
-      'So a colleague reads the work, on a fixed plan, against a written sheet. We write down who writes in your name. You may tell your fans that. We will not ask you to take the line out of your bio.',
+      'Chatters are people. Now and then a message comes out wrong. We do not hide it. We tell you, and we put it right with you.',
+      'We write down who writes in your name. You may tell your fans that. We will not ask you to take the line out of your bio.',
     ],
     link: { href: '/how-it-works#chatting', label: 'How the check works' },
   },
   {
     q: 'How long is the deal, and how do I get out?',
     a: [
-      'We go through the terms on the call. You can leave early if this stops working for you.',
+      'We go through the terms on the call. You can leave early if the work no longer suits you.',
     ],
     link: { href: '/switching', label: 'If you are switching from another agency' },
   },
@@ -61,27 +74,78 @@ const faqs = [
   {
     q: 'How and when do I get paid?',
     a: [
-      'OnlyFans pays your own bank first. We send our bill after that, once a week, on the agreed split. Your money does not run through us on the way to you.',
+      'There is no setup fee. There is no minimum you have to earn.',
+      'The money goes straight to your bank. We send our bill after that, once a week. Your money does not run through us on the way to you.',
       'We do not give tax or bank advice. When your case needs it, ask your accountant. We would rather say that than guess.',
     ],
     link: null,
   },
 ];
+
+const firstHalf = faqs.slice(0, 3);
+const secondHalf = faqs.slice(3);
 ---
 
 <Base
   title="FAQ | Wunder"
   description="The six questions creators really ask us, with the answer and the reason behind it."
 >
+  <Split
+    image="creator-tells-her-story.webp"
+    alt="A creator talks and uses her hands to explain something."
+    width={640}
+    height={360}
+    caption="These are the questions creators ask us on the first call."
+    eager
+  >
+    <h1>The six questions we really get.</h1>
+    <p class="lead">
+      In the order they come up. Every answer says what we do, not what we promise.
+    </p>
+  </Split>
+
   <section class="section">
     <div class="wrap wrap-narrow">
-      <h1>The six questions we really get.</h1>
-      <p class="lead">
-        In the order they come up. Every answer says what we do, not what we promise.
-      </p>
       <div class="faq-list">
         {
-          faqs.map((item) => (
+          firstHalf.map((item) => (
+            <article class="faq-item">
+              <h2>{item.q}</h2>
+              {item.a.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {item.link && (
+                <p class="caption">
+                  <a href={item.link.href}>{item.link.label}</a>
+                </p>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Split
+    image="creator-checkin.webp"
+    alt="A creator and Lauris sit at a podcast table with a Wunder sign behind them."
+    width={640}
+    height={360}
+    caption="Anything you do not find here, ask us on the call."
+    flip
+  >
+    <h2>Still not sure?</h2>
+    <p>
+      Write down the one thing that worries you most. Bring it to the call. We would rather answer
+      it there than have you guess.
+    </p>
+  </Split>
+
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <div class="faq-list">
+        {
+          secondHalf.map((item) => (
             <article class="faq-item">
               <h2>{item.q}</h2>
               {item.a.map((paragraph) => (
@@ -103,7 +167,7 @@ const faqs = [
 
 <style>
   .faq-list {
-    margin-top: 40px;
+    margin-top: 8px;
   }
 
   .faq-item {

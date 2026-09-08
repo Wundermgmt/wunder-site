@@ -1,44 +1,103 @@
 ---
 /*
-  /results, uebernommen aus dem Tab "Resultate" von wundermgmt.com,
-  Sicherung vom 7. September 2026. Ansage Manuel 07.09.2026 abends:
-  die Seite inklusive der Videos uebernehmen.
+  /results. Die Beweisseite.
 
-  Reihenfolge wie auf der Live-Seite: Einleitung, die sechs Video-Cases,
-  die drei benannten Ergebnisaussagen, das Abschlussvideo, der Abschluss-CTA.
+  UMBAU 08.09.2026, Ansage Manuel. Vorher war das eine Liste aus Videos, drei
+  nackten Textkacheln und einem Quellenblock. Jetzt gilt: jede Behauptung hat
+  den Beweis direkt daneben.
 
-  Alle Zahlen liegen in src/data/results.ts, weil der Copy-Check nackte
-  Zahlen in Seiten-Copy verbietet. Hier wird nur ausgegeben.
+  - Die drei Ergebnisaussagen stehen als Ueberschrift neben ihrem Screenshot,
+    Zuordnung wie auf wundermgmt.com. Bild links, Bild rechts, im Wechsel.
+  - Vier echte Kundenbewertungen mit Sternen, Datum und Vorname.
+  - Kein Datum, keine Herkunftsangabe, kein Hinweis auf die Vorgaengerseite.
+  - Der Name der Fan-Plattform steht nirgends.
 
-  Sprache: einfaches Englisch, kurze Saetze. Die meisten Creatorinnen sind
-  keine englischen Muttersprachlerinnen.
+  Alle Zahlen liegen in src/data/results.ts, weil der Copy-Check nackte Zahlen
+  in Seiten-Copy verbietet. Hier wird nur ausgegeben.
+
+  /proof gibt es nicht mehr. Die Seite sagte "no case is ready yet", waehrend
+  hier ein ganzer Stapel Faelle liegt. Zwei Seiten, die sich widersprechen,
+  sind schlimmer als eine. /proof zeigt jetzt hierher, siehe astro.config.mjs.
 */
 import Base from '../layouts/Base.astro';
 import VideoCard from '../components/VideoCard.astro';
 import CtaBlock from '../components/CtaBlock.astro';
+import Split from '../components/Split.astro';
+import Photo from '../components/Photo.astro';
 import {
   intro,
   videosBlock,
   videoCases,
-  statementsBlock,
-  statements,
+  proofBlock,
+  proofCases,
+  reviews,
+  reviewsBlock,
   closingVideo,
   closingBlock,
-  sourceNote,
-  videoSourceNote,
 } from '../data/results';
 ---
 
 <Base
   title="Results | Wunder"
-  description="Creators tell you what changed for them. Six short videos, plus the numbers behind them, taken from our own website."
+  description="Real screens from real accounts. What creators earned, how their followers grew, and what they wrote about working with us."
 >
+  <Split
+    image="creator-speaking.webp"
+    alt="A creator sits at a microphone and talks. She uses her hands while she explains something."
+    width={640}
+    height={360}
+    caption="A creator we work with, talking about her own numbers."
+    eager
+  >
+    <p class="eyebrow">{intro.eyebrow}</p>
+    <h1>{intro.heading}</h1>
+    <p class="lead">{intro.lead}</p>
+    <p>{intro.body}</p>
+    <CtaBlock secondary />
+  </Split>
+
   <section class="section">
-    <div class="wrap wrap-narrow">
-      <p class="eyebrow">{intro.eyebrow}</p>
-      <h1>{intro.heading}</h1>
-      <p class="lead">{intro.lead}</p>
-      <p>{intro.body}</p>
+    <div class="wrap">
+      <p class="eyebrow">{proofBlock.eyebrow}</p>
+      <h2>{proofBlock.heading}</h2>
+      <p class="lead">{proofBlock.lead}</p>
+    </div>
+  </section>
+
+  {
+    proofCases.map((item, i) => (
+      <Split
+        image={item.image}
+        alt={item.alt}
+        width={item.width}
+        height={item.height}
+        caption={item.caption}
+        flip={i % 2 === 1}
+      >
+        <h3 class="proof-headline">{item.headline}</h3>
+      </Split>
+    ))
+  }
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">{reviewsBlock.eyebrow}</p>
+      <h2>{reviewsBlock.heading}</h2>
+      <p class="lead">{reviewsBlock.lead}</p>
+      <div class="review-list">
+        {
+          reviews.map((item) => (
+            <Photo
+              file={item.image}
+              alt={item.alt}
+              width={1200}
+              height={462}
+              caption={item.caption}
+              sizes="(max-width: 860px) 100vw, 520px"
+            />
+          ))
+        }
+      </div>
     </div>
   </section>
 
@@ -53,12 +112,7 @@ import {
           videoCases.map((item) => (
             <article class="video-item">
               <h3>{item.headline}</h3>
-              <VideoCard
-                src={item.src}
-                poster={item.poster}
-                caption={item.caption}
-                sourceNote={`${videoSourceNote} ${item.duration}.`}
-              />
+              <VideoCard src={item.src} poster={item.poster} caption={item.caption} />
             </article>
           ))
         }
@@ -67,60 +121,33 @@ import {
   </section>
 
   <section class="section">
-    <div class="wrap">
-      <p class="eyebrow">{statementsBlock.eyebrow}</p>
-      <h2>{statementsBlock.heading}</h2>
-      <p class="lead">{statementsBlock.lead}</p>
-
-      <div class="grid-3">
-        {
-          statements.map((item) => (
-            <div class="panel">
-              <p class="statement">{item.text}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!--
-    Hier stand auf der Live-Seite die grosse Wand aus rund 60 Verdienst-
-    und WhatsApp-Screenshots, Block "More Results From Creators We Work
-    With". Die Bilder baut ein anderer Agent ein. Diese Datei fasst sie
-    bewusst nicht an.
-  -->
-
-  <section class="section">
     <div class="wrap wrap-narrow">
+      <h2>{closingVideo.headline}</h2>
       <VideoCard
         src={closingVideo.src}
         poster={closingVideo.poster}
         caption={closingVideo.caption}
-        sourceNote={`${videoSourceNote} ${closingVideo.duration}.`}
       />
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap wrap-narrow">
-      <p class="eyebrow">{closingBlock.eyebrow}</p>
-      <h2>{closingBlock.heading}</h2>
-      <p class="lead">{closingBlock.lead}</p>
-      <CtaBlock secondary />
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap wrap-narrow">
-      <h2 class="note-heading">{sourceNote.heading}</h2>
-      {sourceNote.lines.map((line) => <p class="caption">{line}</p>)}
-    </div>
-  </section>
+  <Split
+    image="creator-and-manager-table.webp"
+    alt="A creator and Lauris sit at the same table and talk. Both are at the same height in the picture."
+    width={640}
+    height={360}
+    caption="We meet the creators we work with."
+    flip
+  >
+    <p class="eyebrow">{closingBlock.eyebrow}</p>
+    <h2>{closingBlock.heading}</h2>
+    <p class="lead">{closingBlock.lead}</p>
+    <CtaBlock secondary />
+  </Split>
 </Base>
 
 <style>
-  /* Eine Spalte auf breiten Schirmen bis 720px Video, zwei ab Tablet. */
+  /* Eine Spalte auf schmalen Schirmen, zwei ab Tablet. */
   .video-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -132,13 +159,27 @@ import {
     margin: 0 0 12px;
   }
 
-  .statement {
-    margin: 0;
-    font-weight: 600;
+  .review-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    margin-top: 32px;
   }
 
-  .note-heading {
-    font-size: 18px;
-    color: var(--text-muted);
+  /*
+    Die Aussage steht gross neben ihrem Bild. Sie ist eine h3, weil daruber
+    schon die h2 des Blocks steht, sieht aber aus wie eine h2.
+  */
+  .proof-headline {
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+    margin: 0;
+  }
+
+  @media (max-width: 860px) {
+    .proof-headline {
+      font-size: 24px;
+    }
   }
 </style>

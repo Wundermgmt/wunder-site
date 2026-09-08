@@ -14,27 +14,33 @@ import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import Photo from '../components/Photo.astro';
+import Split from '../components/Split.astro';
 import { teamVideos, loadNote } from '../data/youtube';
 ---
 
 <Base
   title="Meet us | Wunder"
-  description="See the people behind Wunder. Our own videos with our founders and a creator."
+  description="See the people behind Wunder. Watch a talk with our founders and with a creator we work with."
 >
-  <section class="section">
-    <div class="wrap">
-      <p class="eyebrow">Meet us</p>
-      <h1>Meet the team in real life</h1>
-      <p class="lead">We fly out and meet our creators face to face.</p>
-      <p>
-        Lauris films most of these talks. He is one of our two founders. The other one is Manuel.
-        You can see them both here.
-      </p>
-      <p>
-        Nothing on this page is a stock photo. These are our own videos, from our own days at work.
-      </p>
-    </div>
-  </section>
+  <Split
+    image="creator-and-manager-table.webp"
+    alt="A creator and Lauris sit at the same table and talk. Both are at the same height in the picture."
+    width={640}
+    height={360}
+    caption="We fly out and meet our creators face to face."
+    eager
+  >
+    <p class="eyebrow">Meet us</p>
+    <h1>Meet the team in real life</h1>
+    <p class="lead">
+      Before you write to us, you can watch us. Then you know who you are talking to.
+    </p>
+    <p>
+      Lauris films most of these talks. He is one of our two founders. The other one is Manuel. You
+      can see them both here.
+    </p>
+    <CtaBlock secondary />
+  </Split>
 
   <section class="section">
     <div class="wrap">
@@ -100,13 +106,19 @@ import { teamVideos, loadNote } from '../data/youtube';
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="panel panel-quiet">
-        <h2>Come and see for yourself</h2>
-        <p>We would rather show you than tell you. Watch a talk, then write to us.</p>
-      </div>
-      <CtaBlock />
-    </div>
-  </section>
+  <Split
+    image="creator-speaking.webp"
+    alt="A creator sits at a microphone and talks. She uses her hands while she explains something."
+    width={640}
+    height={360}
+    caption="Every creator here said yes to one short form first."
+    flip
+  >
+    <h2>Come and see for yourself</h2>
+    <p>We would rather show you than tell you. Watch a talk, then write to us.</p>
+    <p>
+      Want the numbers behind these talks? <a href="/results">The results page has them</a>.
+    </p>
+    <CtaBlock />
+  </Split>
 </Base>

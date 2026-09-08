@@ -2,7 +2,7 @@
   Die Videos der Seite /meet-us.
 
   Quelle: der YouTube-Kanal von Lauris Kalnins, https://www.youtube.com/@lauris.kalnins
-  Abgezogen am 7. September 2026 mit yt-dlp. Der Kanal hatte zu dem Zeitpunkt
+  Abgezogen am 2026-09-07 mit yt-dlp. Der Kanal hatte zu dem Zeitpunkt
   zehn regulaere Videos plus Shorts. Ausgewaehlt sind die sechs, in denen man
   Menschen trifft: die beiden Gruender und die Creatorin Katrina Zaiceva.
   Reine Verkaufsvideos und die Agentur-Business-Folgen sind bewusst draussen.

@@ -1,209 +1,246 @@
 ---
 /*
-  Home. Structure and copy: 04-konzept.md section 4.3, page "/".
-  Six sections, one message above the fold, no number tiles, no badges.
+  Home.
 
-  DECIDED (Manuel, 07.09.2026, abends): the revenue split is NOT stated on the
-  public site. It is covered in the closing call. This replaces the earlier
-  decision from midday. Do not put a split figure back on any page.
-  DECIDED (Manuel, 07.09.2026): no contract term, notice period or renewal
-  language on the site. Early exit if it stops working stays, without a
-  concrete deadline.
-  DECIDED (Manuel, 07.09.2026, abends): most creators are not native English
-  speakers. Every sentence on this page is short and plain on purpose. The
-  build measures it, see scripts/check-copy.mjs, rule 5.
+  KOMPLETTER COPY-UMBAU 08.09.2026. Manuel hat die Fassung vom Morgen
+  abgelehnt: zu viele Denkfehler in der Copy. Was hier geaendert wurde und
+  warum, Punkt fuer Punkt:
+
+  1. Headline. Die alte Zeile stellte das Wort "against" zwischen uns und die
+     Creatorin. Zwei Fehler in einer Zeile. Erstens liest eine Frau, deren
+     Englisch Fremdsprache ist, dort "gegen sie". Zweitens schaute die Zeile
+     zurueck auf ihre alten Zahlen, statt nach vorn. Wer schon gut laeuft, dem
+     verspricht der Satz nur, nicht schlechter zu sein als vorher.
+     Neu: "You make the content. We do the rest." Sie ist die Handelnde, wir
+     sind die Arbeit dahinter. Female-Gaze-Dossier Abschnitt 4.
+  2. Subheadline. Keine Umsatzversprechen, keine Zahl als Versprechen. Sie
+     benennt nur, was wir tun, und was sie davon hat: ihre Woche.
+     Nachgeschaerft am 08.09.2026 nach dem Zielgruppen-Rat, Protokoll
+     projects/zielgruppen-rat/protokolle/2026-09-08-0924-wunder-hero-v3-*.md:
+     Die erste Fassung endete auf "your page can grow, and you can earn more".
+     Alle sieben Stimmen haben genau diese Zeile als "wieder so eine Agentur"
+     markiert, Vertrauensschnitt 3.2 bei Kaufhandlung 3.0. Ein Versprechen
+     ohne Grenze wirkt in dieser Zielgruppe gegen den Absender. Die Zeile ist
+     ersetzt durch die drei Zusicherungen, die vier von fuenf Kernpersonas
+     unabhaengig voneinander vermisst haben: Geld zuerst bei ihr, nichts geht
+     ohne ihr Ja raus, sie kann aufhoeren. Dahinter der Verweis auf die
+     Beweisseite statt auf eine Moeglichkeit.
+  3. Der Abschnitt "You know what your account did at its best" ist raus. Er
+     widersprach dem eigenen Mechanismus: die Grundlinie sind die letzten
+     dreissig Tage, nicht der beste Monat. Der Mechanismus steht weiter auf
+     /how-it-works, dort gehoert er hin.
+  4. Der Name der Fan-Plattform steht nirgends mehr. Grund: Banken.
+  5. Keine Toolnamen mehr. Ersatz: "the programs we built for
+     this".
+  6. Passwort. Der Abschnitt behauptete "You never hand us a password". Das ist
+     falsch. Korrektur Manuel 08.09.2026: die Creatorin gibt uns das Passwort,
+     damit sich unsere Programme verbinden koennen. Ein Mensch loggt sich nie
+     direkt ein.
+  7. "How you get paid" bleibt und ist kuerzer: keine Setup-Gebuehr, kein
+     Mindestumsatz, das Geld geht direkt auf ihr Konto, wir stellen danach
+     unsere Rechnung, einmal die Woche.
+  8. Jeder Abschnitt hat jetzt ein Bild, abwechselnd links und rechts. Vorher
+     stand ausser im Kopf nirgends eines. Regel Manuel: nie Text auf Text.
+
+  BINDEND, gilt weiter:
+  Kein Revenue Split auf der Seite (Manuel 07.09. abends, bestaetigt 08.09.).
+  Keine Laufzeit, keine Kuendigungsfrist, keine Verlaengerung.
+  Jeder Satz kurz und einfach, siehe scripts/check-copy.mjs, Regeln 5 bis 8.
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
-import RecordCard from '../components/RecordCard.astro';
-import Photo from '../components/Photo.astro';
-import { getCollection } from 'astro:content';
+import Split from '../components/Split.astro';
 import { legal } from '../site';
-
-const records = (await getCollection('records'))
-  .filter((entry) => !entry.data.draft)
-  .sort((a, b) => a.data.order - b.data.order);
-const firstRecord = records[0];
 ---
 
 <Base
-  title="Wunder | Managed against your own numbers"
-  description="Wunder is a creator management company in Riga. We write down what your account did in the last thirty days. After that, you measure us against that number."
+  title="Wunder | You make the content, we do the rest"
+  description="Wunder works with creators. We plan your posts, we write to your fans and we sell for you. Your money reaches your bank first, and you see every step in your own portal."
 >
-  <section class="section hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <h1>Managed against your own numbers.</h1>
-          <p class="lead">
-            Wunder is a creator management company. We are based in Riga. Before we start, we look
-            at your last thirty days. We write that number down. Then you measure us against it.
-            You see the same portal we do.
-          </p>
-          <CtaBlock secondary />
-        </div>
-        <Photo
-          file="hero-creator-talk.webp"
-          alt="A creator and Lauris sit across from each other at a podcast table and talk."
-          width={640}
-          height={360}
-          sizes="(max-width: 860px) 100vw, 520px"
-          eager
-          caption="We sit down with the creators we work with. This one talks about her own numbers."
-        />
-      </div>
-    </div>
-  </section>
+  <Split
+    image="creator-speaking.webp"
+    alt="A creator sits at a microphone and talks. She uses her hands while she explains something."
+    width={640}
+    height={360}
+    caption="A creator we work with, talking about her own month."
+    eager
+  >
+    <h1>You make the content. We do the rest.</h1>
+    <p class="lead">
+      We work with creators like you. We plan your posts. We write to your fans. We sell for you.
+      You get your week back.
+    </p>
+    <ul class="promise">
+      <li>Your money reaches your bank first.</li>
+      <li>Nothing goes out in your name without your yes.</li>
+      <li>You can leave when the work no longer suits you.</li>
+    </ul>
+    <p>
+      Want to see where that got other creators? <a href="/results">Look at their own screens</a>.
+    </p>
+    <CtaBlock secondary />
+  </Split>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>You know what your account did at its best.</h2>
-      <p class="lead">
-        We write that number down before we start. Then you can hold us to it.
-      </p>
-      {
-        firstRecord ? (
-          <div class="record-slot">
-            <RecordCard {...firstRecord.data} />
-          </div>
-        ) : (
-          <div class="record-slot panel">
-            <p>
-              Seven videos from our old website go through the numbers of single accounts. Watch
-              them on the <a href="/results">results page</a>.
-            </p>
-            <p class="caption">
-              Our own case cards are not ready yet. We check each one against the portal first.
-            </p>
-          </div>
-        )
-      }
-      <p class="caption">
-        Every result here is one case. Each one has a date. Each one says what did not work.
-        <a href="/proof">See how we report numbers</a>.
-      </p>
-    </div>
-  </section>
+  <Split
+    image="creator-and-manager-table.webp"
+    alt="A creator and Lauris sit at the same table and talk. Both are at the same height in the picture."
+    width={640}
+    height={360}
+    caption="We sit down with every creator before anything starts."
+    flip
+  >
+    <h2>What do you need help with?</h2>
+    <p class="lead">Most creators come to us for one of four things.</p>
+    <ul>
+      <li>More fans, because growth has stopped.</li>
+      <li>Help with the daily work that is not the content.</li>
+      <li>A plan for what to post, and when.</li>
+      <li>Free time. Some of them just want their week back.</li>
+    </ul>
+    <p>What matters most to you? Tell us on the call.</p>
+  </Split>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>What do you need help with?</h2>
-      <p class="lead">
-        Most people come to us for one of four things. Growth that has stopped. Help with the work
-        that is not the content. Marketing skills they never had time to learn. Or free time. What
-        matters most to you? Tell us on the call.
-      </p>
-    </div>
-  </section>
+  <Split
+    image="case-followers.webp"
+    alt="A follower report for one account. The number of new follows in the period is three hundred twenty four thousand."
+    width={1300}
+    height={1016}
+    caption="One account. New followers over five months. This is her own report."
+  >
+    <h2>We show you, we do not tell you.</h2>
+    <p class="lead">
+      Any agency can promise you a big month. We would rather put the screen next to the words.
+    </p>
+    <p>
+      On our results page you see what happened on real accounts. What they earned. How their
+      followers grew. And what those creators wrote about us in their own words.
+    </p>
+    <p><a href="/results">See the results</a></p>
+  </Split>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>Three things we can show you, not just tell you.</h2>
-      <div class="grid-3">
-        <div class="panel">
-          <h3>You see the same screen we do</h3>
-          <p>
-            Every post goes through our own system. We read each number at the source. We do not
-            guess it. You log into your own portal. There you see views, reach and followers. You
-            can look at seven, thirty and ninety days.
-          </p>
-          <p><a href="/how-it-works#portal">See how it works</a></p>
-        </div>
-        <div class="panel">
-          <h3>You never hand us a password</h3>
-          <p>
-            We post to Instagram through Zernio. We run the OnlyFans chat and vault through
-            Infloww. Both are official tools. You give them access, and you can take it back. A
-            password you hand over is gone.
-          </p>
-          <p><a href="/how-it-works#access">See how it works</a></p>
-        </div>
-        <div class="panel">
-          <h3>We check the people who write in your name</h3>
-          <p>
-            Twice a week our system reads the last finished shift. It scores the chat against a
-            written rule set. The check runs to a fixed plan. Nobody on the chat team can turn it
-            off.
-          </p>
-          <p>
-            We write down who writes to your fans. You may say that in your own bio. We will not
-            ask you to take the line out.
-          </p>
-          <p><a href="/how-it-works#chatting">See how it works</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Split
+    image="portal-login-desktop.webp"
+    alt="The portal login screen on a laptop, with fields for email and password."
+    width={1200}
+    height={750}
+    caption="Your own login. You do not need to ask us for numbers."
+    flip
+  >
+    <h2>You see the same screen we do.</h2>
+    <p>
+      Every post goes through our own portal. We read each number where it comes from. We do not
+      guess it.
+    </p>
+    <p>
+      You log into your own portal. There you see views, reach and followers. You can look at
+      seven, thirty and ninety days. You see the plan your manager wrote.
+    </p>
+    <p><a href="/how-it-works#portal">See how it works</a></p>
+  </Split>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>How you get paid.</h2>
-      <p>
-        There is no setup fee. There is no minimum you have to earn. OnlyFans pays your own bank
-        first. We send our bill after that, once a week. We go through the numbers on the call.
-        You sign nothing before that.
-      </p>
-      <p>
-        You can leave early if this stops working for you. We show you how on the call.
-      </p>
-      <p>
-        Your content stays yours. We never held your passwords. So there is nothing to hand back.
-        We switch your portal access off the same day.
-      </p>
-      <CtaBlock />
-    </div>
-  </section>
+  <Split
+    image="portal-login-mobile.webp"
+    alt="The same login screen on a phone."
+    width={430}
+    height={932}
+    caption="One login for you. Our programs use their own."
+    narrow
+  >
+    <h2>What happens with your password.</h2>
+    <p>
+      You give us the password for your page. Our programs need it so they can connect. That is the
+      only reason we ask for it.
+    </p>
+    <p>
+      Nobody here opens your account by hand. All the work runs through the programs we built for
+      this. So there is a record of what was done, and when.
+    </p>
+    <p><a href="/how-it-works#access">See how it works</a></p>
+  </Split>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>A real company, with two people who sign for it.</h2>
-      <p>
-        Wunder is a brand by {legal.company}. The number in the register is {legal.regNumber}. The
-        company started in Riga on {legal.registered}. Two directors run it, and each one may sign
-        alone. Manuel Gonzalez is CEO and co owner. Lauris Kalnins is COO and co owner.
-      </p>
-      <p>
-        You can look all of that up first. <a href="/company">The company page has the rest</a>.
-      </p>
-    </div>
-  </section>
+  <Split
+    image="lauris-speaking.webp"
+    alt="Lauris sits at a microphone and explains something. He is looking at the person across the table."
+    width={640}
+    height={360}
+    caption="Lauris runs the day to day work with the team."
+    flip
+  >
+    <h2>We check the people who write to your fans.</h2>
+    <p>
+      Someone writes to your fans in your name. That is the one thing we do as you. So we read that
+      work back, and never by the person who wrote it.
+    </p>
+    <p>
+      Twice a week our system takes the last finished shift and scores it against written rules.
+      Nobody on the chat team can switch that check off.
+    </p>
+    <p>
+      Chatters are people. Now and then a message comes out wrong. When that happens we tell you,
+      and we put it right with you.
+    </p>
+    <p><a href="/how-it-works#chatting">See how it works</a></p>
+  </Split>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>Apply, and we tell you either way.</h2>
-      <p>
-        You send eight short answers. A person reads them. Then you hear if it is a fit. If it is
-        not, you get one line that says so. You get an answer, not silence.
-      </p>
-      <CtaBlock secondary />
-    </div>
-  </section>
+  <Split
+    image="creator-checkin.webp"
+    alt="A creator and Lauris sit at a podcast table with a Wunder sign behind them."
+    width={640}
+    height={360}
+    caption="We go through the money on the call, not on a web page."
+  >
+    <h2>How you get paid.</h2>
+    <ul>
+      <li>There is no setup fee.</li>
+      <li>There is no minimum you have to earn.</li>
+      <li>The money goes straight to your bank.</li>
+      <li>We send our bill after that, once a week.</li>
+    </ul>
+    <p>
+      We go through the numbers on the call. You sign nothing before that. You can leave early if
+      the work no longer suits you.
+    </p>
+    <p>
+      Your content stays yours. When you go, we switch your portal access off the same day.
+    </p>
+    <CtaBlock />
+  </Split>
+
+  <Split
+    image="founders-call.webp"
+    alt="Manuel and Lauris talk to each other on a video call, each in his own room."
+    width={324}
+    height={360}
+    caption="Manuel and Lauris. They run the company together."
+    flip
+    narrow
+  >
+    <h2>A real company, with two people who sign for it.</h2>
+    <p>
+      Wunder is a brand by {legal.company}. The number in the register is {legal.regNumber}. The
+      company started in Riga on {legal.registered}.
+    </p>
+    <p>
+      Two directors run it, and each one may sign alone. Manuel Gonzalez is CEO and co owner.
+      Lauris Kalnins is COO and co owner.
+    </p>
+    <p>
+      You can look all of that up first. <a href="/company">The company page has the rest</a>.
+    </p>
+  </Split>
+
+  <Split
+    image="creator-meeting-blue.webp"
+    alt="A creator and Lauris sit across from each other and talk in a studio with blue light."
+    width={640}
+    height={360}
+    caption="Every creator we work with started with one short form."
+  >
+    <h2>Apply, and we tell you either way.</h2>
+    <p>
+      You send eight short answers. A person reads them. Then you hear if it is a fit. If it is not,
+      you get one line that says so. You get an answer, not silence.
+    </p>
+    <CtaBlock secondary />
+  </Split>
 </Base>
-
-<style>
-  .hero {
-    padding-top: 88px;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 56px;
-    align-items: center;
-  }
-
-  .record-slot {
-    max-width: 640px;
-    margin: 32px 0 24px;
-  }
-
-  @media (max-width: 860px) {
-    .hero {
-      padding-top: 48px;
-    }
-    .hero-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-  }
-</style>

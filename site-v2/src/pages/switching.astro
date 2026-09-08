@@ -1,79 +1,91 @@
 ---
 /*
-  The real blocker of the most valuable group is the old agency, not the price.
-  04-konzept.md section 4.3, page "/switching".
-  Hard limit that has to stay in the copy: reading and sorting a contract is
-  not legal advice. Same logic as the ban on tax and banking statements in
-  appendix A of the closing playbook.
-  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends.
+  Der echte Blocker der wertvollsten Gruppe ist die alte Agentur, nicht der
+  Preis. 04-konzept.md Abschnitt 4.3, Seite "/switching".
+  Harte Grenze, die in der Copy bleiben muss: einen Vertrag lesen und ordnen
+  ist keine Rechtsberatung.
 
   Geaendert 07.09.2026 abends: hier stand ein Zitat in Ich-Form in einem
-  blockquote, mit der Fussnote, dass es von niemandem stammt. Beide neuen
-  Dossiers verbieten genau das. Vertrauens-Dossier Abschnitt 10, Anti-Muster
-  "Sterne ohne Quelle" und "Testimonials aus Textentwuerfen erfinden";
-  Female-Gaze-Dossier Abschnitt 4, "Keine erfundenen Ich-Zitate". Die Aussage
-  steht jetzt als berichtete Beobachtung da, ohne Zitatoptik.
+  blockquote, mit der Fussnote, dass es von niemandem stammt. Beide Dossiers
+  verbieten genau das. Die Aussage steht jetzt als berichtete Beobachtung da.
+
+  Geaendert 08.09.2026: jeder Abschnitt hat ein Bild, Ansage Manuel.
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
+import Split from '../components/Split.astro';
 ---
 
 <Base
   title="Switching agencies | Wunder"
   description="What happens when you are still signed with another agency, in what order, and where our help stops."
 >
-  <section class="section">
-    <div class="wrap">
-      <h1>Leaving an agency you signed with.</h1>
-      <p class="lead">This is the part most people are stuck on. It is not the money.</p>
-      <p>
-        Most people tell us the same thing on the first call. They are nervous about telling their
-        current agency. That part is normal, and it has an order you can follow.
-      </p>
-    </div>
-  </section>
+  <Split
+    image="creator-tells-her-story.webp"
+    alt="A creator talks and uses her hands to explain something."
+    width={640}
+    height={360}
+    caption="Almost every creator we meet has been through this once."
+    eager
+  >
+    <h1>Leaving an agency you signed with.</h1>
+    <p class="lead">This is the part most people are stuck on. It is not the money.</p>
+    <p>
+      Most people tell us the same thing on the first call. They are nervous about telling their
+      current agency. That part is normal, and it has an order you can follow.
+    </p>
+    <CtaBlock secondary />
+  </Split>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>What we do.</h2>
-      <p>
-        Send us your deal and we read it with you. We tell you how much notice you owe. We tell you
-        when your next way out opens. We tell you what the part about your content means in real
-        life.
-      </p>
-      <p>
-        That is reading and sorting. It is not legal advice. We are not lawyers, and we are not
-        yours. When a paper needs a lawyer, we say so. Then you take it to one.
-      </p>
-      <p>
-        We do not call your agency. We do not write to them in your name. We do not ask you to
-        break a deal you signed.
-      </p>
-    </div>
-  </section>
+  <Split
+    image="lauris-speaking.webp"
+    alt="Lauris sits at a microphone and explains something to the person across the table."
+    width={640}
+    height={360}
+    caption="We read the paper with you. We do not call anyone for you."
+    flip
+  >
+    <h2>What we do.</h2>
+    <p>
+      Send us your deal and we read it with you. We tell you how much notice you owe. We tell you
+      when your next way out opens. We tell you what the part about your content means in real
+      life.
+    </p>
+    <p>
+      That is reading and sorting. It is not legal advice. We are not lawyers, and we are not
+      yours. When a paper needs a lawyer, we say so. Then you take it to one.
+    </p>
+    <p>
+      We do not call your agency. We do not write to them in your name. We do not ask you to break
+      a deal you signed.
+    </p>
+  </Split>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>The order things happen in.</h2>
-      <ol>
-        <li>You apply. In the form you say that you are still tied, and until when.</li>
-        <li>We talk anyway. That call ties you to nothing.</li>
-        <li>We read your deal. We work out the first date you can leave.</li>
-        <li>
-          You give notice yourself, in writing, in the window your deal allows. We do not start
-          before that date.
-        </li>
-        <li>
-          We start after your old deal ends. On day one we read your last thirty days. That is
-          your starting point.
-        </li>
-      </ol>
-      <p>
-        Maybe your deal has no way out for months. Then we say so. We put a date in the calendar
-        instead of talking you into something.
-      </p>
-      <CtaBlock secondary />
-    </div>
-  </section>
+  <Split
+    image="creator-meeting-blue.webp"
+    alt="A creator and Lauris sit across from each other and talk in a studio with blue light."
+    width={640}
+    height={360}
+    caption="Nothing starts before your old deal has ended."
+  >
+    <h2>The order things happen in.</h2>
+    <ol>
+      <li>You apply. In the form you say that you are still tied, and until when.</li>
+      <li>We talk anyway. That call ties you to nothing.</li>
+      <li>We read your deal. We work out the first date you can leave.</li>
+      <li>
+        You give notice yourself, in writing, in the window your deal allows. We do not start
+        before that date.
+      </li>
+      <li>
+        We start after your old deal ends. On day one we read your last thirty days. That is your
+        starting point.
+      </li>
+    </ol>
+    <p>
+      Maybe your deal has no way out for months. Then we say so. We put a date in the calendar
+      instead of talking you into something.
+    </p>
+    <CtaBlock secondary />
+  </Split>
 </Base>
-

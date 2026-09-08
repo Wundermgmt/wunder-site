@@ -1,61 +1,87 @@
 ---
 /*
-  The page Ralfs sends in the middle of a conversation. It has to stand on its
-  own. Structure and copy: 04-konzept.md section 4.3, page "/how-it-works",
-  built on the three pillars in section 2.2.
+  Die Seite, die Ralfs mitten im Gespraech schickt. Sie muss allein stehen
+  koennen.
 
-  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends. Alle Befunde
-  bleiben drin, nur in kurzen Saetzen. Der Satz zur Einkommenszusage unten steht
-  wortgleich in scripts/allowed-phrases.txt. Wer ihn umformuliert, muss die
-  Freigabezeile dort mitziehen, sonst bricht der Copy-Check.
+  UMBAU 08.09.2026, Ansage Manuel:
+
+  1. Teil zwei hiess "You never hand us a password." Das war schlicht falsch.
+     Korrektur Manuel 08.09.2026, woertlich: die Creatorinnen geben uns das
+     Passwort, damit sich unsere Programme verbinden koennen; wir loggen uns
+     nie direkt in den Account ein, nur ueber diese Programme. Der ganze
+     Abschnitt ist danach neu geschrieben.
+  2. Keine Toolnamen. Die zwei Werkzeuge standen frueher hier namentlich.
+     Jetzt: "the programs we built for this".
+  3. Der Name der Fan-Plattform steht nirgends mehr.
+  4. Jeder Teil hat ein Bild.
+
+  Der Satz zur Einkommenszusage unten steht wortgleich in
+  scripts/allowed-phrases.txt. Wer ihn umformuliert, muss die Freigabezeile
+  dort mitziehen, sonst bricht der Copy-Check.
 */
 import Base from '../layouts/Base.astro';
 import CtaBlock from '../components/CtaBlock.astro';
+import Split from '../components/Split.astro';
 import Photo from '../components/Photo.astro';
 ---
 
 <Base
   title="How it works | Wunder"
-  description="Three things you can check: your own portal, official tools instead of passwords, and a check on everyone who writes in your name."
+  description="Three parts you can check: your own portal, the programs that do the work, and a check on everyone who writes to your fans."
 >
+  <Split
+    image="hero-creator-talk.webp"
+    alt="A creator and Lauris sit across from each other at a podcast table and talk."
+    width={640}
+    height={360}
+    caption="We explain all of this again on the call, in your own words."
+    eager
+  >
+    <h1>How the work is done.</h1>
+    <p class="lead">
+      Three parts. You can check each one. You do not have to take our word for it.
+    </p>
+    <CtaBlock secondary />
+  </Split>
+
+  <Split
+    id="portal"
+    image="portal-login-desktop.webp"
+    alt="The portal login screen on a laptop, with fields for email and password."
+    width={1200}
+    height={750}
+    caption="This is the door, not the rooms behind it. No creator numbers are shown here."
+    flip
+  >
+    <p class="eyebrow">Part one</p>
+    <h2>You see the same screen we do.</h2>
+    <p class="lead">
+      You can look at your account at any time. You do not have to ask us. You see the same number
+      we see.
+    </p>
+    <p>
+      Every post goes through our own portal. We read each number where it comes from. We do not
+      guess it. We built the whole chain ourselves. So there is nothing we could tell you that we
+      cannot also show you.
+    </p>
+  </Split>
+
   <section class="section">
     <div class="wrap">
-      <h1>How the work is done.</h1>
-      <p class="lead">
-        Three parts. You can check each one. You do not have to take our word for it.
-      </p>
-    </div>
-  </section>
-
-  <section class="section" id="portal">
-    <div class="wrap">
-      <p class="eyebrow">Part one</p>
-      <h2>You see the same screen we do.</h2>
-      <p class="lead">
-        You can look at your account at any time. You do not have to ask us. You see the same
-        number we see.
-      </p>
-      <p>
-        Every post goes through our own portal. We read each number at the source. We do not guess
-        it. We built the whole chain ourselves. So there is nothing we could tell you that we
-        cannot also show you.
-      </p>
       <ol>
         <li>
-          First we read your last thirty days. We look at what your account did on its own.
-          That number is your starting point.
+          First we read your last thirty days. We look at what your account did on its own. That
+          number is your starting point.
         </li>
         <li>
           Each night our system works out your middle day of the last thirty days. Then it scores
           every post against your own middle day, not against some agency average.
         </li>
+        <li>A post is scored three days after it goes up. Before that it is too young to judge.</li>
         <li>
-          A post is scored three days after it goes up. Before that it is too young to judge.
-        </li>
-        <li>
-          You log into your own portal. You see views, reach and followers there. You can look
-          at seven, thirty and ninety days. You see the daily line and the period before it. You
-          see the content plan. You see the plan your manager wrote.
+          You log into your own portal. You see views, reach and followers there. You can look at
+          seven, thirty and ninety days. You see the daily line and the period before it. You see
+          the content plan.
         </li>
         <li>
           Two things are missing there on purpose. You cannot see who a single fan is. You cannot
@@ -63,74 +89,81 @@ import Photo from '../components/Photo.astro';
           people's data.
         </li>
       </ol>
-      <div class="portal-hint">
-        <div class="portal-shots">
-          <Photo
-            file="portal-login-desktop.webp"
-            alt="The portal login screen on a laptop, with fields for work email and password."
-            width={1200}
-            height={750}
-            sizes="(max-width: 860px) 100vw, 520px"
-          />
-          <Photo
-            file="portal-login-mobile.webp"
-            alt="The same portal login screen on a phone."
-            width={430}
-            height={932}
-            sizes="(max-width: 860px) 60vw, 200px"
-          />
-        </div>
-        <p class="caption">
-          This is the door, not the rooms behind it. We show no creator numbers here. The portal is
-          not a public demo and it stays out of search.
-        </p>
-      </div>
       <CtaBlock />
     </div>
   </section>
 
-  <section class="section" id="access">
+  <Split
+    id="access"
+    image="portal-login-mobile.webp"
+    alt="The same login screen on a phone."
+    width={430}
+    height={932}
+    caption="Your portal login is your own. It is kept apart from our staff system."
+    narrow
+  >
+    <p class="eyebrow">Part two</p>
+    <h2>What happens with your password.</h2>
+    <p class="lead">
+      You give us the password for your page. Our programs need it so they can connect. That is the
+      only reason we ask for it.
+    </p>
+    <p>
+      Nobody here opens your account by hand. Every post, every message and every number runs
+      through the programs we built for this. So there is a record of what was done, and when.
+    </p>
+  </Split>
+
+  <section class="section">
     <div class="wrap">
-      <p class="eyebrow">Part two</p>
-      <h2>You never hand us a password.</h2>
-      <p class="lead">
-        You do not give us a password. Not for Instagram. Not for OnlyFans.
-      </p>
-      <p>
-        We work through the official tools of the platforms. We do not use your login. You give
-        those tools access, and you can take it back. A password you hand over is gone.
-      </p>
       <ol>
-        <li>We post to Instagram through Zernio. It is an official tool and it plans posts for us.</li>
-        <li>We run the OnlyFans chat and vault through Infloww. It is an official tool too.</li>
-        <li>Our team signs in to our own systems with company Google accounts. No shared logins.</li>
         <li>
-          Your portal login is its own thing. It is kept apart from the staff system. A creator
-          login can never hold a staff role. We read who you are from a signed cookie only. So
-          nobody can change a number in the link and land in someone else's data.
+          Your posts go out through our own programs. A person picks the post and the time. The
+          program does the rest.
         </li>
         <li>
-          We can switch your portal access off at once. It stops on the next click, not on the
-          next login. Taking you out of the portal deletes nothing. It only sets a date. So a
-          wrong click is one reset, not a loss.
+          The chat with your fans and your paid files run through the same kind of program. Again,
+          no person signs in as you.
+        </li>
+        <li>Our team signs in to our own systems with company accounts. No shared logins.</li>
+        <li>
+          Your portal login is its own thing. A creator login can never hold a staff role. We read
+          who you are from a signed cookie only. So nobody can change a number in the link and land
+          in someone else's data.
+        </li>
+        <li>
+          We can switch your portal access off at once. It stops on the next click, not on the next
+          login. Taking you out of the portal deletes nothing. It only sets a date. So a wrong
+          click is one reset, not a loss.
         </li>
       </ol>
     </div>
   </section>
 
-  <section class="section" id="chatting">
+  <Split
+    id="chatting"
+    image="lauris-speaking.webp"
+    alt="Lauris sits at a microphone and explains something. He is looking at the person across the table."
+    width={640}
+    height={360}
+    caption="The chat desk has its own managers. They read the work back."
+    flip
+  >
+    <p class="eyebrow">Part three</p>
+    <h2>We check the people who write to your fans.</h2>
+    <p class="lead">
+      You already make the work. What is missing is the selling. That is the part we do, with
+      people we check.
+    </p>
+    <p>
+      Someone writes to your fans in your name. That work gets read back, and not by the person who
+      wrote it. Chat is the only thing we do in your name. So we built a check for it. It runs to a
+      plan, and nobody on the chat team can switch it off.
+    </p>
+  </Split>
+
+  <section class="section">
     <div class="wrap">
-      <p class="eyebrow">Part three</p>
-      <h2>We check the people who write in your name.</h2>
-      <p class="lead">
-        You already make the work. What is missing is the selling. That is the part we do, with
-        people we check.
-      </p>
-      <p>
-        Someone writes to your fans in your name. That work gets read back, and not by the person
-        who wrote it. Chat is the only thing we do in your name. So we built a check for it. It
-        runs to a plan, and nobody on the chat team can turn it off.
-      </p>
       <ol>
         <li>
           Twice a week our system reads the shift plan. It pulls the chat log of the last finished
@@ -152,41 +185,29 @@ import Photo from '../components/Photo.astro';
           platform. The point is simple. An automatic message must not put your account at risk.
         </li>
       </ol>
+      <p>
+        Chatters are people. Now and then a message comes out wrong. We do not hide that. We tell
+        you, and we put it right with you. Most creators are fine with it once they know how we
+        handle it.
+      </p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>What we do not do.</h2>
-      <ul>
-        <li>No fee up front. No fee before you have earned.</li>
-        <li>No access to your money. Your payout reaches your bank first.</li>
-        <li>No post goes out without your yes.</li>
-        <li>No old post stays in the plan once you ask us to stop it.</li>
-        <li>We do not guarantee your income. Nobody honest can.</li>
-      </ul>
-      <CtaBlock />
-    </div>
-  </section>
+  <Split
+    image="creator-tells-her-story.webp"
+    alt="A creator talks and uses her hands to explain how her account grew."
+    width={640}
+    height={360}
+    caption="You keep the last word on your own account."
+  >
+    <h2>What we do not do.</h2>
+    <ul>
+      <li>No fee up front. No fee before you have earned.</li>
+      <li>No access to your money. Your payout reaches your bank first.</li>
+      <li>No post goes out without your yes.</li>
+      <li>No old post stays in the plan once you ask us to stop it.</li>
+      <li>We do not guarantee your income. Nobody honest can.</li>
+    </ul>
+    <CtaBlock />
+  </Split>
 </Base>
-
-<style>
-  .portal-hint {
-    max-width: 760px;
-    margin: 32px 0;
-  }
-
-  .portal-shots {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 16px;
-    align-items: start;
-  }
-
-  @media (max-width: 860px) {
-    .portal-shots {
-      grid-template-columns: 1fr;
-      max-width: 420px;
-    }
-  }
-</style>

@@ -91,3 +91,63 @@ Fans, sichtbar ohne jeden Klick. Die neuen Poster stammen aus Sekunde 3 und zeig
 sprechende Person. results-07 stammt aus Sekunde 14 und zeigt eine Creatorin.
 Die Videos selbst zeigen diese Daten beim Abspielen weiterhin. Das ist ungeloest und
 braucht Manuels Entscheidung.
+
+
+## Nachtrag 08.09.2026, Umbau nach Manuels Korrekturen
+
+NEU EINGEBUNDEN, aus 13_wunder/medien-2026-09-07/:
+
+creator-speaking.webp            lauris-youtube/creatorin-treffen-podcast-holzstudio-01.webp
+                                 Creatorin am Mikrofon, sie spricht und gestikuliert. Sie ist die
+                                 handelnde Person im Bild, Kamera auf Augenhoehe.
+                                 Verwendung: Hero /, /results, /who-we-work-with, /meet-us.
+creator-and-manager-table.webp   lauris-youtube/creatorin-checkin-podcast-03.webp
+                                 Weite Aufnahme, Creatorin und Lauris am selben Tisch, gleiche
+                                 Hoehe im Bild. Erfuellt die Bildregeln des Female-Gaze-Dossiers
+                                 am saubersten von allen vorhandenen Aufnahmen.
+                                 Verwendung: /, /company, /results, /meet-us, /apply.
+lauris-speaking.webp             lauris-youtube/creatorin-treffen-podcast-holzstudio-03.webp
+                                 Lauris am Mikrofon, im Gespraech.
+                                 Verwendung: /, /how-it-works, /company, /who-we-work-with,
+                                 /switching.
+founders-split.webp              lauris-youtube/team-manuel-lauris-co-founder-reveal-02.webp
+                                 Manuel oben, Lauris unten, Splitscreen aus dem Podcast.
+                                 Verwendung: /company, Hero.
+
+BEWEISBILDER, aus 13_wunder/website-alt-screenshots/, gezogen am 08.09.2026 aus
+der Ergebnisseite von wundermgmt.com. Zuordnung Bild zu Aussage exakt wie dort:
+
+case-monthly-pay.webp        case05_1500-to-10000-eur-per-month.jpg
+                             Statistikseite einer Creatorin, Einnahmenkurve steigt.
+                             Aussage daneben: von 1.500 auf 10.000 Euro im Monat.
+case-followers.webp          case06_200k-followers-6months.png
+                             Follower-Bericht, Follows im Zeitraum 324,1 Tausend.
+                             Aussage daneben: ueber 200.000 neue Follower in sechs Monaten.
+case-monthly-earnings.webp   case07_tens-of-thousands-monthly.jpg
+                             Statistikseite ueber sechs Monate mit Tagesbalken.
+                             Aussage daneben: zehntausende jeden Monat.
+
+Alle drei am 08.09.2026 im Bild geprueft: keine Klarnamen, keine Fan-Namen, kein
+Produktname eines Werkzeugs sichtbar. Waehrungsabweichung siehe unten.
+
+review-01 bis review-04.webp  case02_usd50k-onlyfans_img1 bis img4.png
+                              Vier Kundenbewertungen mit fuenf Sternen, Datum und Vorname:
+                              Monique 04.02.2025, Jasmina 04.10.2025, Tatjana 04.07.2025,
+                              Alicia 04.04.2025. Standen auf der Live-Seite bereits
+                              oeffentlich. Kein Produktname im Bild, keine Nachnamen.
+
+RAUS, nicht mehr eingebunden:
+team-group.webp   Ansage Manuel 08.09.2026: das Bild zeigt das CW-Media-Team von vor
+                  Jahren, nicht Wunder. Datei bleibt liegen, wird nirgends verwendet.
+
+OFFEN VOR DEM LIVEGANG:
+1. Freigabe der Creatorin fuer die vier Standbilder aus den YouTube-Videos. Ihr Name
+   steht nicht auf der Seite. Schriftliche Freigabe fuer die Nutzung als Website-Bild
+   und fuer den Zuschnitt liegt weiterhin NICHT vor.
+2. Freigabe fuer die drei Beweis-Screenshots. Sie standen auf der eigenen Live-Seite,
+   eine dokumentierte Zustimmung der Creatorinnen liegt nicht vor.
+3. Waehrung. case-monthly-pay zeigt Dollar, die Aussage daneben nennt Euro. Die
+   Zuordnung stammt eins zu eins von der Live-Seite. Vor dem Livegang klaeren, ob die
+   Aussage oder das Bild angepasst wird.
+4. Die Videos results-02, -05 und -06 zeigen beim Abspielen weiterhin Namen zahlender
+   Fans. Siehe den Blocker in src/data/results.ts.

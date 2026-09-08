@@ -28,6 +28,7 @@
   somewhere unintended.
 */
 import Base from '../layouts/Base.astro';
+import Split from '../components/Split.astro';
 import { formEndpoint, legal } from '../site';
 
 const euCountries = [
@@ -55,21 +56,31 @@ const configured = formEndpoint.trim() !== '';
   title="Apply to work with us | Wunder"
   description="Eight short answers. A person reads them, and you hear back either way."
 >
+  <Split
+    image="creator-and-manager-table.webp"
+    alt="A creator and Lauris sit at the same table and talk. Both are at the same height in the picture."
+    width={640}
+    height={360}
+    caption="This is where it goes next. One call, at the same table."
+    eager
+  >
+    <h1>Apply to work with us.</h1>
+    <p class="lead">
+      Eight answers. It takes about a minute. A person reads them, not a filter. Two answers
+      decide right away if we can work together at all. So they sit at the top. Not in minute
+      twenty six of a call.
+    </p>
+    <p class="no-ask">
+      We do not ask for ID, photos, bank details or logins. Not here, not later by email.
+    </p>
+    <p>
+      Had a bad experience with an agency? Tell us what went wrong. Ask us how we work. Ask your
+      questions before you sign anything.
+    </p>
+  </Split>
+
   <section class="section">
     <div class="wrap wrap-narrow">
-      <h1>Apply to work with us.</h1>
-      <p class="lead">
-        Eight answers. It takes about a minute. A person reads them, not a filter. Two answers
-        decide right away if we can work together at all. So they sit at the top. Not in minute
-        twenty six of a call.
-      </p>
-      <p class="no-ask">
-        We do not ask for ID, photos, bank details or logins. Not here, not later by email.
-      </p>
-      <p class="lead">
-        Had a bad experience with an agency? Tell us what went wrong. Ask us how we work. Ask your
-        questions before you sign anything.
-      </p>
 
       {
         !configured && (
@@ -92,7 +103,7 @@ const configured = formEndpoint.trim() !== '';
         </div>
 
         <div class="field">
-          <label for="link">Link to your OnlyFans or link page</label>
+          <label for="link">Link to your fan page or link page</label>
           <input id="link" name="link" type="url" required placeholder="https://" />
         </div>
 
@@ -127,7 +138,7 @@ const configured = formEndpoint.trim() !== '';
         </fieldset>
 
         <div class="field">
-          <label for="revenue">About how much did your OnlyFans make in the last thirty days?</label>
+          <label for="revenue">About how much did your page make in the last thirty days?</label>
           <select id="revenue" name="revenue_band" required>
             <option value="">Please choose</option>
             {revenueBands.map((band) => <option value={band}>{band}</option>)}

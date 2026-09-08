@@ -13,6 +13,15 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
+  /*
+    /proof gibt es seit dem 08.09.2026 nicht mehr. Die Seite erklaerte, wie wir
+    Zahlen berichten, und sagte dabei "no case is ready yet", waehrend
+    /results voller Faelle steht. Zwei Seiten, die sich widersprechen, sind
+    schlimmer als eine. Alte Links laufen jetzt auf /results.
+  */
+  redirects: {
+    '/proof': '/results',
+  },
   integrations: [
     sitemap({
       // Legal pages and the post application confirmation stay out of the

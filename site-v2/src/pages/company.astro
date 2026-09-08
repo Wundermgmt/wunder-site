@@ -1,13 +1,26 @@
 ---
 /*
-  Replaces /story and /team. Governance instead of a founding story.
-  04-konzept.md section 4.3, page "/company".
-  No team size anywhere on this page until decision 5 is made: four different
-  numbers in four places are worse than no number.
-  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends.
+  /company. Wer hinter der Marke steht, und wer unterschreibt.
+
+  UMBAU 08.09.2026, Ansage Manuel:
+
+  1. team-group.webp ist RAUS. Das Bild zeigt das CW-Media-Team von vor
+     Jahren, nicht Wunder. Manuel woertlich: "sofort raus". Die Datei bleibt in
+     public/img liegen, wird aber nirgends mehr eingebunden.
+  2. Nur Lauris und Manuel. Die uebrigen Portraits aus der Medienbibliothek
+     zeigen Personen, die sich nicht sicher zuordnen lassen. Manuels Vorgabe
+     fuer diesen Fall: im Zweifel die Portraits von Lauris und Manuel.
+  3. Der Satz zur Herkunft der Fotos ist
+     raus. Keine Herkunftsangabe auf der Seite.
+  4. Der Absatz, in dem die Seite erklaerte, warum wir keine Teamgroesse
+     nennen koennen, ist raus. Eine Besucherin liest dort ein internes
+     Zaehlproblem. Die Teamgroesse steht weiterhin nirgends, aber jetzt ohne
+     Selbstkommentar.
+  5. Jeder Abschnitt hat ein Bild.
 */
 import Base from '../layouts/Base.astro';
 import Photo from '../components/Photo.astro';
+import Split from '../components/Split.astro';
 import CtaBlock from '../components/CtaBlock.astro';
 import { legal } from '../site';
 ---
@@ -16,29 +29,34 @@ import { legal } from '../site';
   title="Company | Wunder"
   description="The company behind Wunder: KG Models SIA in Riga, with two directors in the public register."
 >
-  <section class="section">
-    <div class="wrap">
-      <h1>The company behind the name.</h1>
-      <p class="lead">
-        Wunder is a brand by {legal.company}. The number in the register is {legal.regNumber}. The
-        company started on {legal.registered}. The address is {legal.street}, {legal.city}, {
-          legal.country
-        }.
-      </p>
-      <p>
-        You can look all of that up in the Latvian register. You do not need us for it. There is a
-        company with a like name in the United States. It has nothing to do with us. The number
-        above is how you tell them apart.
-      </p>
-    </div>
-  </section>
+  <Split
+    image="founders-split.webp"
+    alt="Manuel and Lauris on a video call, one above the other, each in his own room."
+    width={302}
+    height={342}
+    caption="Manuel and Lauris. They own the company and they run it."
+    narrow
+    eager
+  >
+    <h1>The company behind the name.</h1>
+    <p class="lead">
+      Wunder is a brand by {legal.company}. The number in the register is {legal.regNumber}. The
+      company started on {legal.registered}. The address is {legal.street}, {legal.city}, {
+        legal.country
+      }.
+    </p>
+    <p>
+      You can look all of that up in the Latvian register. You do not need us for it. There is a
+      company with a like name in the United States. It has nothing to do with us. The number above
+      is how you tell them apart.
+    </p>
+  </Split>
 
   <section class="section">
     <div class="wrap">
       <h2>Who decides.</h2>
-      <p>
+      <p class="lead">
         Two directors run the company. Each one may sign alone. Both are in the public register.
-        Manuel Gonzalez is CEO and co owner. Lauris Kalnins is COO and co owner.
       </p>
       <div class="people">
         <Photo
@@ -67,34 +85,43 @@ import { legal } from '../site';
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>Where the work happens.</h2>
-      <p>
-        Riga is the seat of the company and the office. Our content and chat team works in the
-        Philippine time zone. That is why the chat is awake when your fans are.
-      </p>
-      <p class="caption">
-        We do not publish a team size yet. First we want to count it the same way twice, staff and
-        freelancers apart. A number we cannot repeat is worse than no number.
-      </p>
-      <div class="shots-single">
-        <Photo
-          file="team-group.webp"
-          alt="Eight people from the team stand together and smile."
-          width={1400}
-          height={787}
-          sizes="(max-width: 860px) 100vw, 780px"
-          caption="Part of the team. Not everyone is in this picture."
-        />
-      </div>
-      <p class="caption">
-        These photos are our own. They come from our old website. We use no stock photos and no
-        pictures made by a machine.
-      </p>
-      <CtaBlock secondary />
-    </div>
-  </section>
+  <Split
+    image="lauris-speaking.webp"
+    alt="Lauris sits at a microphone and explains something to the person across the table."
+    width={640}
+    height={360}
+    caption="Lauris runs the day to day work with the team."
+    flip
+  >
+    <h2>Where the work happens.</h2>
+    <p>
+      Riga is the seat of the company and the office. Your manager and your creative person work
+      from here.
+    </p>
+    <p>
+      Our content and chat team works in the Philippine time zone. That is why the chat is awake
+      when your fans are.
+    </p>
+  </Split>
+
+  <Split
+    image="creator-and-manager-table.webp"
+    alt="A creator and Lauris sit at the same table and talk. Both are at the same height in the picture."
+    width={640}
+    height={360}
+    caption="We fly out and meet the creators we work with."
+  >
+    <h2>We are people, not a logo.</h2>
+    <p>
+      You can watch us before you write to us. Lauris films the talks he has with creators. Manuel
+      sits in on some of them.
+    </p>
+    <p>
+      <a href="/meet-us">Meet us</a> has those talks. <a href="/results">Results</a> has the numbers
+      behind them.
+    </p>
+    <CtaBlock secondary />
+  </Split>
 </Base>
 
 <style>
@@ -102,14 +129,9 @@ import { legal } from '../site';
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    margin: 28px 0 0;
+    margin: 28px 0;
     max-width: 700px;
     align-items: start;
-  }
-
-  .shots-single {
-    margin: 32px 0;
-    max-width: 780px;
   }
 
   @media (max-width: 860px) {

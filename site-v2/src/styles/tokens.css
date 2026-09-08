@@ -349,3 +349,33 @@ small,
     display: block;
   }
 }
+
+/*
+  Die drei Zusicherungen im Kopf der Startseite. Ergaenzt am 08.09.2026 nach
+  dem Zielgruppen-Rat: der Text braucht dort eine eigene ruhige Form, damit er
+  nicht als weitere Aufzaehlung untergeht. Gruener Haken statt Punkt, weil
+  Gruen im Portal die Markierung ist.
+*/
+.promise {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+.promise li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 8px;
+}
+
+.promise li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
