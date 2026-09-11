@@ -12,7 +12,7 @@ mostly fluff; this one is 3 indexed pages plus legal.
 |---|---|
 | `/` | Everything: hero, stats, the 4 proof videos, what we do, who it's for, how it works, FAQ |
 | `/results/` | The 4 creator proof videos (kept at the old URL — it was indexed) |
-| `/apply/` | Application page; CTA links to the existing Calendly (`calendly.com/agency-application/discovery-call`) |
+| `/apply/` | Qualify form only (name, phone, IG, OF, WhatsApp). Submit opens mailto:info@wundermgmt.com. Calendly and Book a call are gone. |
 | `/imprint/`, `/privacy/` | Legal (KG Models SIA), noindex |
 | `render.yaml` | Render static-site blueprint, incl. 301s for every URL in the old Squarespace sitemap |
 
@@ -20,7 +20,7 @@ mostly fluff; this one is 3 indexed pages plus legal.
 
 - Copy: rewritten from the old site's own claims (stats, guarantees, requirements).
   Nothing invented. The revenue split is deliberately NOT on the site — terms are
-  covered on the application call.
+  covered after you apply.
 - Videos: downloaded from the old site's Squarespace CDN (their signed HLS URLs
   expire), re-encoded to 720p H.264, self-hosted in `assets/video/`.
 - Fonts: Anton + Epilogue, self-hosted woff2 (GDPR: no Google Fonts requests).
@@ -42,9 +42,9 @@ mostly fluff; this one is 3 indexed pages plus legal.
 ## Cutover checklist (before killing Squarespace)
 
 - [ ] The 3 Zapier zaps fire on Squarespace form submissions (Inbound stage 40 +
-      email to rg@). The new site has no form — applications go through Calendly.
-      Confirm the Calendly → Pipedrive path covers what the zaps did, or accept
-      the change knowingly.
+      email to rg@). The new site apply page is a form that opens a mailto to
+      info@. Confirm that path covers what the zaps did, or accept the change
+      knowingly.
 - [ ] Any ads/bio links pointing at `/workshop`, `/influencer`, `/call` etc. keep
       working via the 301s in `render.yaml` — spot-check the ones in use.
 - [ ] Keep the Squarespace subscription until DNS has fully switched.
