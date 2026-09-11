@@ -1,0 +1,314 @@
+---
+import '../styles/tokens.css';
+import { legal, cta, plausibleDomain } from '../site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Legal pages stay out of the index, same as today. */
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const path = Astro.url.pathname;
+const canonical = new URL(path, Astro.site ?? 'https://wundermgmt.com').href;
+const ogImage = new URL('/og-image.png', Astro.site ?? 'https://wundermgmt.com').href;
+
+/*
+  Hoechstens sechs Punkte im Kopf, sonst bricht die Leiste auf drei Zeilen um.
+  "Who we work with" und "Switching" stehen dafuer im Fuss und werden aus den
+  Seitentexten heraus verlinkt.
+*/
+/*
+  /proof ist am 08.09.2026 in /results aufgegangen. Die Seite sagte "no case
+  is ready yet", waehrend /results voller Faelle steht. Ein Menuepunkt weniger,
+  ein Widerspruch weniger. Der alte Pfad leitet weiter, siehe astro.config.mjs.
+*/
+const nav = [
+  { href: '/how-it-works', label: 'How it works' },
+  { href: '/results', label: 'Results' },
+  { href: '/meet-us', label: 'Meet us' },
+  { href: '/company', label: 'Company' },
+  { href: '/faq', label: 'FAQ' },
+];
+
+const footerNav = [
+  { href: '/who-we-work-with', label: 'Who we work with' },
+  { href: '/switching', label: 'Switching' },
+  { href: '/apply', label: 'Apply' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <!-- Favicon: own wordmark, generated from the site's own CI tokens. -->
+    <!-- No third party icon service. -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Social share preview. Image: own generated wordmark, 1200x630, no stock art. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Wunder" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Wunder, you make the content and we do the rest" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    {
+      plausibleDomain && (
+        <script defer data-domain={plausibleDomain} src="https://plausible.io/js/script.js" />
+      )
+    }
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Wunder',
+        legalName: legal.company,
+        url: 'https://wundermgmt.com',
+        identifier: legal.regNumber,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: legal.street,
+          addressLocality: 'Riga',
+          postalCode: 'LV-1050',
+          addressCountry: 'LV',
+        },
+      })}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/">Wunder</a>
+        <nav class="nav" aria-label="Main">
+          {
+            nav.map((item) => (
+              <a
+                class="nav-link"
+                href={item.href}
+                aria-current={path.startsWith(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <a
+            class="nav-link login"
+            href="https://wunderportal.com"
+            rel="nofollow noopener"
+            target="_blank">Creator login</a
+          >
+          <a class="cta header-cta" href={cta.primaryHref}>{cta.primary}</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <p class="caption footer-nav">
+          {
+            footerNav.map((item, i) => (
+              <>
+                {i > 0 && <span aria-hidden="true"> / </span>}
+                <a href={item.href}>{item.label}</a>
+              </>
+            ))
+          }
+        </p>
+        <p class="caption entity">
+          {legal.brandLine}, reg. {legal.regNumber}, {legal.street}, {legal.city}, {legal.country}.
+        </p>
+        <p class="caption footer-links">
+          <a href="/imprint">Imprint</a>
+          <span aria-hidden="true"> / </span>
+          <a href="/privacy">Privacy</a>
+          <span aria-hidden="true"> / </span>
+          <a href="https://wunderportal.com" rel="nofollow noopener" target="_blank"
+            >Creator login</a
+          >
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  /*
+    Kopf und Fuss im Portal-CI: weisser Grund, feine Trennlinie, Wortmarke
+    WUNDER in fetten Versalien mit Laufweite schwarz auf weiss. Der aktive
+    Menuepunkt ist die schwarze Pille aus dem Portal, sonst ruhige graue
+    Textlinks. Quelle: ~/manuel-os/tools/wunder-pdf/README.md.
+  */
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: var(--ground);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 68px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    font-family: var(--font-sans);
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .brand:hover {
+    color: var(--ink);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    line-height: 1.2;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+    background: var(--muted-surface);
+  }
+
+  /* Aktiver Menuepunkt: schwarze Pille, weisse Schrift, wie im Portal. */
+  .nav-link[aria-current='page'] {
+    color: #ffffff;
+    background: var(--ink);
+  }
+
+  .nav-link[aria-current='page']:hover {
+    color: #ffffff;
+    background: var(--ink);
+  }
+
+  /* Creator login bleibt ein ruhiger Textlink, nie ein Button. Konzept 4.7. */
+  .login {
+    color: var(--text-muted);
+    text-decoration: underline;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .login:hover {
+    background: transparent;
+    color: var(--text);
+  }
+
+  .header-cta {
+    font-size: 14px;
+    padding: 9px 18px;
+    margin-left: 6px;
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    padding: 32px 0;
+    margin-top: 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .entity,
+  .footer-links,
+  .footer-nav {
+    margin: 0;
+  }
+
+  .footer-nav {
+    flex-basis: 100%;
+    padding-bottom: 16px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .footer-nav a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .footer-nav a:hover {
+    color: var(--accent-strong);
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
+  }
+
+  .footer-links a:hover {
+    color: var(--text);
+  }
+
+  @media (max-width: 860px) {
+    .site-header {
+      position: static;
+    }
+    .header-inner {
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .nav {
+      gap: 4px;
+    }
+    .nav-link {
+      padding: 6px 10px;
+    }
+    .header-cta {
+      display: inline-block;
+      width: auto;
+      margin-left: 0;
+    }
+  }
+</style>

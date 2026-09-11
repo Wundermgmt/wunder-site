@@ -1,0 +1,261 @@
+---
+/*
+  Ein YouTube-Video, das beim Seitenaufruf nichts von Google laedt.
+
+  Regel, die hier fest verdrahtet ist: solange niemand klickt, gibt es keinen
+  Request an einen Google-Host. Kein iframe, kein Fremdskript, kein Thumbnail
+  von i.ytimg.com. Die Vorschau ist eine eigene Flaeche aus den CI-Tokens plus
+  ein Inline-SVG als Abspielsymbol.
+
+  Erst der Klick ersetzt die Vorschau durch ein iframe auf
+  youtube-nocookie.com mit autoplay. Ab da laeuft das Video, vorher nicht.
+
+  Barrierefreiheit: die Vorschau ist ein echter button, also mit Tab
+  erreichbar und mit Enter oder Leertaste bedienbar. Der Titel steht im
+  Button, das SVG ist aria-hidden. Der Rahmen haelt 16 zu 9, deshalb springt
+  beim Umschalten nichts.
+
+  Standbild: liegt als /img/youtube/<id>.webp im eigenen public-Ordner, aus der
+  Medienbibliothek 13_wunder/medien-2026-09-07/lauris-youtube/thumbnails/.
+  Bewusst lokal und nicht von i.ytimg.com, sonst waere der Datenschutzvorteil
+  weg. Fehlt die Datei, bleibt die ruhige Flaeche mit dem Abspielsymbol, die
+  Karte funktioniert also auch ohne Bild.
+*/
+
+interface Props {
+  /** YouTube-Video-ID, elf Zeichen. */
+  id: string;
+  /** Titel. Wird der zugaengliche Name des Play-Buttons. */
+  title: string;
+  /** Volle URL zum Video auf YouTube, fuer den Textlink darunter. */
+  url: string;
+  /** Ein bis zwei einfache Saetze unter dem Bild. */
+  blurb: string;
+  /** Laufzeit als fertiger Text, kommt aus src/data/youtube.ts. */
+  durationLabel: string;
+  /** Hinweiszeile, dass beim Klick von YouTube geladen wird. */
+  loadNote: string;
+  /** Auf false setzen, wenn fuer diese ID kein lokales Standbild vorliegt. */
+  poster?: boolean;
+}
+
+const { id, title, url, blurb, durationLabel, loadNote, poster = true } = Astro.props;
+---
+
+<figure class="yt-card">
+  <div class="yt-frame" data-yt-id={id} data-yt-title={title}>
+    <button type="button" class="yt-play">
+      {
+        poster && (
+          <img
+            class="yt-poster"
+            src={`/img/youtube/${id}.webp`}
+            alt=""
+            width={1280}
+            height={720}
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      }
+      <span class="yt-overlay">
+        <svg class="yt-mark" viewBox="0 0 64 64" width="56" height="56" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="30" fill="#ffffff" stroke="#e4e4e7" stroke-width="2"></circle>
+          <path d="M26 20 L46 32 L26 44 Z" fill="#09090b"></path>
+        </svg>
+        <span class="yt-title">{title}</span>
+        <span class="yt-hint">Play</span>
+      </span>
+    </button>
+  </div>
+
+  <figcaption class="yt-body">
+    <p class="yt-blurb">{blurb}</p>
+    <p class="caption yt-meta">{loadNote}</p>
+    <p class="caption yt-meta">
+      <a href={url} rel="nofollow noopener" target="_blank">Open on YouTube</a>
+      <span aria-hidden="true"> / </span>{durationLabel}
+    </p>
+  </figcaption>
+</figure>
+
+<script is:inline>
+  /*
+    Ein Listener fuer die ganze Seite, egal wie viele Karten es gibt.
+    Die Flagge verhindert, dass der Listener pro Karte noch einmal haengt.
+  */
+  if (!window.__wunderYouTubeReady) {
+    window.__wunderYouTubeReady = true;
+
+    document.addEventListener('click', function (event) {
+      var target = event.target;
+      if (!target || !target.closest) return;
+
+      var button = target.closest('.yt-play');
+      if (!button) return;
+
+      var frame = button.closest('.yt-frame');
+      if (!frame) return;
+
+      var id = frame.getAttribute('data-yt-id');
+      var title = frame.getAttribute('data-yt-title') || 'Video';
+      if (!id) return;
+
+      var iframe = document.createElement('iframe');
+      iframe.className = 'yt-iframe';
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1';
+      iframe.title = title;
+      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute(
+        'allow',
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+      );
+
+      frame.innerHTML = '';
+      frame.appendChild(iframe);
+      iframe.focus();
+    });
+  }
+</script>
+
+<style>
+  .yt-card {
+    margin: 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  /* Haelt den Platz frei, bevor und nachdem umgeschaltet wird. */
+  .yt-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--muted-surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  /*
+    Das Standbild liegt hinter der Beschriftung. Der weisse Schleier haelt den
+    Kontrast von Titel und Wort "Play" ueber jedem Bild, sonst waere die
+    Schrift je nach Motiv nicht mehr lesbar.
+  */
+  .yt-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .yt-overlay {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.28);
+  }
+
+  .yt-play:hover .yt-overlay,
+  .yt-play:focus-visible .yt-overlay {
+    background: rgba(255, 255, 255, 0.42);
+  }
+
+  /*
+    Beschriftung auf einer eigenen weissen Flaeche statt auf einem Schleier
+    ueber dem ganzen Bild. So bleibt das Foto ein Foto und der Text trotzdem
+    auf jedem Motiv lesbar.
+  */
+  .yt-play:has(.yt-poster) .yt-title,
+  .yt-play:has(.yt-poster) .yt-hint {
+    background: var(--ground);
+    border-radius: var(--radius);
+    padding: 6px 12px;
+  }
+
+  .yt-play:has(.yt-poster) .yt-hint {
+    padding: 3px 10px;
+  }
+
+  .yt-play {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border: 0;
+    background: var(--muted-surface);
+    color: var(--text);
+    font-family: var(--font-sans);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .yt-play:hover,
+  .yt-play:focus-visible {
+    background: var(--accent-soft);
+  }
+
+  .yt-mark {
+    display: block;
+    flex: none;
+  }
+
+  .yt-play:hover .yt-mark circle,
+  .yt-play:focus-visible .yt-mark circle {
+    stroke: var(--accent);
+  }
+
+  .yt-title {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.35;
+    max-width: 24ch;
+  }
+
+  .yt-hint {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .yt-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .yt-body {
+    padding: 18px;
+  }
+
+  .yt-blurb {
+    margin: 0;
+    color: var(--text);
+  }
+
+  .yt-meta {
+    margin: 8px 0 0;
+  }
+
+  .yt-meta a {
+    color: var(--accent-strong);
+  }
+</style>

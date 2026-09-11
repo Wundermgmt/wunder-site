@@ -1,0 +1,124 @@
+---
+/*
+  Die Seite "Meet the team in real life".
+
+  Zweck: Vertrauen ueber Gesichter statt ueber Text. Wer wissen will, mit wem
+  er es zu tun hat, sieht hier die beiden Gruender und eine Creatorin, die
+  ueber ihre Zeit bei uns spricht.
+
+  Die Videos liegen als Daten in src/data/youtube.ts, samt Quelle und
+  Laufzeit. Diese Seite gibt nur aus. Geladen wird von YouTube erst nach
+  einem Klick, siehe components/YouTubeEmbed.astro.
+*/
+import Base from '../layouts/Base.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import Photo from '../components/Photo.astro';
+import Split from '../components/Split.astro';
+import { teamVideos, loadNote } from '../data/youtube';
+---
+
+<Base
+  title="Meet us | Wunder"
+  description="See the people behind Wunder. Watch a talk with our founders and with a creator we work with."
+>
+  <Split
+    image="creator-and-manager-table.webp"
+    alt="A creator and Lauris sit at the same table and talk. Both are at the same height in the picture."
+    width={640}
+    height={360}
+    caption="We fly out and meet our creators face to face."
+    eager
+  >
+    <p class="eyebrow">Meet us</p>
+    <h1>Meet the team in real life</h1>
+    <p class="lead">
+      Before you write to us, you can watch us. Then you know who you are talking to.
+    </p>
+    <p>
+      Lauris films most of these talks. He is one of our two founders. The other one is Manuel. You
+      can see them both here.
+    </p>
+    <CtaBlock secondary />
+  </Split>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Watch the videos</h2>
+      <p class="lead">Press play on one. Each one is a real talk, not an ad.</p>
+      <div class="grid-2">
+        {
+          teamVideos.map((video) => (
+            <YouTubeEmbed
+              id={video.id}
+              title={video.title}
+              url={video.url}
+              blurb={video.blurb}
+              durationLabel={video.durationLabel}
+              poster={video.poster}
+              loadNote={loadNote}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Days at work</h2>
+      <p class="lead">Stills from the same talks. Nobody is posing here.</p>
+      <div class="gallery">
+        <Photo
+          file="creator-tells-her-story.webp"
+          alt="A creator talks and uses her hands to explain how her account grew."
+          width={640}
+          height={360}
+          sizes="(max-width: 860px) 100vw, 340px"
+          caption="A creator tells us what changed for her."
+        />
+        <Photo
+          file="creator-checkin.webp"
+          alt="A creator and Lauris sit at a podcast table with a Wunder sign behind them."
+          width={640}
+          height={360}
+          sizes="(max-width: 860px) 100vw, 340px"
+          caption="A check in talk with a creator we work with."
+        />
+        <Photo
+          file="creator-meeting-blue.webp"
+          alt="A creator and Lauris sit across from each other and talk in a blue lit studio."
+          width={640}
+          height={360}
+          sizes="(max-width: 860px) 100vw, 340px"
+          caption="Another talk, another studio."
+        />
+        <Photo
+          file="founders-call.webp"
+          alt="Manuel and Lauris talk to each other on a video call, each in his own room."
+          width={324}
+          height={360}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="wide"
+          caption="Manuel and Lauris. They run the company together."
+        />
+      </div>
+    </div>
+  </section>
+
+  <Split
+    image="creator-speaking.webp"
+    alt="A creator sits at a microphone and talks. She uses her hands while she explains something."
+    width={640}
+    height={360}
+    caption="Every creator here said yes to one short form first."
+    flip
+  >
+    <h2>Come and see for yourself</h2>
+    <p>We would rather show you than tell you. Watch a talk, then write to us.</p>
+    <p>
+      Want the numbers behind these talks? <a href="/results">The results page has them</a>.
+    </p>
+    <CtaBlock />
+  </Split>
+</Base>

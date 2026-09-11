@@ -1,0 +1,17 @@
+{
+  "name": "wunder-site-v2",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/check-copy.mjs && node scripts/check-words.mjs && astro build",
+    "preview": "astro preview",
+    "check:copy": "node scripts/check-copy.mjs",
+    "check:words": "node scripts/check-words.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^5.13.5"
+  }
+}

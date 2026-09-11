@@ -1,0 +1,91 @@
+---
+/*
+  Auswahl als Positionierung, mit dem zweiten Einstieg fuer die Creatorin, die
+  ein Konto verloren hat, im gleichen Gewicht.
+  04-konzept.md Abschnitt 4.3, Seite "/who-we-work-with", und Abschnitt 3.
+  Die internen Ausschluesse (Profi-Darstellerinnen, Medienvertraege) bleiben
+  bewusst von dieser Seite fern. Sie gehoeren in die Qualifizierung.
+
+  Geaendert 08.09.2026: der Name der Fan-Plattform steht nirgends mehr, Ansage Manuel,
+  Grund Banken. Ersatz: "your fan page". Jeder Abschnitt hat ein Bild.
+*/
+import Base from '../layouts/Base.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import Split from '../components/Split.astro';
+---
+
+<Base
+  title="Who we work with | Wunder"
+  description="What we look for, in public, and what we do when you have lost an account before."
+>
+  <Split
+    image="creator-speaking.webp"
+    alt="A creator sits at a microphone and talks. She uses her hands while she explains something."
+    width={640}
+    height={360}
+    caption="We would rather say no early than waste your afternoon."
+    eager
+  >
+    <h1>We say no more often than yes.</h1>
+    <p class="lead">
+      Here is what we look at. Check yourself against it, before you spend twenty minutes on a
+      call.
+    </p>
+    <ul>
+      <li>Steady reach, not a follower count. Last month counts more than three years of collecting.</li>
+      <li>A live fan page link that is yours.</li>
+      <li>Content in English.</li>
+      <li>A face people can see. We do not run an AI persona.</li>
+      <li>Reach you did not buy.</li>
+      <li>You pay tax in the European Union.</li>
+      <li>Time for the posting rhythm we agree on. This is the one we say no over most.</li>
+    </ul>
+    <CtaBlock />
+  </Split>
+
+  <Split
+    image="creator-checkin.webp"
+    alt="A creator and Lauris sit at a podcast table with a Wunder sign behind them."
+    width={640}
+    height={360}
+    caption="Most creators we work with had an agency before us."
+    flip
+  >
+    <h2>If you have lost an account before.</h2>
+    <p class="lead">
+      You are not starting at zero. You are building back an account that worked once. This time
+      you can see every step we take.
+    </p>
+    <p>
+      Some of those earlier agencies were bad. That is not a no here. We want to know the history
+      of the account. We want to know how you lost it. We would rather hear both at the start than
+      in month three.
+    </p>
+    <p>
+      Maybe your last month was quiet because you stopped posting. Say so in the form. It changes
+      the plan, not the answer.
+    </p>
+    <CtaBlock />
+  </Split>
+
+  <Split
+    image="lauris-speaking.webp"
+    alt="Lauris sits at a microphone and explains something to the person across the table."
+    width={640}
+    height={360}
+    caption="A clear no now saves both of us three months."
+  >
+    <h2>Who we do not take on.</h2>
+    <ul>
+      <li>Anyone who pays tax outside the European Union. We cannot pay you the way we pay the rest.</li>
+      <li>
+        Anyone still tied to another agency or manager, until that deal ends. See <a
+          href="/switching">switching</a
+        >.
+      </li>
+      <li>Accounts with reach that was bought.</li>
+      <li>Faceless accounts and AI personas.</li>
+      <li>Anyone who wants us to run the account alone. There is no version of this without you.</li>
+    </ul>
+  </Split>
+</Base>

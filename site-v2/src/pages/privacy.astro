@@ -1,0 +1,602 @@
+---
+/*
+  Datenschutzerklaerung, ausformuliert am 07.09.2026.
+  Neufassung, keine Uebersetzung. Gliederungslogik und Detailgrad orientieren
+  sich an "/Users/manuelgonzalez/manuel-os/projects/websites/rechtstexte/datenschutz.md"
+  (Growth Club GmbH), der Inhalt ist aber eigenstaendig auf die lettische
+  KG Models SIA und auf die tatsaechlich eingesetzten Dienste zugeschnitten.
+
+  Vorgabe Manuel vom 07.09.2026: lieber einen Dienst zu viel nennen als einen
+  zu wenig. Genannt sind deshalb Render, Google Workspace, Instagram und Meta,
+  das Creator-Portal wunderportal.com, das Planungswerkzeug, das Chatwerkzeug, Slack, WhatsApp,
+  Discord und das Bewerbungsformular auf /apply.
+
+  Zwei harte Punkte aus dem Konzept, die die Pruefung ueberstehen muessen:
+  1. Die Empfaengerliste nennt nur Dienste, die wirklich Daten sehen.
+  2. Eine hier genannte Speicherdauer muss ausgefuehrt werden, nicht nur
+     gedruckt. Deshalb stehen konkrete Fristen als offener Punkt drin und
+     nicht als Behauptung.
+
+  Belegte Tatsachen zur Technik dieser Seite, geprueft am 07.09.2026:
+  - Hosting laeuft ueber Render, siehe render.yaml in diesem Repo.
+  - Die Seite laedt keine externen Schriften. Epilogue liegt lokal unter
+    /fonts/epilogue-latin.woff2 und wird in src/layouts/Base.astro vorgeladen.
+  - Es gibt kein Cookie, kein Pixel, keinen Consent-Dialog. Plausible ist in
+    src/site.ts nur optional vorgesehen und ohne PUBLIC_PLAUSIBLE_DOMAIN aus.
+  - Das Formular auf /apply postet an FORM_ENDPOINT und ist ohne diese
+    Umgebungsvariable abgeschaltet.
+  - Die MX-Eintraege von wundermgmt.com zeigen auf Google, per dig geprueft
+    am 07.09.2026. Daher Google Workspace als Mail- und Ablagesystem.
+*/
+import Base from '../layouts/Base.astro';
+import { legal } from '../site';
+
+/*
+  Empfaengeruebersicht. Anschriften nur dort, wo sie belegt sind. Wo der Sitz
+  des Anbieters nicht sauber belegt ist, steht das als offener Punkt und wird
+  nicht geraten.
+*/
+const recipients = [
+  {
+    purpose: 'Hosting and delivery of this website, server log files',
+    who: 'Render Services, Inc., United States',
+    basis: 'Processor, standard contractual clauses',
+    open: 'Registered address and processing region to be confirmed',
+  },
+  {
+    purpose: 'Email, calendar, documents and file storage',
+    who: 'Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland, with Google LLC, United States',
+    basis: 'Processor',
+    open: 'Processing agreement reference to be added',
+  },
+  {
+    purpose: 'Our profiles, creator accounts and reach data on Instagram',
+    who: 'Meta Platforms Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Ireland',
+    basis: 'Art. 6(1)(f) and Art. 6(1)(b) GDPR, joint controllership for profile insights',
+    open: 'Joint controller arrangement under Art. 26 GDPR to be assessed',
+  },
+  {
+    purpose: 'Scheduled publishing to Instagram through an authorised interface',
+    who: 'Our scheduling tool',
+    basis: 'Art. 6(1)(b) GDPR, processor where applicable',
+    open: 'Legal name, seat and processing agreement to be confirmed',
+  },
+  {
+    purpose: 'Fan chat and file library on your fan platform, through an authorised interface',
+    who: 'Our chat and file tool',
+    basis: 'Art. 6(1)(b) GDPR, processor where applicable',
+    open: 'Legal name, seat and processing agreement to be confirmed',
+  },
+  {
+    purpose: 'Creator portal at wunderportal.com, login and performance figures',
+    who: `${legal.company}, operating the portal, with its hosting and database provider`,
+    basis: 'Art. 6(1)(b) GDPR',
+    open: 'Hosting and database provider behind the portal to be named here',
+  },
+  {
+    purpose: 'Internal coordination and, where agreed, coordination with creators',
+    who: 'Slack Technologies Limited, Salesforce Tower, North Dock, Dublin, Ireland, Salesforce group',
+    basis: 'Art. 6(1)(b) and Art. 6(1)(f) GDPR',
+    open: 'Processing agreement reference to be added',
+  },
+  {
+    purpose: 'Messenger contact with creators who choose that channel',
+    who: 'WhatsApp Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Ireland, with WhatsApp LLC, United States',
+    basis: 'Art. 6(1)(b) GDPR',
+    open: null,
+  },
+  {
+    purpose: 'Team and production coordination in our own server',
+    who: 'Discord, Inc., United States',
+    basis: 'Art. 6(1)(f) GDPR, and Art. 6(1)(b) GDPR where the exchange is part of the work',
+    open: 'Registered address and transfer instrument to be confirmed',
+  },
+  {
+    purpose: 'Bookkeeping, tax advice and legal advice',
+    who: 'Advisers bound by professional secrecy, in Latvia',
+    basis: 'Art. 6(1)(c) and Art. 6(1)(f) GDPR',
+    open: null,
+  },
+];
+---
+
+<Base
+  title="Privacy | Wunder"
+  description="What data this site collects, who receives it, on what legal basis and how long it is kept."
+  noindex
+>
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <h1>Privacy</h1>
+
+      <p class="draft-note">
+        Draft wording, complete but not legally reviewed. Every item marked TO BE COMPLETED BY
+        COUNSEL has to be filled in, and the page as a whole has to be confirmed, before it goes
+        live. This text was written from scratch. The old generator template from the previous site
+        is deliberately not carried over.
+      </p>
+
+      <h2>1. Who is responsible</h2>
+      <p>
+        {legal.company}<br />
+        {legal.street}<br />
+        {legal.city}<br />
+        {legal.country}<br />
+        Registration number {legal.regNumber}
+      </p>
+      <p>
+        Represented by Manuel Gonzalez, CEO, and Lauris Kalnins, COO. Wunder is a brand name of this
+        company. There is no second entity behind it.
+      </p>
+      <p>
+        For anything about your data, a plain message is enough:
+        <a href={`mailto:${legal.privacyEmail}`}>{legal.privacyEmail}</a>. For everything else,
+        <a href={`mailto:${legal.contactEmail}`}>{legal.contactEmail}</a>.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: whether this company has to appoint a data protection officer
+        under Latvian law and, if so, the contact details. Also whether a representative under
+        Art. 27 GDPR is needed for any activity carried out from outside the European Union.
+      </p>
+
+      <h2>2. What this policy covers</h2>
+      <p>
+        It covers this website, the application form on our apply page, contact with us by email or
+        messenger, and the work with creators once we start, including the creator portal at
+        wunderportal.com and the tools listed in section 7.
+      </p>
+      <p>
+        It does not cover the platforms themselves. What your fan platform or Instagram do with your
+        data as their own user is governed by their own terms, and we have no say in it.
+      </p>
+
+      <h2>3. Visiting this website</h2>
+
+      <h3>3.1 Server log files</h3>
+      <p>
+        Every time a page here is requested, the hosting provider processes the technical data it
+        needs in order to serve the page:
+      </p>
+      <ul>
+        <li>the IP address of the requesting device</li>
+        <li>date and time of the request</li>
+        <li>the file requested, the amount of data transferred and whether the request succeeded</li>
+        <li>browser type and version, operating system and, where the browser sends it, the referring page</li>
+      </ul>
+      <p>
+        The legal basis is Art. 6(1)(f) GDPR. Our legitimate interest is a site that works and stays
+        secure. We do not merge these logs with other data and we do not analyse them per person.
+        Hosting runs on Render Services, Inc., United States. The site is delivered as static files.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the processing agreement with the hosting provider, the exact log
+        retention period the provider applies, and the processing region.
+      </p>
+
+      <h3>3.2 No cookies, no tracking, no consent banner</h3>
+      <p>
+        This site sets no cookies. There is no tracking pixel, no session recording, no heatmap, no
+        cross site identifier and no advertising tag. That is also why there is no consent banner
+        here asking you to agree to any of it. A banner would be theatre if there is nothing behind
+        it.
+      </p>
+      <p>
+        The site loads no fonts from an external service either. The typefaces are served from our
+        own domain, so visiting a page does not open a connection to a font provider. The same is
+        true for icons and images.
+      </p>
+
+      <h3>3.3 Statistics, if we ever switch them on</h3>
+      <p>
+        The build can optionally use Plausible, a cookieless statistics tool that measures page views
+        in aggregate and sets no identifier on your device. It is switched off in this version. If we
+        switch it on, we will describe it here first, with the provider, the data and the legal
+        basis. Until this section says it is running, it is not running.
+      </p>
+
+      <h2>4. The application form</h2>
+      <p>
+        On our apply page you can send us a short application. The fields are: your Instagram handle,
+        a link to your fan page or link page, the country where you pay tax, whether you are
+        currently under contract and until when, a revenue band, a publishing frequency band, your
+        email address, and an optional free text note.
+      </p>
+      <p>
+        We do not ask for identity documents, photographs, bank details or login credentials, and the
+        form accepts no file uploads at all. Please do not send us special categories of data under
+        Art. 9 GDPR, for example health data, through this form.
+      </p>
+      <p>
+        What happens with a submission: it is delivered to a Wunder mailbox and read there by the
+        people who decide whether a call makes sense. The mailbox runs on Google Workspace, see
+        section 5. The form contains one hidden field that real people never fill in. It is there to
+        stop automated submissions without handing your data to a third party bot protection service.
+      </p>
+      <p>
+        The legal basis is Art. 6(1)(b) GDPR, because you are asking us to take steps before a
+        possible agreement. Where a submission does not lead to an agreement, the basis for keeping
+        it for a short period is Art. 6(1)(f) GDPR, our legitimate interest in being able to
+        reconstruct who we answered and why.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the retention period for applications that do not lead to an
+        agreement, and the deletion routine that actually executes it. A period printed here without
+        a real deletion job behind it is worse than none. Also to be confirmed: the final form
+        endpoint and whether any provider sits between the form and the mailbox.
+      </p>
+
+      <h2>5. Contacting us, email and office systems</h2>
+      <p>
+        If you write to us, we process what you send in order to answer. The legal basis is
+        Art. 6(1)(b) GDPR where the message concerns an agreement or the run up to one, otherwise
+        Art. 6(1)(f) GDPR, our legitimate interest in answering the people who write to us.
+      </p>
+      <p>
+        Our mailboxes, calendars, documents and file storage run on Google Workspace. The provider
+        for users in the European Economic Area is Google Ireland Limited, Gordon House, Barrow
+        Street, Dublin 4, Ireland, with processing by Google LLC in the United States. Your contact
+        and agreement data are processed there to the extent they appear in messages, appointments or
+        documents.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the reference to the processing agreement with Google and the
+        data regions configured for this workspace.
+      </p>
+
+      <h2>6. The creator portal</h2>
+      <p>
+        Creators we work with get an account for the portal at wunderportal.com. It shows the figures
+        from the accounts we manage for you, the current state of the work and the documents that
+        belong to the collaboration.
+      </p>
+      <p>
+        Processed there are your login identity, your name and email address, the performance figures
+        pulled from the platforms we manage for you, and what you upload or agree there. Your portal
+        identity is separate from the staff system and can never hold a staff role. The legal basis
+        is Art. 6(1)(b) GDPR, because the portal is part of what we agreed to deliver.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the hosting and database provider behind the portal has to be
+        named here by legal name, seat and transfer instrument, and the processing agreement has to
+        be referenced. The portal is described here, its infrastructure is not documented yet.
+      </p>
+
+      <h2>7. The tools we use while we work with you</h2>
+      <p>
+        These are the systems that actually see data when we run an account. You give us the
+        password for your page so that these systems can connect to it. Nobody on our side opens
+        your account by hand.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the product names of the two interfaces below are deliberately
+        not printed on this page. Instruction Manuel Gonzalez, 2026-09-08, for banking
+        reasons. Art. 13(1)(e) GDPR allows categories of recipients. Please confirm that the
+        category wording used here is sufficient for this notice, or tell us where the legal names
+        have to appear instead.
+      </p>
+
+      <h3>7.1 The tool that publishes your posts</h3>
+      <p>
+        Instagram publishing runs through an authorised interface with server side
+        scheduling. Processed there are the account we publish to, the posts and captions we prepare,
+        the publishing times and the reach figures the interface returns. The legal basis is
+        Art. 6(1)(b) GDPR.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: legal name, seat, transfer instrument and processing agreement
+        for this provider.
+      </p>
+
+      <h3>7.2 The tool that runs the fan chat</h3>
+      <p>
+        The fan chat and the file library on your fan platform run through a second authorised
+        interface.
+        Processed there are the messages exchanged with your fans, the media in your vault, prices
+        and offers, and the figures the interface reports back. Fan data appear in this processing
+        because a conversation has two sides. The legal basis is Art. 6(1)(b) GDPR for you as our
+        contract partner, and Art. 6(1)(f) GDPR for the handling of fan messages, with our legitimate
+        interest in running the account we were engaged to run.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: legal name, seat, transfer instrument and processing agreement
+        for this provider, and the roles of creator, agency and platform in relation to fan data.
+        This is the part of the setup with the highest exposure and it needs a proper assessment,
+        not a sentence.
+      </p>
+
+      <h3>7.3 Instagram and Meta</h3>
+      <p>
+        We run our own profiles and, where agreed, we publish on the creator accounts we manage. When
+        you visit or interact with a profile, Meta processes your data on its own responsibility. The
+        provider for users in the European Economic Area is Meta Platforms Ireland Limited, 4 Grand
+        Canal Square, Grand Canal Harbour, Dublin 2, Ireland.
+      </p>
+      <p>
+        For the aggregated statistics about the use of a profile, we are joint controllers with Meta
+        under Art. 26 GDPR. The legal basis for our part is Art. 6(1)(f) GDPR, our legitimate
+        interest in knowing whether what we publish reaches anyone, and Art. 6(1)(b) GDPR where the
+        account belongs to a creator we manage. You can exercise your rights against us and against
+        Meta.
+      </p>
+      <p>
+        Links from this site to a social profile are ordinary links. Data reach the provider only
+        when you click one.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the joint controller arrangement for profile insights, and
+        whether paid advertising is switched on. No advertising pixel runs on this site today, and if
+        one is added it needs its own section and a consent mechanism before it goes live.
+      </p>
+
+      <h3>7.4 Slack</h3>
+      <p>
+        Internal coordination, and where agreed the coordination with creators, runs on Slack. The
+        provider for users in the European Economic Area is Slack Technologies Limited, Salesforce
+        Tower, North Dock, Dublin, Ireland, part of the Salesforce group. Processed are your name,
+        your email address and the content of the messages. The legal basis is Art. 6(1)(b) GDPR
+        where the exchange is part of the work, otherwise Art. 6(1)(f) GDPR, our legitimate interest
+        in an orderly internal process.
+      </p>
+
+      <h3>7.5 WhatsApp</h3>
+      <p>
+        Some creators prefer WhatsApp for day to day contact. The provider for users in the European
+        Economic Area is WhatsApp Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour,
+        Dublin 2, Ireland, part of the Meta group, with transfers to WhatsApp LLC in the United
+        States. Processed are your mobile number, your profile name and the content of your messages.
+        Message content is end to end encrypted, connection and usage data are not.
+      </p>
+      <p>
+        Using this channel is voluntary. If you would rather not, everything runs by email or through
+        the portal instead, at no disadvantage to you. Please do not send special categories of data
+        under Art. 9 GDPR this way. The legal basis is Art. 6(1)(b) GDPR, because the exchange is
+        part of the work we agreed.
+      </p>
+
+      <h3>7.6 Discord</h3>
+      <p>
+        Parts of the team and the production coordination run in our own Discord server. The provider
+        is Discord, Inc., United States. Processed are your account name, your profile and the
+        content of the messages in the channels you are in. The legal basis is Art. 6(1)(f) GDPR, our
+        legitimate interest in coordinated production, and Art. 6(1)(b) GDPR where the exchange is
+        part of the work agreed with you.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: registered address, transfer instrument and whether a processing
+        agreement is available for this provider.
+      </p>
+
+      <h2>8. Job applications</h2>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the careers path runs on a separate site and a separate system
+        and has to be described separately, with its own fields, its own readers, its own recipients
+        and its own retention period. Creator applications under section 4 and job applications are
+        not the same processing and must not be described in one paragraph.
+      </p>
+
+      <h2>9. Who receives your data</h2>
+      <p>
+        We pass data on only as far as the purposes above require. The list names the services that
+        actually see data. It is not a precautionary list of everything on the market, and it is not
+        shorter than reality either.
+      </p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Purpose</th>
+              <th scope="col">Recipient and seat</th>
+              <th scope="col">Basis</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              recipients.map((row) => (
+                <tr>
+                  <td>{row.purpose}</td>
+                  <td>
+                    {row.who}
+                    {row.open && <span class="todo"><br />TO BE COMPLETED BY COUNSEL: {row.open}.</span>}
+                  </td>
+                  <td>{row.basis}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Beyond this, we pass data on where the law obliges us to, or where it is necessary to
+        establish, exercise or defend legal claims.
+      </p>
+
+      <h2>10. Transfers outside the European Union</h2>
+      <p>
+        Some of the providers above are based in the United States or process data there. That
+        applies to Render for the hosting, to Google, to Meta including WhatsApp, to Slack through
+        the Salesforce group, and to Discord.
+      </p>
+      <p>
+        Where a provider is certified under the EU US Data Privacy Framework, the transfer rests on
+        the adequacy decision of the European Commission. In every other case, and in addition, we
+        rely on standard contractual clauses under Art. 46(2)(c) GDPR, together with the technical
+        measures the providers apply, in particular encryption in transit and at rest and restricted
+        access rights.
+      </p>
+      <p>
+        Even with those measures, it cannot be ruled out that authorities in the United States access
+        data, and that the legal remedies available to you there are weaker than in the European
+        Union. You can check whether a specific provider is currently certified in the public list at
+        dataprivacyframework.gov.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: per provider, the current certification status and the transfer
+        instrument actually in place, plus a transfer impact assessment where one is required. Also
+        to be recorded: where the team working on the accounts is located, and what instrument covers
+        that.
+      </p>
+
+      <h2>11. Legal bases at a glance</h2>
+      <ul>
+        <li>
+          Art. 6(1)(b) GDPR, performance of an agreement or steps taken before entering into one:
+          your application, the work on your accounts, the portal, the exchange over email and
+          messenger.
+        </li>
+        <li>
+          Art. 6(1)(f) GDPR, legitimate interest: the technical operation and security of this site,
+          answering enquiries that are not about an agreement, internal coordination, and the reach
+          figures of our own profiles.
+        </li>
+        <li>
+          Art. 6(1)(a) GDPR, consent: only where we ask you for it separately and you can withdraw
+          it at any time with effect for the future, Art. 7(3) GDPR. Nothing on this site currently
+          runs on consent, because nothing on it requires any.
+        </li>
+        <li>
+          Art. 6(1)(c) GDPR, legal obligation: keeping records that tax and commercial law require us
+          to keep.
+        </li>
+      </ul>
+
+      <h2>12. How long we keep data</h2>
+      <ul>
+        <li>Server log files: short term, within the retention the hosting provider applies.</li>
+        <li>
+          Applications that do not lead to an agreement: kept only as long as we need them to answer
+          and to reconstruct our decision.
+        </li>
+        <li>
+          Data from a running collaboration, including messages: for the term of the agreement and
+          afterwards for as long as we need them to settle it and to defend legal claims.
+        </li>
+        <li>
+          Agreements, invoices and accounting records: for the statutory retention periods under
+          Latvian tax and accounting law.
+        </li>
+      </ul>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the concrete period for each of these categories, and the
+        statutory retention periods that apply to this company in Latvia. Every period stated here
+        has to be backed by a deletion routine that runs. We would rather publish this section late
+        than publish a period we do not execute.
+      </p>
+
+      <h2>13. Your rights</h2>
+      <p>You have the right:</p>
+      <ul>
+        <li>to information about the data we hold about you, Art. 15 GDPR</li>
+        <li>to have inaccurate data corrected, Art. 16 GDPR</li>
+        <li>to erasure, Art. 17 GDPR</li>
+        <li>to restriction of processing, Art. 18 GDPR</li>
+        <li>to data portability, Art. 20 GDPR</li>
+        <li>
+          to object to processing based on legitimate interest, Art. 21 GDPR, on grounds relating to
+          your particular situation, and at any time and without reasons where the processing is for
+          direct marketing
+        </li>
+        <li>to withdraw a consent you gave, at any time with effect for the future, Art. 7(3) GDPR</li>
+      </ul>
+      <p>
+        A plain message to <a href={`mailto:${legal.privacyEmail}`}>{legal.privacyEmail}</a> is
+        enough. We do not require a particular form, and we do not charge for it.
+      </p>
+
+      <h2>14. Complaints to a supervisory authority</h2>
+      <p>
+        You can complain to a data protection supervisory authority, in particular in the country
+        where you live or work. The authority responsible for us is the Latvian Data State
+        Inspectorate, Datu valsts inspekcija, in Riga.
+      </p>
+      <p class="todo">
+        TO BE COMPLETED BY COUNSEL: the current postal address, telephone number and website of the
+        Latvian Data State Inspectorate, confirmed at the time of publication.
+      </p>
+
+      <h2>15. Do you have to give us your data</h2>
+      <p>
+        Providing personal data is neither required by law nor by contract. Without the entries in
+        the application form, though, we cannot assess an application, and without the data needed to
+        run an account, we cannot run it.
+      </p>
+      <p>
+        There is no automated decision making, including profiling, within the meaning of
+        Art. 22 GDPR. A person reads every application and a person decides.
+      </p>
+
+      <h2>16. Changes to this policy</h2>
+      <p>
+        We update this policy when the law changes or when we change the tools we use. The version
+        published here is the one that applies. Version of 2026-09-07, not yet legally
+        reviewed.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .draft-note {
+    padding: 16px 20px;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    color: var(--text);
+    max-width: 68ch;
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-top: 44px;
+  }
+
+  h3 {
+    font-size: 18px;
+    text-transform: none;
+    font-family: var(--font-text);
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-top: 28px;
+  }
+
+  /* Dunkleres Gruen, siehe Kontrastbegruendung in tokens.css. */
+  .todo {
+    color: var(--accent-strong);
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin: 24px 0 32px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 640px;
+    font-size: 15px;
+  }
+
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  th {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  td {
+    color: var(--text-muted);
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+</style>

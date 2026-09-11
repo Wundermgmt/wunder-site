@@ -1,0 +1,5 @@
+# Open on purpose, AI crawlers included. Carried over from the current site.
+User-agent: *
+Allow: /
+
+Sitemap: https://wundermgmt.com/sitemap-index.xml

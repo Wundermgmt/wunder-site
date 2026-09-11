@@ -1,0 +1,176 @@
+---
+/*
+  /company. Wer hinter der Marke steht, und wer unterschreibt.
+
+  UMBAU 08.09.2026, Ansage Manuel:
+
+  1. team-group.webp ist RAUS. Das Bild zeigt das CW-Media-Team von vor
+     Jahren, nicht Wunder. Manuel woertlich: "sofort raus". Die Datei bleibt in
+     public/img liegen, wird aber nirgends mehr eingebunden.
+  2. Nur Lauris und Manuel. Die uebrigen Portraits aus der Medienbibliothek
+     zeigen Personen, die sich nicht sicher zuordnen lassen. Manuels Vorgabe
+     fuer diesen Fall: im Zweifel die Portraits von Lauris und Manuel.
+  3. Der Satz zur Herkunft der Fotos ist
+     raus. Keine Herkunftsangabe auf der Seite.
+  4. Der Absatz, in dem die Seite erklaerte, warum wir keine Teamgroesse
+     nennen koennen, ist raus. Eine Besucherin liest dort ein internes
+     Zaehlproblem. Die Teamgroesse steht weiterhin nirgends, aber jetzt ohne
+     Selbstkommentar.
+  5. Jeder Abschnitt hat ein Bild.
+
+  NACHTRAG 08.09.2026, Ansage Manuel (Foto-Zuordnung Kontaktblatt):
+  6. Edvards Stalgevics kommt als drittes Teammitglied dazu, Foto 3 aus dem
+     nummerierten Kontaktblatt (`edvards-stalgevics.webp`). Er ist kein
+     Direktor, deshalb bleibt der "Who decides"-Absatz zu den zwei
+     Geschaeftsfuehrern unveraendert und Edvards steht in einem eigenen
+     Block direkt danach. Rolle "Creative Director" ist belegt aus der
+     Bio-Seite der alten Live-Seite (squarespace-sicherung-2026-09-07/
+     texte/wunder-1.txt: "Edvards Stalgevics, Creative Director ... social
+     media wizard"), gestuetzt durch 00-faktenbasis-intern.md (Edvards fuehrt
+     wunder-social-suite/Content-Discovery, ist "Eds" und Owner des
+     Referral-Systems). Foto 6 (moeglicherweise Ryan, unbestaetigt) ist bewusst noch
+     nicht eingebaut. Fotos 2 und 5 zeigen beide Lauris; kein Platzhalter auf
+     /meet-us oder der Startseite gefunden, der einen Tausch rechtfertigt,
+     also bleibt Foto 2 (lauris-kalnins.webp) unveraendert hier, Foto 5 bleibt
+     ungenutzt in der Medienbibliothek liegen.
+*/
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Split from '../components/Split.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import { legal } from '../site';
+---
+
+<Base
+  title="Company | Wunder"
+  description="The company behind Wunder: KG Models SIA in Riga, with two directors in the public register."
+>
+  <Split
+    image="founders-split.webp"
+    alt="Manuel and Lauris on a video call, one above the other, each in his own room."
+    width={302}
+    height={342}
+    caption="Manuel and Lauris. They own the company and they run it."
+    narrow
+    eager
+  >
+    <h1>The company behind the name.</h1>
+    <p class="lead">
+      Wunder is a brand by {legal.company}. The number in the register is {legal.regNumber}. The
+      company started on {legal.registered}. The address is {legal.street}, {legal.city}, {
+        legal.country
+      }.
+    </p>
+    <p>
+      You can look all of that up in the Latvian register. You do not need us for it. There is a
+      company with a like name in the United States. It has nothing to do with us. The number above
+      is how you tell them apart.
+    </p>
+  </Split>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Who decides.</h2>
+      <p class="lead">
+        Two directors run the company. Each one may sign alone. Both are in the public register.
+      </p>
+      <div class="people">
+        <Photo
+          file="manuel-gonzalez.webp"
+          alt="Manuel Gonzalez smiles while working at a laptop by a window."
+          width={900}
+          height={675}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="portrait"
+          caption="Manuel Gonzalez, CEO and co owner."
+        />
+        <Photo
+          file="lauris-kalnins.webp"
+          alt="Lauris Kalnins sits at a desk with a laptop and an open notebook."
+          width={900}
+          height={1349}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="portrait"
+          caption="Lauris Kalnins, COO and co owner."
+        />
+      </div>
+      <p>
+        {legal.company} signs your deal. There is no second firm in the chain. There is no middle
+        man. Your deal is not passed on to anyone else.
+      </p>
+      <h3>The team behind the brand.</h3>
+      <p>Edvards Stalgevics leads the creative side. He shapes the look of every campaign and post.</p>
+      <div class="people people-solo">
+        <Photo
+          file="edvards-stalgevics.webp"
+          alt="Edvards Stalgevics smiles while working at a laptop in the office."
+          width={1200}
+          height={1800}
+          sizes="(max-width: 860px) 100vw, 340px"
+          ratio="portrait"
+          caption="Edvards Stalgevics, Creative Director."
+        />
+      </div>
+    </div>
+  </section>
+
+  <Split
+    image="lauris-speaking.webp"
+    alt="Lauris sits at a microphone and explains something to the person across the table."
+    width={640}
+    height={360}
+    caption="Lauris runs the day to day work with the team."
+    flip
+  >
+    <h2>Where the work happens.</h2>
+    <p>
+      Riga is the seat of the company and the office. Your manager and your creative person work
+      from here.
+    </p>
+    <p>
+      Our content and chat team works in the Philippine time zone. That is why the chat is awake
+      when your fans are.
+    </p>
+  </Split>
+
+  <Split
+    image="creator-and-manager-table.webp"
+    alt="A creator and Lauris sit at the same table and talk. Both are at the same height in the picture."
+    width={640}
+    height={360}
+    caption="We fly out and meet the creators we work with."
+  >
+    <h2>We are people, not a logo.</h2>
+    <p>
+      You can watch us before you write to us. Lauris films the talks he has with creators. Manuel
+      sits in on some of them.
+    </p>
+    <p>
+      <a href="/meet-us">Meet us</a> has those talks. <a href="/results">Results</a> has the numbers
+      behind them.
+    </p>
+    <CtaBlock secondary />
+  </Split>
+</Base>
+
+<style>
+  .people {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 28px 0;
+    max-width: 700px;
+    align-items: start;
+  }
+
+  .people-solo {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+  }
+
+  @media (max-width: 860px) {
+    .people {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

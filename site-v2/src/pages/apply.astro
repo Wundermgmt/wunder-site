@@ -1,0 +1,282 @@
+---
+/*
+  Application funnel. 04-konzept.md section 4.6.
+  Eight fields, the two qualification gates (tax residency, existing contract)
+  sit at the front, and the form takes no file uploads at all.
+
+  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends. Labels, Hinweise
+  und die Auswahllisten im Frontmatter werden von der Lesbarkeitspruefung
+  mitgemessen, siehe scripts/check-copy.mjs, Regel 5.
+
+  Aenderungen 07.09.2026 abends aus den drei Tiefenrecherchen:
+  - Titel und H1 heissen jetzt "Apply to work with us". Grund: Beispiel E18 im
+    Dossier einfache Sprache, der Knopf muss benennen, was er wirklich tut.
+  - Die Redewendung "burned" ist raus, ebenso die unbelegte Behauptung, das sei
+    "the fastest way". Beispiele E16 und E17 im selben Dossier.
+  - Die Antwortzeit-Zusage "within one working day" ist raus. Ansage Manuel
+    07.09.2026, keine Claims und keine Antwortzeitwerte; gleiche Vorgabe im
+    Vertrauens-Dossier, These T7.
+  - Optionale Felder sind als optional beschriftet, und der Freitext sagt, was
+    NICHT hineingehoert. Formularregeln im Vertrauens-Dossier, Abschnitt 7.
+  - Ohne FORM_ENDPOINT stand hier eine Entwicklerkonfiguration. Jetzt steht dort
+    ein ehrlicher zweiter Kontaktweg. Female-Gaze-Dossier, Abschnitt 10,
+    Prioritaet 1.
+
+  The target is FORM_ENDPOINT from the host environment and is empty by
+  default. No Google Apps Script, no endpoint in the repository (concept 6.3).
+  With no endpoint configured the form renders disabled instead of posting
+  somewhere unintended.
+*/
+import Base from '../layouts/Base.astro';
+import Split from '../components/Split.astro';
+import { formEndpoint, legal } from '../site';
+
+const euCountries = [
+  'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia',
+  'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia',
+  'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania',
+  'Slovakia', 'Slovenia', 'Spain', 'Sweden',
+];
+
+const revenueBands = [
+  'Nothing right now',
+  'Up to EUR 1,000',
+  'EUR 1,000 to EUR 5,000',
+  'EUR 5,000 to EUR 15,000',
+  'EUR 15,000 to EUR 30,000',
+  'More than EUR 30,000',
+];
+
+const reelBands = ['None at the moment', 'One to three', 'Four to seven', 'Eight or more'];
+
+const configured = formEndpoint.trim() !== '';
+---
+
+<Base
+  title="Apply to work with us | Wunder"
+  description="Eight short answers. A person reads them, and you hear back either way."
+>
+  <Split
+    image="creator-and-manager-table.webp"
+    alt="A creator and Lauris sit at the same table and talk. Both are at the same height in the picture."
+    width={640}
+    height={360}
+    caption="This is where it goes next. One call, at the same table."
+    eager
+  >
+    <h1>Apply to work with us.</h1>
+    <p class="lead">
+      Eight answers. It takes about a minute. A person reads them, not a filter. Two answers
+      decide right away if we can work together at all. So they sit at the top. Not in minute
+      twenty six of a call.
+    </p>
+    <p class="no-ask">
+      We do not ask for ID, photos, bank details or logins. Not here, not later by email.
+    </p>
+    <p>
+      Had a bad experience with an agency? Tell us what went wrong. Ask us how we work. Ask your
+      questions before you sign anything.
+    </p>
+  </Split>
+
+  <section class="section">
+    <div class="wrap wrap-narrow">
+
+      {
+        !configured && (
+          <p class="notice">
+            The form below is switched off right now. Write to <a href={`mailto:${legal.contactEmail}`}>{legal.contactEmail}</a> instead and tell us the
+            same things in your own words.
+          </p>
+        )
+      }
+
+      <form
+        class="apply"
+        method="post"
+        action={configured ? formEndpoint : undefined}
+        novalidate={false}
+      >
+        <div class="field">
+          <label for="instagram">Instagram handle</label>
+          <input id="instagram" name="instagram" type="text" required autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="link">Link to your fan page or link page</label>
+          <input id="link" name="link" type="url" required placeholder="https://" />
+        </div>
+
+        <div class="field">
+          <label for="tax">Where do you pay tax?</label>
+          <select id="tax" name="tax_country" required>
+            <option value="">Please choose</option>
+            {euCountries.map((country) => <option value={country}>{country}</option>)}
+            <option value="outside_eu">Outside the European Union</option>
+          </select>
+          <p class="hint caption">
+            We can only take you on if you pay tax in the European Union. That is about the way
+            we pay you, nothing else.
+          </p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Are you currently under contract with an agency or manager?</legend>
+          <label class="inline"
+            ><input type="radio" name="under_contract" value="yes" required /> Yes</label
+          >
+          <label class="inline"
+            ><input type="radio" name="under_contract" value="no" required /> No</label
+          >
+          <label class="sub" for="contract_until">If yes, until when? (optional)</label>
+          <input id="contract_until" name="contract_until" type="text" placeholder="Month and year" />
+          <p class="hint caption">
+            A yes here is not a no from us. It only changes the order of things. See <a
+              href="/switching">switching</a
+            >.
+          </p>
+        </fieldset>
+
+        <div class="field">
+          <label for="revenue">About how much did your page make in the last thirty days?</label>
+          <select id="revenue" name="revenue_band" required>
+            <option value="">Please choose</option>
+            {revenueBands.map((band) => <option value={band}>{band}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="reels">How many reels do you post in a normal week?</label>
+          <select id="reels" name="reels_band" required>
+            <option value="">Please choose</option>
+            {reelBands.map((band) => <option value={band}>{band}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="note">What would you like help with? (optional)</label>
+          <textarea id="note" name="note" rows="4"></textarea>
+          <p class="hint caption">
+            You can leave this empty. Please leave out passwords, bank details and private
+            pictures.
+          </p>
+        </div>
+
+        <!-- Honeypot. Real people never fill this in. Bot protection without a third party service. -->
+        <div class="trap" aria-hidden="true">
+          <label for="company_website">Company website</label>
+          <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <input type="hidden" name="source" value="site" />
+
+        <p class="actions">
+          <button class="cta" type="submit" disabled={!configured} aria-disabled={!configured}>
+            Send application
+          </button>
+        </p>
+      </form>
+
+      <h2 class="after">What happens next.</h2>
+      <ol>
+        <li>A person reads this, not a filter.</li>
+        <li>That person runs the first calls here. There is no sales queue.</li>
+        <li>You hear back either way, fit or not.</li>
+      </ol>
+      <p>
+        If it is not a fit, you get one line that says so. You get an answer, not silence.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .no-ask {
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--muted-surface);
+    max-width: 68ch;
+  }
+
+  .notice {
+    padding: 16px 20px;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    color: var(--text);
+    max-width: 68ch;
+  }
+
+  .apply {
+    margin-top: 40px;
+  }
+
+  .field {
+    margin-bottom: 28px;
+    border: 0;
+    padding: 0;
+  }
+
+  label,
+  legend {
+    display: block;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 8px;
+    padding: 0;
+  }
+
+  label.inline {
+    display: inline-block;
+    margin-right: 24px;
+    color: var(--text-muted);
+  }
+
+  label.sub {
+    margin-top: 16px;
+    color: var(--text-muted);
+  }
+
+  input[type='text'],
+  input[type='url'],
+  input[type='email'],
+  select,
+  textarea {
+    width: 100%;
+    background: var(--ground);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    padding: 11px 14px;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .hint {
+    margin: 8px 0 0;
+  }
+
+  .trap {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .after {
+    margin-top: 56px;
+  }
+</style>

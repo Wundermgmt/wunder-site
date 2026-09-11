@@ -1,0 +1,33 @@
+---
+/*
+  A real confirmation page, not a hint that disappears after three seconds.
+  04-konzept.md section 4.6, "Was nach dem Absenden passiert".
+  Sprache: einfaches Englisch, Ansage Manuel 07.09.2026 abends.
+*/
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Application received | Wunder"
+  description="Your form reached us. A person reads it, and you hear back either way."
+  noindex
+>
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <h1>We have it.</h1>
+      <p class="lead">Three things, so you know what you are waiting for.</p>
+      <ol>
+        <li>A person reads this, not a filter.</li>
+        <li>That person runs the first calls here.</li>
+        <li>You hear back either way, fit or not.</li>
+      </ol>
+      <p>
+        Did you think of something after you sent it? Write to us and add it. Do not fill the form
+        in twice.
+      </p>
+      <p>
+        While you wait, read <a href="/how-it-works">how the work is done</a>.
+      </p>
+    </div>
+  </section>
+</Base>

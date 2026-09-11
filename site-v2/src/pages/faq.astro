@@ -1,0 +1,203 @@
+---
+/*
+  Die sechs Aengste in der Reihenfolge, in der sie in unseren Calls kommen.
+
+  UMBAU 08.09.2026, Ansage Manuel:
+
+  1. Die Bann-Frage war falsch beantwortet. Sie sagte, das Risiko bleibe und
+     keine Agentur koenne es nehmen. Korrektur Manuel 08.09.2026: in den
+     letzten Jahren wurde kein Instagram-Konto gebannt, und falls es passiert,
+     haben wir Kontakte, die das Konto wieder freischalten. Manuels Aussage
+     gilt hier als Tatsache, sie steht ueber der aelteren Formulierung.
+     Das Wort fuer besondere Beziehungen zur Plattform faellt trotzdem nicht.
+     Es steht auf der Sperrliste in scripts/check-copy.mjs und im
+     Trust-Standard. Der Satz sagt nur, dass wir Leute kennen.
+  2. Keine Toolnamen mehr in der Zugriffsfrage.
+  3. Der Name der Fan-Plattform steht nirgends mehr.
+  4. Die Zugriffsfrage sagt jetzt die Wahrheit ueber das Passwort.
+  5. Zwei Bilder, damit die Seite keine reine Textwand ist.
+
+  BINDEND: Die Vertragsfrage nennt weiter keine Laufzeit und keine Frist. Der
+  Split steht nicht auf der Seite, auch nicht als Wort.
+
+  Diese Strings werden als Text gerendert und deshalb von der
+  Lesbarkeitspruefung mitgemessen, siehe scripts/check-copy.mjs, Regel 5.
+*/
+import Base from '../layouts/Base.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import Split from '../components/Split.astro';
+
+const faqs = [
+  {
+    q: 'What if my account gets banned?',
+    a: [
+      'In the last years not one Instagram account of our creators was banned. We work through official ways. We keep the messages our system sends inside a hard limit. We do not use the growth tricks that get accounts flagged.',
+      'If it ever does happen, we know people at the platforms who can switch an account back on. That is the first thing we try.',
+      'While that runs, we build your reach back on the accounts you still have. We move the fans you already earned. You do not start from nothing.',
+    ],
+    link: { href: '/how-it-works#access', label: 'How access works' },
+  },
+  {
+    q: 'Who can get into my accounts?',
+    a: [
+      'You give us the password for your page. Our programs need it so they can connect. That is the only reason we ask for it.',
+      'Nobody here opens your account by hand. Every post, every message and every number runs through the programs we built for this. So there is a record of what was done, and when.',
+      'Our team signs in to our own systems with company accounts. We use no shared logins. Your portal login is kept apart from the staff system. It can never hold a staff role.',
+    ],
+    link: { href: '/how-it-works#access', label: 'How access works' },
+  },
+  {
+    q: 'Who writes to my fans, and what do they say?',
+    a: [
+      'A trained chat team. They work from what you set at the start. Your limits. Your prices. Your no go list.',
+      'Twice a week our system scores the last finished shift. It uses a written score sheet and a fixed pass mark. Some mistakes fail on the spot. We also measure how fast the reply came. The person who wrote is never the person who scores.',
+      'Chatters are people. Now and then a message comes out wrong. We do not hide it. We tell you, and we put it right with you.',
+      'We write down who writes in your name. You may tell your fans that. We will not ask you to take the line out of your bio.',
+    ],
+    link: { href: '/how-it-works#chatting', label: 'How the check works' },
+  },
+  {
+    q: 'How long is the deal, and how do I get out?',
+    a: [
+      'We go through the terms on the call. You can leave early if the work no longer suits you.',
+    ],
+    link: { href: '/switching', label: 'If you are switching from another agency' },
+  },
+  {
+    q: 'What about leaks?',
+    a: [
+      'It is the internet. Nobody gets content fully off it again. No one can promise you that.',
+      'Here is what can be done. We send takedown notices where the site takes them. We watermark. We keep your best paid material off the channels that get copied first. We tell you which of those we do for you, and which ones need you.',
+    ],
+    link: null,
+  },
+  {
+    q: 'How and when do I get paid?',
+    a: [
+      'There is no setup fee. There is no minimum you have to earn.',
+      'The money goes straight to your bank. We send our bill after that, once a week. Your money does not run through us on the way to you.',
+      'We do not give tax or bank advice. When your case needs it, ask your accountant. We would rather say that than guess.',
+    ],
+    /*
+      Entscheidung Manuel 08.09.2026: Rat Nummer 7 aus dem Zielgruppen-Rat
+      steht hier zusaetzlich einmal als Kasten, weil diese Antwort die
+      Zahlung erklaert. Kein zweiter Streifen, nur eine ruhige Box.
+    */
+    note: 'No fee to start. No minimum to reach. You pay us after your money arrives.',
+    link: null,
+  },
+];
+
+const firstHalf = faqs.slice(0, 3);
+const secondHalf = faqs.slice(3);
+---
+
+<Base
+  title="FAQ | Wunder"
+  description="The six questions creators really ask us, with the answer and the reason behind it."
+>
+  <Split
+    image="creator-tells-her-story.webp"
+    alt="A creator talks and uses her hands to explain something."
+    width={640}
+    height={360}
+    caption="These are the questions creators ask us on the first call."
+    eager
+  >
+    <h1>The six questions we really get.</h1>
+    <p class="lead">
+      In the order they come up. Every answer says what we do, not what we promise.
+    </p>
+  </Split>
+
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <div class="faq-list">
+        {
+          firstHalf.map((item) => (
+            <article class="faq-item">
+              <h2>{item.q}</h2>
+              {item.a.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {item.link && (
+                <p class="caption">
+                  <a href={item.link.href}>{item.link.label}</a>
+                </p>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Split
+    image="creator-checkin.webp"
+    alt="A creator and Lauris sit at a podcast table with a Wunder sign behind them."
+    width={640}
+    height={360}
+    caption="Anything you do not find here, ask us on the call."
+    flip
+  >
+    <h2>Still not sure?</h2>
+    <p>
+      Write down the one thing that worries you most. Bring it to the call. We would rather answer
+      it there than have you guess.
+    </p>
+  </Split>
+
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <div class="faq-list">
+        {
+          secondHalf.map((item) => (
+            <article class="faq-item">
+              <h2>{item.q}</h2>
+              {item.a.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {item.note && <p class="panel panel-quiet faq-note">{item.note}</p>}
+              {item.link && (
+                <p class="caption">
+                  <a href={item.link.href}>{item.link.label}</a>
+                </p>
+              )}
+            </article>
+          ))
+        }
+      </div>
+      <CtaBlock />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .faq-list {
+    margin-top: 8px;
+  }
+
+  .faq-item {
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .faq-item h2 {
+    font-size: 22px;
+    text-transform: none;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    line-height: 1.3;
+  }
+
+  .faq-item p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-note {
+    margin-top: 16px;
+    font-weight: 600;
+    color: #27272a;
+  }
+</style>

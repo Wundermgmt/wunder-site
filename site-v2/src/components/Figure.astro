@@ -1,0 +1,57 @@
+---
+/*
+  The only way a number is allowed to appear in body copy.
+  04-konzept.md section 6.6, point 3: value, period, basis, source, read date.
+  Missing any of them stops the build. Not in use yet: no number on the site
+  currently carries all five, and a number without them does not go up.
+*/
+
+interface Props {
+  value: string;
+  period: string;
+  basis: string;
+  source: string;
+  readAt: string;
+  label: string;
+}
+
+const { value, period, basis, source, readAt, label } = Astro.props;
+
+for (const [field, content] of Object.entries({ value, period, basis, source, readAt, label })) {
+  if (typeof content !== 'string' || content.trim() === '') {
+    throw new Error(
+      `Figure: the field "${field}" is empty. A number needs value, period, basis, source, ` +
+        `readAt and label. See 04-konzept.md section 6.6.`
+    );
+  }
+}
+---
+
+<figure class="figure">
+  <p class="value">{value}</p>
+  <figcaption class="caption">
+    {label}. {period}. Basis: {basis}. Source: {source}, read on {readAt}.
+  </figcaption>
+</figure>
+
+<style>
+  .figure {
+    margin: 0 0 24px;
+    padding-top: 16px;
+    border-top: 2px solid var(--accent);
+  }
+
+  .value {
+    font-family: var(--font-sans);
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.028em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.05;
+    margin: 0 0 8px;
+  }
+
+  figcaption {
+    margin: 0;
+  }
+</style>

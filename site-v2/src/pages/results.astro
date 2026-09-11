@@ -1,0 +1,185 @@
+---
+/*
+  /results. Die Beweisseite.
+
+  UMBAU 08.09.2026, Ansage Manuel. Vorher war das eine Liste aus Videos, drei
+  nackten Textkacheln und einem Quellenblock. Jetzt gilt: jede Behauptung hat
+  den Beweis direkt daneben.
+
+  - Die drei Ergebnisaussagen stehen als Ueberschrift neben ihrem Screenshot,
+    Zuordnung wie auf wundermgmt.com. Bild links, Bild rechts, im Wechsel.
+  - Vier echte Kundenbewertungen mit Sternen, Datum und Vorname.
+  - Kein Datum, keine Herkunftsangabe, kein Hinweis auf die Vorgaengerseite.
+  - Der Name der Fan-Plattform steht nirgends.
+
+  Alle Zahlen liegen in src/data/results.ts, weil der Copy-Check nackte Zahlen
+  in Seiten-Copy verbietet. Hier wird nur ausgegeben.
+
+  /proof gibt es nicht mehr. Die Seite sagte "no case is ready yet", waehrend
+  hier ein ganzer Stapel Faelle liegt. Zwei Seiten, die sich widersprechen,
+  sind schlimmer als eine. /proof zeigt jetzt hierher, siehe astro.config.mjs.
+*/
+import Base from '../layouts/Base.astro';
+import VideoCard from '../components/VideoCard.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import Split from '../components/Split.astro';
+import Photo from '../components/Photo.astro';
+import {
+  intro,
+  videosBlock,
+  videoCases,
+  proofBlock,
+  proofCases,
+  reviews,
+  reviewsBlock,
+  closingVideo,
+  closingBlock,
+} from '../data/results';
+---
+
+<Base
+  title="Results | Wunder"
+  description="Real screens from real accounts. What creators earned, how their followers grew, and what they wrote about working with us."
+>
+  <Split
+    image="creator-speaking.webp"
+    alt="A creator sits at a microphone and talks. She uses her hands while she explains something."
+    width={640}
+    height={360}
+    caption="A creator we work with, talking about her own numbers."
+    eager
+  >
+    <p class="eyebrow">{intro.eyebrow}</p>
+    <h1>{intro.heading}</h1>
+    <p class="lead">{intro.lead}</p>
+    <p>{intro.body}</p>
+    <CtaBlock secondary />
+  </Split>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">{proofBlock.eyebrow}</p>
+      <h2>{proofBlock.heading}</h2>
+      <p class="lead">{proofBlock.lead}</p>
+    </div>
+  </section>
+
+  {
+    proofCases.map((item, i) => (
+      <Split
+        image={item.image}
+        alt={item.alt}
+        width={item.width}
+        height={item.height}
+        caption={item.caption}
+        flip={i % 2 === 1}
+      >
+        <h3 class="proof-headline">{item.headline}</h3>
+      </Split>
+    ))
+  }
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">{reviewsBlock.eyebrow}</p>
+      <h2>{reviewsBlock.heading}</h2>
+      <p class="lead">{reviewsBlock.lead}</p>
+      <div class="review-list">
+        {
+          reviews.map((item) => (
+            <Photo
+              file={item.image}
+              alt={item.alt}
+              width={1200}
+              height={462}
+              caption={item.caption}
+              sizes="(max-width: 860px) 100vw, 520px"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">{videosBlock.eyebrow}</p>
+      <h2>{videosBlock.heading}</h2>
+      <p class="lead">{videosBlock.lead}</p>
+
+      <div class="video-list">
+        {
+          videoCases.map((item) => (
+            <article class="video-item">
+              <h3>{item.headline}</h3>
+              <VideoCard src={item.src} poster={item.poster} caption={item.caption} />
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <h2>{closingVideo.headline}</h2>
+      <VideoCard
+        src={closingVideo.src}
+        poster={closingVideo.poster}
+        caption={closingVideo.caption}
+      />
+    </div>
+  </section>
+
+  <Split
+    image="creator-and-manager-table.webp"
+    alt="A creator and Lauris sit at the same table and talk. Both are at the same height in the picture."
+    width={640}
+    height={360}
+    caption="We meet the creators we work with."
+    flip
+  >
+    <p class="eyebrow">{closingBlock.eyebrow}</p>
+    <h2>{closingBlock.heading}</h2>
+    <p class="lead">{closingBlock.lead}</p>
+    <CtaBlock secondary />
+  </Split>
+</Base>
+
+<style>
+  /* Eine Spalte auf schmalen Schirmen, zwei ab Tablet. */
+  .video-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .video-item h3 {
+    margin: 0 0 12px;
+  }
+
+  .review-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    margin-top: 32px;
+  }
+
+  /*
+    Die Aussage steht gross neben ihrem Bild. Sie ist eine h3, weil daruber
+    schon die h2 des Blocks steht, sieht aber aus wie eine h2.
+  */
+  .proof-headline {
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+    margin: 0;
+  }
+
+  @media (max-width: 860px) {
+    .proof-headline {
+      font-size: 24px;
+    }
+  }
+</style>

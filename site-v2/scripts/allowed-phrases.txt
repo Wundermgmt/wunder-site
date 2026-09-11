@@ -1,0 +1,14 @@
+# Cleared phrases. One per line. Reason after the double slash.
+# Everything in here was checked against 04-konzept.md before it was added.
+# Adding a line is a copy decision, not a technical one.
+#
+# Gilt fuer Regel 1 (gesperrte Claims) und seit 07.09.2026 auch fuer Regel 7
+# (formelle Woerter) und Regel 8 (Redewendungen). Die Freigabe streicht immer
+# genau diesen Wortlaut, nie das Wort ueberall. Wer hier eine Redewendung
+# eintraegt, muss dazuschreiben, warum eine Leserin mit Englisch als
+# Fremdsprache sie trotzdem versteht.
+
+We do not guarantee your income, and nobody honest can.  // 04-konzept.md, /how-it-works, section "What we do not do"
+We do not guarantee your income.  // same sentence, short form
+no income guarantee  // negation, allowed on purpose
+does not guarantee  // negation, allowed on purpose

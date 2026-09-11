@@ -1,0 +1,126 @@
+---
+/*
+  Ein Abschnitt aus Text und Bild nebeneinander.
+
+  Grund fuer die Komponente, Ansage Manuel 08.09.2026: auf der Seite fehlten
+  ueberall Bilder, ausser im Kopf. Die Regel lautet jetzt: Ueberschrift mit
+  Bild, Text mit Bild, Text mit Bild. Nie Text auf Text. Damit das nicht auf
+  jeder Seite von Hand nachgebaut wird, liegt das Raster hier.
+
+  Die Seite gibt nur an, ob das Bild links oder rechts steht. Auf dem Telefon
+  steht das Bild immer unter dem Text, damit die Ueberschrift zuerst kommt.
+  Female-Gaze-Dossier, Abschnitt 4, Punkt 6: der mobile Zuschnitt wird eigens
+  geprueft.
+*/
+import Photo from './Photo.astro';
+
+interface Props {
+  /** Dateiname unterhalb von /img. */
+  image: string;
+  /** Bildbeschreibung, einfaches Englisch, Pflicht. */
+  alt: string;
+  width: number;
+  height: number;
+  /** Bildunterschrift. Tatsachenaussage, keine Erfolgsbehauptung. */
+  caption?: string;
+  /** true stellt das Bild nach links, Text nach rechts. */
+  flip?: boolean;
+  /** Anker fuer Links aus anderen Seiten. */
+  id?: string;
+  /** Nur fuer das erste Bild der Startseite. */
+  eager?: boolean;
+  /** Schmales Bild neben breitem Text, zum Beispiel ein Telefon-Screenshot. */
+  narrow?: boolean;
+  ratio?: 'portrait' | 'square' | 'wide';
+}
+
+const {
+  image,
+  alt,
+  width,
+  height,
+  caption,
+  flip = false,
+  id,
+  eager = false,
+  narrow = false,
+  ratio,
+} = Astro.props;
+
+const sizes = narrow
+  ? '(max-width: 860px) 70vw, 300px'
+  : '(max-width: 860px) 100vw, 480px';
+---
+
+<section class="section" id={id}>
+  <div class="wrap">
+    <div class:list={['split', { flip, narrow }]}>
+      <div class="split-text">
+        <slot />
+      </div>
+      <div class="split-media">
+        <Photo
+          file={image}
+          alt={alt}
+          width={width}
+          height={height}
+          caption={caption}
+          sizes={sizes}
+          eager={eager}
+          ratio={ratio}
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .split.narrow {
+    grid-template-columns: 1.6fr 1fr;
+  }
+
+  /* Bild nach links, Text nach rechts. Reihenfolge im Quelltext bleibt Text zuerst. */
+  .split.flip .split-text {
+    order: 2;
+  }
+
+  .split.flip .split-media {
+    order: 1;
+  }
+
+  .split-text > :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .split-text > :global(:last-child) {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 860px) {
+    .split,
+    .split.narrow {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    /* Auf dem Telefon steht der Text immer oben. */
+    .split.flip .split-text {
+      order: 1;
+    }
+
+    .split.flip .split-media {
+      order: 2;
+    }
+
+    .split.narrow .split-media {
+      max-width: 320px;
+    }
+  }
+</style>
